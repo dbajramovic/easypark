@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/RegisterStyle.css" />
+<title>Tracker</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="scripts/Registration.js"></script>
+</head>
+<body>
+<div id='cssmenu'>
+		<ul>
+		   <li><a href='index.html'><span>Track!</span></a></li>
+		   <li class='active'><a href='#'><span>Register</span></a></li>
+		   <li class='last'><a href='Login.html'><span>Login</span></a></li>
+		</ul>
+	</div>
+<div class="okvir">
+
+	<form class="formaZaUnos">		
+		<input type="text"  class="Username" id="Username" placeholder="Korisničko ime"></input><br>
+		<input type="text" class="FirstName" id="FirstName" placeholder="Ime"></input><br>
+		<input type="text" class="LastName" id="LastName" placeholder="Prezime"></input><br>
+		<input type="text" class="CompanyName" id="CompanyName" placeholder="Ime kompanije"></input><br>
+		<input type="password" class="Password" id="Password" placeholder="Šifra"></input><br>
+		<input type="text" class="About" id="About" placeholder="O vama"></input><br>
+		<button type="button" name="Register" class="Register" onClick="register()">Registruj se!</button> 
+	</form>
+	<div id="googleMap" class="mapa"></div>
+</div>
+</body>
+</html>
