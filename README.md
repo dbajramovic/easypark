@@ -1,4 +1,4 @@
 easypark
 ========
 
-A WIP Parking helping system built in JAVA fot Web and Android
+A WIP Parking helping system built in JAVA for Web and Android
