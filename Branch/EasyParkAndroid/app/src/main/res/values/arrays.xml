@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="left_drawer_options">
+        <item>@string/drawer_option_map</item>
+        <item>@string/drawer_option_login</item>
+        <item>@string/drawer_option_register</item>
+        <item>@string/drawer_option_add_parking</item>
+        <item>@string/drawer_option_edit_parking</item>
+    </string-array>
+</resources>
