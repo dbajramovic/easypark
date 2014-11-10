@@ -8,15 +8,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Bureksasutlijom/git/easypark1/Branch/ojdbc7.jar">
 		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Elvis/Desktop/Eclipse IDE for Java EE Developers/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar" sourcepath="C:/Users/Elvis/Desktop/Eclipse IDE for Java EE Developers/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8/src">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Elvis/Desktop/Eclipse%20IDE%20for%20Java%20EE%20Developers/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8/docs/"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Elvis/Desktop/Eclipse IDE for Java EE Developers/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>

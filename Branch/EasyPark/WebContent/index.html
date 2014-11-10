@@ -8,21 +8,17 @@
 <script src="scripts/DrawingPoints.js"></script>
 <script src="scripts/GetData.js"></script>
 </head>
-<body>
+<body  bgcolor = 'silver'>
+<div class="okvir">
 <div id='cssmenu'>
 <ul>
-   <li class='active'><a href='#'><span>Pronaði!</span></a></li>
-   <li><a href='Register.html'><span>Registruj</span></a></li>
-   <li class='last'><a href='Login.html'><span>Upiši se</span></a></li>
+   <li class='active'><a href='#'><span>Pretraga</span></a></li>
+   <li><a href='Register.html'><span>Registracija</span></a></li>
+   <li class='last'><a href='Login.html'><span>Upis</span></a></li>
+   <li class="logo"><img src="http://farm4.staticflickr.com/3948/15516864549_444151e61d_b.jpg" width="155px"></li>
 </ul>
 </div>
-<div class="okvir">
-	<form>
-		<input type="text" list="json-datalist" id="unosTeksta" placeholder="Unesite naziv mjesta, npr: Sutjeska-Vogošæa" class="unosTeksta" name="unosTeksta" onkeyup="showHint(this.value)"></input>
-		<datalist id="json-datalist"></datalist>
-		<button type="button" name="pocetak" class="pocetak" onClick="search(this.form.unosTeksta.value)">Start</button> 
-		<div id="googleMap" class="mapa"></div>
-	</form>
+	<div id="googleMap" class="mapa"></div>
 </div>
 
 

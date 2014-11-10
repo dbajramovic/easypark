@@ -1,18 +1,20 @@
 @CHARSET "UTF-8";
 .naslov{width:250px;margin-top:5%;margin-left:42%;}
-
+.body {
+	bgcolor:silver;
+}
 div.okvir{
 	display:inline-block;
   	position:relative;
-  	top: auto;
-	left: 10%;
+  	top: -3%;
+	left: 3%;
 	right: auto;
 	text-align:center;
-	width:1100px;
-	height:700px;
+	width:1230px;
+	height:620px;
 	border:10px solid gray;
 	margin-top:1%;
-  	padding: 10px 5px 15px 5px;
+  	padding: 5px 5px 15px 5px;
   	text-align: center;
   	float: left;
   	background: #92bcf5;
@@ -25,11 +27,11 @@ div.okvir{
   	box-shadow: 10px 10px 50px 20px rgba(13,13,43,1);
 }
 .mapa{
-	width:800px; 
-	height:640px;
+	width:1070px; 
+	height:620px;
 	position:relative;
 	top:10px;
-	left:300px;
+	left:-10px;
 	border:5px black;
 }
 
@@ -150,8 +152,10 @@ div.okvir{
 	font-size: 100%;
 	font-style: bold;
 }
-
-
+li.logo {
+	width:50px;
+	height:100px;
+}
 
 
 /* CSS for Vertical Menu */
@@ -162,7 +166,7 @@ div.okvir{
   display:inline-block;
   float:left;
   position:relative;
-	left: 10%;
+	left: -3%;
 }
 #cssmenu ul,
 #cssmenu li {

@@ -1,38 +1,12 @@
 package ServicePackage;
 
-import java.nio.charset.Charset;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.*;
-
-import jdk.nashorn.internal.runtime.regexp.RegExp;
-
-import org.codehaus.jettison.json.JSONObject;
-
-import Models.Admin;
-import Models.Device;
-import Models.History;
-import Models.Temp;
+//import jdk.nashorn.internal.runtime.regexp.RegExp;
 
 @Path("/service")
 public class TrackerService {
