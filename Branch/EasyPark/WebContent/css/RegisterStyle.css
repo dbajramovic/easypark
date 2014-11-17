@@ -1,14 +1,21 @@
 @CHARSET "UTF-8";
-
+.body {
+	bgcolor:silver;
+}
 .formaZaUnos{
-	position:relative;
 	left:-300px;
+	width:600px;
+	margin:0px;
+}
+li.logo {
+	width:50px;
+	height:100px;
 }
 .mapa{
-	width:500px; 
-	height:300px;
+	width:550px; 
+	height:500px;
 	position:relative;
-	top:-200px;
+	top:-500px;
 	left:500px;
 	border:5px black;
 }
@@ -23,7 +30,6 @@
 
 div.okvir{
 	display:inline-block;
-  	position:relative;
   	top: auto;
 	left: 10%;
 	right: auto;
@@ -121,7 +127,7 @@ div.okvir{
   display:inline-block;
   float:left;
   position:relative;
-	left: 10%;
+	left: -3%;
 }
 #cssmenu ul,
 #cssmenu li {

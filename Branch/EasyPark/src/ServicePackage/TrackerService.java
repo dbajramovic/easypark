@@ -1,12 +1,24 @@
 package ServicePackage;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 //import jdk.nashorn.internal.runtime.regexp.RegExp;
+
+
+
+
+import Models.Parking;
 
 @Path("/service")
 public class TrackerService {
@@ -17,6 +29,22 @@ public class TrackerService {
 	private String user;
 	private String password;
 	private Connection connection = null;
+	
+	@Path("/parkingsinrange")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Parking> giveMeParkingsInRange(JSONObject id) throws SQLException, JSONException{
+		List<Parking> lp = null;
+		GetParkingsAtLocation ga = new GetParkingsAtLocation();
+		try {
+			lp = ga.giveMe(OracleConnector.getConnection(), id.getInt("longtitude"), id.getInt("latitude"), id.getInt("range"));
+		}
+		catch(SQLException e) {
+			e.printStackTrace();	
+		}
+		return lp;
+	}
 /*
 	@Path("/getdataofadmin")
 	@POST

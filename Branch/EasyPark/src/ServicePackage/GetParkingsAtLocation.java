@@ -29,12 +29,18 @@ public class GetParkingsAtLocation {
 		while(rs.next()) {
 			Parking p = new Parking();
 			p.set_parkingID(rs.getInt(1));
-			p.set_locationID(rs.getInt(3));
-			p.set_creatorID(0);
+			p.set_longtitude(rs.getFloat(2));
+			p.set_latitude(rs.getFloat(3));
 			p.set_note(rs.getString(6));
 			p.set_price(rs.getInt(5));
 			p.set_pictureID(rs.getInt(2));
 			p.set_totalnumber(rs.getInt(4));
+			p.set_isthereCamera(new Boolean(rs.getInt(8) != 0));
+			p.set_isthereGuard(new Boolean(rs.getInt(9) != 0));
+			p.set_isthereLight(new Boolean(rs.getInt(13) != 0));
+			p.set_isthereGoodEntrance(new Boolean(rs.getInt(12) != 0));
+			p.set_isthereRoof(new Boolean(rs.getInt(10) != 0));
+			p.set_isthereRoad(new Boolean(rs.getInt(11) != 0));
 			lista_parkinga.add(p);
 		}
 		return lista_parkinga;

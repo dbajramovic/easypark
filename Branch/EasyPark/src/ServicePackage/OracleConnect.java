@@ -53,13 +53,11 @@ public class OracleConnect {
 			GetParkingsAtLocation l = new GetParkingsAtLocation();
 			List<Parking> lp = l.giveMe(connection, 30, 90, 100);
 			for(int i = 0; i < lp.size();i++){
-				System.out.println(lp.get(i).get_parkingID());
+				System.out.println(lp.get(i).get_isthereCamera());
 			}
 		}
 		else {
 			System.out.println("Failed to make connection!");
 		}
 	}
-
- 
 }
