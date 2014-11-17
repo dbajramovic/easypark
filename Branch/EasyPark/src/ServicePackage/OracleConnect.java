@@ -7,14 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Locale;
 
+import Models.Parking;
 import oracle.jdbc.OracleTypes;
  
 public class OracleConnect {
  
 	public static void main(String[] args) {
- 
 		System.out.println("-------- Oracle JDBC Connection Testing ------");
 		Locale.setDefault(Locale.US);
  
@@ -35,11 +36,9 @@ public class OracleConnect {
 		Connection connection = null;
  
 		try {
-			
 			connection = DriverManager.getConnection(
 					"jdbc:oracle:thin:@localhost:1521:xe", "EasyParkTest",
 					"FCChelsea1");
-			GetParkingsAtLocation.giveMe(connection,30,70,100);
 		}
 		 catch (SQLException e) {
 			
@@ -51,7 +50,13 @@ public class OracleConnect {
  
 		if (connection != null) {
 			System.out.println("You made it, take control your database now!");
-		} else {
+			GetParkingsAtLocation l = new GetParkingsAtLocation();
+			List<Parking> lp = l.giveMe(connection, 30, 90, 100);
+			for(int i = 0; i < lp.size();i++){
+				System.out.println(lp.get(i).get_parkingID());
+			}
+		}
+		else {
 			System.out.println("Failed to make connection!");
 		}
 	}
