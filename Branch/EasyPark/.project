@@ -33,21 +33,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>WebContent/css/bootstrap.min.css</name>
-			<type>1</type>
-			<location>C:/Users/Elvis/Desktop/css/bootstrap.min.css</location>
-		</link>
-		<link>
-			<name>WebContent/css/parking.png</name>
-			<type>1</type>
-			<location>C:/Users/Elvis/Desktop/parking.png</location>
-		</link>
-		<link>
-			<name>WebContent/scripts/bootstrap.min.js</name>
-			<type>1</type>
-			<location>C:/Users/Elvis/Desktop/js/bootstrap.min.js</location>
-		</link>
-	</linkedResources>
 </projectDescription>
