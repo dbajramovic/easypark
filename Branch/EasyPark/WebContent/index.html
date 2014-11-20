@@ -1,26 +1,102 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/Style.css" />
 <title>Easy Park</title>
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="scripts/DrawingPoints.js"></script>
-<script src="scripts/GetData.js"></script>
+<!-- STYLES -->
+	<link rel="stylesheet" type="text/css" href="css/Style.css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link rel="icon" type="image/png" href="http://www.queenshotelbrighton.com/portals/0/images/Parking%20Logo.jpg" />
+
+<!-- INTERNET APIS -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Nok-cKRP-OtaS8tPeuLEAgcN-FLKlIY"></script>
+
+<!-- SCRIPTS -->
+	<script src="scripts/bootstrap.min.js"></script>
+	<script src="scripts/DrawingPoints.js"></script>
+	<!-- <script src="scripts/GetData.js"></script> -->
 </head>
-<body  bgcolor = 'silver'>
-<div class="okvir">
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='#'><span>Pretraga</span></a></li>
-   <li><a href='Register.html'><span>Registracija</span></a></li>
-   <li class='last'><a href='Login.html'><span>Upis</span></a></li>
-   <li class="logo"><img src="http://farm4.staticflickr.com/3948/15516864549_444151e61d_b.jpg" width="155px"></li>
-</ul>
-</div>
-	<div id="googleMap" class="mapa"></div>
+
+<body>
+<!-- begin template -->
+<div class="navbar navbar-custom navbar-fixed-top">
+ <div class="navbar-header"><a class="navbar-brand" href="#">Easy Park</a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Trazi</a></li>
+        <li><a href="#">Registracija</a></li>
+        <li><a href="#">Upis</a></li>
+      </ul>
+      <form class="navbar-form">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle maxSize" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Category 1</a></li>
+                <li><a href="#">Category 2</a></li>
+                <li><a href="#">Category 3</a></li>
+                <li><a href="#">Category 4</a></li>
+                <li><a href="#">Category 5</a></li> 
+              </ul>
+            </div>
+            <input type="text" class="form-control" placeholder="Koji grad?">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+          </div>
+        </div>
+      </form>
+    </div>
 </div>
 
+<div id="googleMap" class="mapa"></div>
+<div class="container-fluid" id="main">
+  <div class="row left-panel">
+  	<div class="col-xs-8" id="left">
+    
+      <h2>Dobrodosli na EasyPark.ba!</h2>
+      
+      <!-- item list -->
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">Naslov1</a></div>
+      </div>
+      <p>Testni tekst broj 1 u kojem opisujemo neku novost na aplikaciji.</p>
+      
+      <hr>
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">Naslov 2</a></div>
+      </div>
+      <p>Testni tekst broj 2 u kojem opisujemo neku novost na aplikaciji..</p>
+      
+      <hr>
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">Naslov 3</a></div>
+      </div>
+      <p>Testni tekst broj 3 u kojem opisujemo neku novost na aplikaciji..</p>
+      
+      <hr>
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">Naslov 4</a></div>
+      </div>
+      <p>Testni tekst broj 4 u kojem opisujemo neku novost na aplikaciji..</p>
+      <hr>
+      <!-- /item list -->
+      
+      <p>
+      <a href="http://etf.unsa.ba/">Fakultet</a> | <a href="https://github.com/dbajramovic/easypark">Source Code</a>
+      </p>
+    </div>
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+    
+  </div>
+</div>
+<!-- end template -->
+	</body>
 
-</body>
 </html>

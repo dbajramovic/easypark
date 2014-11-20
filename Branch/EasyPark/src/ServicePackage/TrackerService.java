@@ -1,8 +1,10 @@
 package ServicePackage;
 
+import java.util.List;
+import java.util.Locale;
+import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -13,11 +15,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+
+
 //import jdk.nashorn.internal.runtime.regexp.RegExp;
-
-
-
-
+import oracle.jdbc.driver.OracleDriver;
+import oracle.jdbc.*;
 import Models.Parking;
 
 @Path("/service")
@@ -30,17 +32,37 @@ public class TrackerService {
 	private String password;
 	private Connection connection = null;
 	
+	public void CreateConnection(){
+		System.out.println("-------- Creating ------");
+		Locale.setDefault(Locale.US);
+		try {Class.forName("oracle.jdbc.driver.OracleDriver");} catch (ClassNotFoundException e) {System.out.println("Where is your Oracle JDBC Driver?");}
+		System.out.println("Connection created!");
+		try {
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SYSTEM","tomcat92");
+		}
+		 catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;
+		}
+	}
+	public void CloseConnection(){
+		
+	}
+	
+	
 	@Path("/parkingsinrange")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Parking> giveMeParkingsInRange(JSONObject id) throws SQLException, JSONException{
+	public List<Parking> giveMeParkingsInRange(JSONObject id){	
 		List<Parking> lp = null;
-		GetParkingsAtLocation ga = new GetParkingsAtLocation();
+		GetParkingsAtLocation ga = new GetParkingsAtLocation();	
+		CreateConnection();
 		try {
-			lp = ga.giveMe(OracleConnector.getConnection(), id.getInt("longtitude"), id.getInt("latitude"), id.getInt("range"));
+			lp = ga.giveMe(connection, id.getInt("longitude"), id.getInt("latitude"), id.getInt("range"));
 		}
-		catch(SQLException e) {
+		catch(Exception e) {
 			e.printStackTrace();	
 		}
 		return lp;

@@ -13,6 +13,7 @@ import Models.Parking;
 import oracle.jdbc.OracleTypes;
 public class GetParkingsAtLocation {
 	public List<Parking> giveMe(Connection con,int longtituda, int langtituda, int razdaljina) {
+		boolean t;
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
 		List<Parking> lista_parkinga = new ArrayList<Parking>();
@@ -24,7 +25,7 @@ public class GetParkingsAtLocation {
 		cs.setInt(2, longtituda);
 		cs.setInt(3, langtituda);
 		cs.setInt(4, razdaljina);
-		cs.execute();
+		t= cs.execute();
 		rs = (ResultSet)cs.getObject(1);
 		while(rs.next()) {
 			Parking p = new Parking();
@@ -43,6 +44,7 @@ public class GetParkingsAtLocation {
 			p.set_isthereRoad(new Boolean(rs.getInt(11) != 0));
 			lista_parkinga.add(p);
 		}
+		
 		return lista_parkinga;
 		}
 		catch (SQLException e) {

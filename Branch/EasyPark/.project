@@ -33,10 +33,26 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<variableList>
-		<variable>
-			<name>OJDBC7</name>
-			<value>file:/C:/Users/Bureksasutlijom/Music/TRCANJE/ojdbc7.jar</value>
-		</variable>
-	</variableList>
+	<linkedResources>
+		<link>
+			<name>WebContent/fonts</name>
+			<type>2</type>
+			<location>C:/Users/Elvis/Desktop/fonts</location>
+		</link>
+		<link>
+			<name>WebContent/css/bootstrap.min.css</name>
+			<type>1</type>
+			<location>C:/Users/Elvis/Desktop/css/bootstrap.min.css</location>
+		</link>
+		<link>
+			<name>WebContent/css/parking.png</name>
+			<type>1</type>
+			<location>C:/Users/Elvis/Desktop/parking.png</location>
+		</link>
+		<link>
+			<name>WebContent/scripts/bootstrap.min.js</name>
+			<type>1</type>
+			<location>C:/Users/Elvis/Desktop/js/bootstrap.min.js</location>
+		</link>
+	</linkedResources>
 </projectDescription>
