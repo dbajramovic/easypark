@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Easy Park</title>
+<meta charset="UTF-8">
 <!-- STYLES -->
 	<link rel="stylesheet" type="text/css" href="css/Style.css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -12,14 +13,26 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Nok-cKRP-OtaS8tPeuLEAgcN-FLKlIY"></script>
 
+<!-- HTML templates -->
+	<link rel="import" href="RegisterBlock.html">
+	<link rel="import" href="LoginBlock.html">
+
 <!-- SCRIPTS -->
 	<script src="scripts/bootstrap.min.js"></script>
+	<script src="scripts/LoadTemplates.js"></script>
 	<script src="scripts/DrawingPoints.js"></script>
 	<!-- <script src="scripts/GetData.js"></script> -->
+
+
 </head>
 
 <body>
-<!-- begin template -->
+  	<!-- places for templates -->
+  	<div id="registrationTemplate"></div>
+  	<div id="loginTemplate"></div>
+	<!-- end adding templates -->
+
+<!-- begin main template -->
 <div class="navbar navbar-custom navbar-fixed-top">
  <div class="navbar-header"><a class="navbar-brand" href="#">Easy Park</a>
       <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,9 +43,9 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Trazi</a></li>
-        <li><a href="#">Registracija</a></li>
-        <li><a href="#">Upis</a></li>
+        <li class="active"><a href="#">Traži</a></li>
+        <li><a href="" data-toggle="modal" data-target=".registrationModal">Registracija</a></li>
+        <li><a href="" data-toggle="modal" data-target=".loginModal" >Upis</a></li>
       </ul>
       <form class="navbar-form">
         <div class="form-group" style="display:inline;">
@@ -60,7 +73,7 @@
   <div class="row left-panel">
   	<div class="col-xs-8" id="left">
     
-      <h2>Dobrodosli na EasyPark.ba!</h2>
+      <h2>Dobrodošli na EasyPark.ba!</h2>
       
       <!-- item list -->
       <div class="panel panel-default">
@@ -96,7 +109,7 @@
     
   </div>
 </div>
-<!-- end template -->
-	</body>
-
+<!-- end main template -->
+</body>
 </html>
+

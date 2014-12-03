@@ -36,20 +36,28 @@ body{
 	height:100%;
 }
 
-#main>.row {
-    overflow-y:scroll;
-}
+
 
 #left {
 	height:100%;
 }
 
 .mapa{
-	width:77%;
+	width:75%;
     height:calc(100% - 0);
     position:absolute;
     right:16px;
     top:50px;
+    bottom:0;
+    overflow:hidden;
+    border:5px black;
+}
+.registration{
+	width:65%;
+    height:calc(100% - 0);
+    position:absolute;
+    right:70px;
+    top:150px;
     bottom:0;
     overflow:hidden;
     border:5px black;
