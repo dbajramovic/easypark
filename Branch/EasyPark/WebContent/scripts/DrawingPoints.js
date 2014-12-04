@@ -11,6 +11,10 @@ var interval;
 var searchName;
 var listOfDevices;
 var indexOfDevice=0;
+var infowindow = new google.maps.InfoWindow({
+    content: null,
+    maxWidth: 400
+});
 var colors= ['aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 
              'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 
              'silver', 'teal', 'white', 'yellow'];
@@ -35,20 +39,6 @@ var styles = [
                 ]
               }
             ];
-function createList(locatlong,locatlat){
-	var desno=true;
-	var lijevo=false;
-	var l=[];
-	for (var i=1;i<20;i++){
-		if (desno){var a= locatlong + (i/1000); desno=!desno;}
-		if (!desno){var d= locatlat-(i/1000);desno=!desno;}
-		if (lijevo){var a= locatlong - (i/1000); lijevo=!lijevo;}
-		if (!lijevo){var d= locatlat+(i/1000);lijevo=!lijevo;}
-		var f=new google.maps.LatLng(a, d); 
-		l.push(f);
-	}
-	return l;
-}
 
 function setMarker(coordinates, color,id, defaultMarker)
 {
@@ -61,6 +51,7 @@ function setMarker(coordinates, color,id, defaultMarker)
 			    animation: google.maps.Animation.DROP,
 			    draggable:true
 			});
+			return marker
 		}
 	else
 		{
@@ -76,62 +67,57 @@ function setMarker(coordinates, color,id, defaultMarker)
 		    animation: google.maps.Animation.DROP,
 		    icon: imageParking
 		});
+		return marker;
 		}
 }
 
-//function setDefaultData(jsonData, indexOf){
-//	indexOfDevice=indexOf;
-//	$('#Time').html(jsonData.time);
-//	$('#Date').html(jsonData.date);
-//	$('#Comment').html(jsonData.comment);
-//	$('#Speed').html(jsonData.speed); 
-//	myLatlng=new google.maps.LatLng(jsonData.lat,jsonData.long);
-//	setMarker(myLatlng,indexOf,indexOf);
-//}
-//function setDefaultAction(jsonData,indexOf){
-//	google.maps.event.addListener(marker, 'click', function() {
-//	   
-//		indexOfDevice=marker.getTitle();
-//	   setDefaultData(jsonData,indexOf);
-//	  });
-//
-//}
-//function setData(jsonData){
-//	listOfDevices=jsonData;
-//    if (jsonData==""){alert('Nema uređaja s tim imenom u bazi, ili nije uključeno praćenje trenutno! Pokušajte ponovo...');if (interval!=null) clearInterval(interval);}
-//    else {
-//    	for(var g=0;g<listOfDevices.length;g++){
-//    	setDefaultData(listOfDevices[g],g,g);
-//    	setDefaultAction(listOfDevices[g],g);
-//    	}
-//    } 
-//    $('#NumberOfDevices').html(jsonData.length); 
-//}
-/*function getData()
-{
-	var JSONObject= {"name":searchName};
-	var jsonData = JSON.stringify(JSONObject); 
-	var request = $.ajax({
-			url: "http://localhost:8080/Tracker/api/service/position",
-			type: "POST",
-			contentType: 'application/json',
-			data: jsonData,
-			dataType: "JSON",
-			success: function(data) {setData(data);}  
-		});
-	request.fail(function( jqXHR, textStatus ) {alert( "Request failed: " + textStatus ); clearInterval(interval);});
-}*/
-//function search(textField){
-//	if (interval!=null) clearInterval(interval);
-//	initialize();
-//	searchName=textField;
-//	interval=setInterval(getData, 1000);
-//}
+function toggleBounce(yest,marker2) {
+	if (yest==false) {marker2.setAnimation(null);} 
+	else if (yest==true){marker2.setAnimation(google.maps.Animation.BOUNCE);}
+};
+
+function addInfoWindow(marker2, infoData){  
+	var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Podaci o parkingu</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Uslovi pod kojima biste ostavili auto</b>: vlasnik: <b>'+infoData._creatorID +'</b>'+ 
+      ' video nadzor: <b>'+infoData._isthereCamera +'</b>'+
+      ' dobar ulaz: <b>'+infoData._isthereGoodEntrance +'</b>'+
+      ' zaštita: <b>'+infoData._isthereGuard +'</b>'+
+      ' osvijetljeno: <b>'+infoData._isthereLight +'</b>'+
+      ' cesta: <b>'+infoData._isthereRoad +'</b>'+
+      ' krov: <b>'+infoData._isthereRoof +'</b>'+
+      ' cijena: <b>'+infoData._price +'</b>'+
+      ' broj mjesta: <b>'+infoData._totalnumber +'</b> </p>';
+	  infowindow.content=contentString;
+	  infowindow.open(map,marker2);  
+};
+
+function setHoverAction(marker2,jsonData){
+	google.maps.event.addListener(marker2, 'mousemove', function() {
+		addInfoWindow(marker2,jsonData);
+	  });
+	google.maps.event.addListener(marker2, 'mouseout', function() {
+		infowindow.close();
+	  });
+}
+
+function setDraggableAction(marker2){
+	google.maps.event.addListener(marker2, 'dragend', function() {
+		toggleBounce(true,marker2);
+		map.setCenter(marker2.getPosition());
+		var r= getParkings(marker2.getPosition().lat(),marker2.getPosition().lng(),10);
+		toggleBounce(false,marker2);
+	  });
+}
 
 function sendToScreen(data){
-    data.forEach(function(item) {
-    	var loc=new google.maps.LatLng(data._latitude, data._longitude);
-    	setMarker(loc,2,1,false);
+	data.forEach(function(item) {
+    	var loc=new google.maps.LatLng(item._latitude, item._longitude);
+    	var m = setMarker(loc,2,item._parkingID,false);
+    	setHoverAction(m,item);
         });
 }
 function getParkings(myLat,myLong,range)
@@ -150,29 +136,17 @@ function getParkings(myLat,myLong,range)
 	);
 }
 
-function sendToScreenT(data){
-    data.forEach(function(item) {
-    	setMarker(item,2,1,false);
-        });
-}
-
-
-
 function getLocation() {
 	 if (navigator.geolocation) {
 	     navigator.geolocation.getCurrentPosition(function (position) {
 	         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	    	 map.setCenter(initialLocation);
-	    	 setMarker(initialLocation,2,1,true);
-	    	 var test = createList(position.coords.latitude,position.coords.longitude);
-	    	 sendToScreenT(test);
-	    	 //getParkings(position.coords.longitude,position.coords.latitude,10);
+	    	 var mark = setMarker(initialLocation,2,1,true);
+	    	 setDraggableAction(mark);
+	    	 var test = getParkings(position.coords.latitude,position.coords.longitude,10);
 	     });
 	 }else{alert("Vaš pretrazivac ne odaje informaciju o vašoj geolokaciji!");}
 }
-       
-
-
 
 function initialize(){
 	var mapProp = {
@@ -190,6 +164,5 @@ google.maps.event.addListener(marker, 'click', function() {
     map.setZoom(8);
     map.setCenter(marker.getPosition());
   });
-
 })();
 

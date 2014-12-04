@@ -38,7 +38,7 @@ public class TrackerService {
 		try {Class.forName("oracle.jdbc.driver.OracleDriver");} catch (ClassNotFoundException e) {System.out.println("Where is your Oracle JDBC Driver?");}
 		System.out.println("Connection created!");
 		try {
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SYSTEM","tomcat92");
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@80.65.65.66:1521:ETFLAB", "EasyPark","EasyParkIsNum1");
 		}
 		 catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
@@ -60,7 +60,7 @@ public class TrackerService {
 		GetParkingsAtLocation ga = new GetParkingsAtLocation();	
 		CreateConnection();
 		try {
-			lp = ga.giveMe(connection, id.getInt("longitude"), id.getInt("latitude"), id.getInt("range"));
+			lp = ga.giveMe(connection, (float) id.getDouble("longitude"), (float) id.getDouble("latitude"),id.getInt("range"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();	

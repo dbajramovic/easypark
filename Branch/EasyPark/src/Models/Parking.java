@@ -5,7 +5,7 @@ public class Parking {
 	}
 
 	private int _parkingID;
-	private float _longtitude;
+	private float _longitude;
 	private float _latitude;
 	private int _creatorID;
 	private int _totalnumber;
@@ -121,12 +121,12 @@ public class Parking {
 		this._latitude = _latitude;
 	}
 
-	public float get_longtitude() {
-		return _longtitude;
+	public float get_longitude() {
+		return _longitude;
 	}
 
-	public void set_longtitude(float _longtitude) {
-		this._longtitude = _longtitude;
+	public void set_longitude(float _longtitude) {
+		this._longitude = _longtitude;
 	}
 
 	public Boolean get_isthereRoof() {
