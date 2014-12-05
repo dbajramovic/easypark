@@ -17,10 +17,12 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 
+
 //import jdk.nashorn.internal.runtime.regexp.RegExp;
 import oracle.jdbc.driver.OracleDriver;
 import oracle.jdbc.*;
 import Models.Parking;
+import Models.Slika;
 
 @Path("/service")
 public class TrackerService {
@@ -66,6 +68,22 @@ public class TrackerService {
 			e.printStackTrace();	
 		}
 		return lp;
+	}
+	@Path("/pic")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Slika giveMePicture(JSONObject id){	
+		Slika p = new Slika();
+		loadPicture lp = new loadPicture();	
+		CreateConnection();
+		try {
+			p = lp.giveMe(connection,id.getInt("pictureid"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();	
+		}
+		return p;
 	}
 /*
 	@Path("/getdataofadmin")

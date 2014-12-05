@@ -19,6 +19,8 @@ public class Parking {
 	private Boolean _isthereGuard;
 	private Boolean _isthereGoodEntrance;
 	private Boolean _isthereRoof;
+	private float _secrating;
+	private float _ovrrating;
 	public int get_parkingID() {
 		return _parkingID;
 	}
@@ -135,5 +137,21 @@ public class Parking {
 
 	public void set_isthereRoof(Boolean _isthereRoof) {
 		this._isthereRoof = _isthereRoof;
+	}
+
+	public float get_secrating() {
+		return _secrating;
+	}
+
+	public void set_secrating(float _secrating) {
+		this._secrating = _secrating;
+	}
+
+	public float get_ovrrating() {
+		return _ovrrating;
+	}
+
+	public void set_ovrrating(float _ovrrating) {
+		this._ovrrating = _ovrrating;
 	}
 }

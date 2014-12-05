@@ -62,6 +62,16 @@ body{
     overflow:hidden;
     border:5px black;
 }
+.parking{
+	width:65%;
+    height:calc(100% - 0);
+    position:absolute;
+    right:70px;
+    top:150px;
+    bottom:0;
+    overflow:hidden;
+    border:5px black;
+}
 .logo {
 	width:50px;
 	height:100px;
