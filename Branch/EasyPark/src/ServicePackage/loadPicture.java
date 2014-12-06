@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,17 +28,18 @@ public class loadPicture {
 		t = cs.execute();
 		rs = (ResultSet)cs.getObject(1);
 		while(rs.next()) {
-			p.set_slika(rs.getBlob(1));
 			p.set_note(rs.getString(2));
-			File image = new File("C:\\Users\\Bureksasutlijom\\Desktop\\java.jpg");
+			byte[] buffer = rs.getBytes(1);
+			/*File image = new File("C:\\Users\\Bureksasutlijom\\Desktop\\java.jpg");
 		      FileOutputStream fos = new FileOutputStream(image);
-		      byte[] buffer = new byte[1];
+		      
 		      InputStream is = rs.getBinaryStream(1);
 		      while (is.read(buffer) > 0) {
 		        fos.write(buffer);
 		      }
-		      fos.close();
-		      p.set_Image(image);
+		      fos.close();*/
+		      p.set_slika(buffer);
+		      System.out.print(buffer);
 		}
 		return p;
 		}

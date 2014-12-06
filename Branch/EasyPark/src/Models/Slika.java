@@ -13,8 +13,7 @@ public class Slika {
 
 	private int _pictureID;
 	private String _note;
-	private Blob _slika;
-	private File img;
+	private byte[] _slika;
 
 	public int get_pictureID() {
 		return _pictureID;
@@ -32,14 +31,11 @@ public class Slika {
 		this._note = _note;
 	}
 
-	public Blob get_slika() {
+	public byte[] get_slika() {
 		return _slika;
 	}
 
-	public void set_slika(Blob _slika) {
+	public void set_slika(byte[] _slika) {
 		this._slika = _slika;
-	}
-	public void set_Image(File image) throws SQLException {
-		this.img = image;
 	}
 }

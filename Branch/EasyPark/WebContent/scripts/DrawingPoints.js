@@ -114,7 +114,7 @@
 	;
 
 	function getParkingModal(marker2, infoData) {
-		// picData = getPicture(3078);
+		picData = getPicture(3078);
 		var kamera = '<img src="http://s23.postimg.org/t59dwo3ob/Medal_Camera_None.png" width="55" height="85">';
 		var cesta = '<img src="http://s1.postimg.org/vpr8jybkf/Medal_Road_None.png" width="55" height="85">';
 		var krov = '<img src="http://s1.postimg.org/ocbukzrin/Medal_Roof_None.png" width="55" height="85">';
@@ -135,7 +135,7 @@
 		if (infoData._isthereLight == true) {
 			svjetlo = '<img src="http://s4.postimg.org/ko5hocjil/Medal_Light.png" width="55" height="85">';
 		}
-		var ContentString = '<div class="modal-dialog" style="width:900px">'
+		var ContentString = '<div class="modal-dialog" style="width:600px">'
 				+ ' <div class="modal-content">'
 				+ '<div class="modal-header">'
 				+ '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'
@@ -144,12 +144,12 @@
 				+ '</h4>'
 				+ '</div>'
 				+ '<div class="modal-body">'
-				+ '<p>Vlasnik:'
-				+ infoData._creatorID
-				+ '<div id="container1" style="width: 270px; height: 200px; margin: 0 auto; float:left" ></div>'
-				+ '<div id="container2" style="width: 270px; height: 200px; margin: 0 auto;"></div>'
-				+ '<img'
-				+ '<hr><h4 class="modal-title" style="clear:both">Medalje</h4>'
+				+ '<p>Vlasnik:<b>'
+				+ infoData._creator
+				+'</b> <br>Broj telefona: <b>'+infoData._telefon
+				+ '</b><div id="container1" style="width: 270px; height: 200px; margin: 0 auto; float:left" ></div>'
+				+ '<div id="container2" style="width: 270px; height: 200px; margin: 0; float:left"></div>'
+				+ '<div id="medalje"><hr><h4 class="modal-title" style="clear:both">Medalje</h4>'
 				+ kamera
 				+ ' '
 				+ cesta
@@ -159,17 +159,19 @@
 				+ cuvar
 				+ ' '
 				+ svjetlo
-				+ '</p>'
-				+ '</div>'
+				+'<hr><b>Cijena:</b> '
+				+infoData._price
+				+ ' KM</p>'
+				+ '</div></div>'
 				+ '<div class="modal-footer">'
 				+ '<button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>'
 				+ '<button type="button" class="btn btn-primary">NE RADI</button>'
 				+ '</div>' + '</div>' + '</div>' + '</div>';
 		document.getElementById("parkingModal").innerHTML = ContentString;
 		;
-		// var slika = document.createElement('img');
-		// slika.src = 'data:image/jpg;base64,'+picData._note;
-		// document.body.appendChild(slika);
+		/*var slika = document.createElement('img');
+		slika.src = 'data:image/jpg;base64,'+picData._slika;
+		document.body.appendChild(slika);*/
 		$("#parkingModal").modal('show');
 	}
 	;

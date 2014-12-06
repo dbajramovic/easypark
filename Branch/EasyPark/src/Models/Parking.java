@@ -7,7 +7,7 @@ public class Parking {
 	private int _parkingID;
 	private float _longitude;
 	private float _latitude;
-	private int _creatorID;
+	private String _creator;
 	private int _totalnumber;
 	private int _price;
 	private String _note;
@@ -21,6 +21,7 @@ public class Parking {
 	private Boolean _isthereRoof;
 	private float _secrating;
 	private float _ovrrating;
+	private String _telefon;
 	public int get_parkingID() {
 		return _parkingID;
 	}
@@ -28,14 +29,6 @@ public class Parking {
 	public void set_parkingID(int _parkingID) {
 		this._parkingID = _parkingID;
 	}
-	public int get_creatorID() {
-		return _creatorID;
-	}
-
-	public void set_creatorID(int _creatorID) {
-		this._creatorID = _creatorID;
-	}
-
 	public int get_totalnumber() {
 		return _totalnumber;
 	}
@@ -153,5 +146,21 @@ public class Parking {
 
 	public void set_ovrrating(float _ovrrating) {
 		this._ovrrating = _ovrrating;
+	}
+
+	public String get_telefon() {
+		return _telefon;
+	}
+
+	public void set_telefon(String _telefon) {
+		this._telefon = _telefon;
+	}
+
+	public String get_creator() {
+		return _creator;
+	}
+
+	public void set_creator(String _creator) {
+		this._creator = _creator;
 	}
 }

@@ -32,7 +32,7 @@ public class GetParkingsAtLocation {
 		while(rs.next()) {
 			Parking p = new Parking();
 			p.set_parkingID(rs.getInt(1));
-			p.set_creatorID(rs.getInt(17));
+			p.set_creator(rs.getString(17));
 			p.set_longitude(rs.getFloat(3));
 			p.set_latitude(rs.getFloat(4));
 			p.set_note(rs.getString(7));
@@ -47,6 +47,7 @@ public class GetParkingsAtLocation {
 			p.set_isthereRoad(new Boolean(rs.getInt(11) != 0));
 			p.set_secrating(rs.getFloat(15));
 			p.set_ovrrating(rs.getFloat(16));
+			p.set_telefon(rs.getString(14));
 			lista_parkinga.add(p);
 		}
 		return lista_parkinga;
