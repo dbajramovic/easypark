@@ -1,4 +1,4 @@
-package ServicePackage;
+package controller;
 
 import java.util.List;
 import java.util.Locale;
@@ -16,8 +16,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.Parking;
+import model.Slika;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+
+
 
 
 
@@ -25,11 +30,11 @@ import org.codehaus.jettison.json.JSONObject;
 //import jdk.nashorn.internal.runtime.regexp.RegExp;
 import oracle.jdbc.driver.OracleDriver;
 import oracle.jdbc.*;
-import Models.Parking;
-import Models.Slika;
+import repository.ParkingsFunctions;
+import repository.ObjectsFunctions;
 
 @Path("/service")
-public class TrackerService {
+public class ParkingService {
 
 	private static final String api_version="1.0.3";
 	private static String conn="";
@@ -63,7 +68,7 @@ public class TrackerService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Parking> giveMeParkingsInRange(JSONObject id){	
 		List<Parking> lp = null;
-		GetParkingsAtLocation ga = new GetParkingsAtLocation();	
+		ParkingsFunctions ga = new ParkingsFunctions();	
 		CreateConnection();
 		try {
 			lp = ga.giveMe(connection, (float) id.getDouble("longitude"), (float) id.getDouble("latitude"),id.getInt("range"));
@@ -73,15 +78,17 @@ public class TrackerService {
 		}
 		return lp;
 	}
+	
 	@Path("/pic")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Slika giveMePicture(JSONObject id){	
 		Slika p = new Slika();
-		loadPicture lp = new loadPicture();	
+		ObjectsFunctions lp = new ObjectsFunctions();	
 		CreateConnection();
 		try {
+			
 			p = lp.giveMe(connection,id.getInt("pictureid"));
 		}
 		catch(Exception e) {

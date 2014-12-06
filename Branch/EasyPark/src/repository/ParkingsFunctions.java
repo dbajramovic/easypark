@@ -1,4 +1,4 @@
-package ServicePackage;
+package repository;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import Models.Parking;
+import model.Parking;
 import oracle.jdbc.OracleTypes;
-public class GetParkingsAtLocation {
+public class ParkingsFunctions {
 	public List<Parking> giveMe(Connection con,float longtituda, float latituda, int razdaljina) {
 		
 		boolean t;

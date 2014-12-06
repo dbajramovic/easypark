@@ -73,9 +73,31 @@
 		} else if (yest == true) {
 			marker2.setAnimation(google.maps.Animation.BOUNCE);
 		}
-	}
-	;
+	};
 
+	function getPicture(picid) {
+		
+		var JSONObject = {
+			"pictureid" : picid
+		};
+		var jsonData = JSON.stringify(JSONObject);
+		var request = $.ajax({
+			url : "http://localhost:80/EasyPark/api/service/pic",
+			type : "POST",
+			contentType : 'application/json',
+			data : jsonData,
+			dataType : "JSON",
+			success : function(data2) {
+				
+				return data2;
+			}
+		});
+		request.fail(function(jqXHR, textStatus) {
+			console.log("dada");
+			clearInterval(interval);
+		});
+	}
+	
 	function addInfoWindow(marker2, infoData) {
 		var contentString = '<div id="content">'
 				+ '<div id="siteNotice">'
@@ -110,11 +132,13 @@
 				+ infoData._totalnumber + '</b> </p>';
 		infowindow.content = contentString;
 		infowindow.open(map, marker2);
-	}
-	;
+	};
+
+	
 
 	function getParkingModal(marker2, infoData) {
-		picData = getPicture(3078);
+		var picData = getPicture(3078);
+		console.log(picData);
 		var kamera = '<img src="http://s23.postimg.org/t59dwo3ob/Medal_Camera_None.png" width="55" height="85">';
 		var cesta = '<img src="http://s1.postimg.org/vpr8jybkf/Medal_Road_None.png" width="55" height="85">';
 		var krov = '<img src="http://s1.postimg.org/ocbukzrin/Medal_Roof_None.png" width="55" height="85">';
@@ -144,9 +168,7 @@
 				+ '</h4>'
 				+ '</div>'
 				+ '<div class="modal-body">'
-				+ '<p>Vlasnik:<b>'
-				+ infoData._creator
-				+'</b> <br>Broj telefona: <b>'+infoData._telefon
+				+ '<p>Vlasnik:<b>'+ infoData._creator+'</b> <br>Broj telefona: <b>'+infoData._telefon
 				+ '</b><div id="container1" style="width: 270px; height: 200px; margin: 0 auto; float:left" ></div>'
 				+ '<div id="container2" style="width: 270px; height: 200px; margin: 0; float:left"></div>'
 				+ '<div id="medalje"><hr><h4 class="modal-title" style="clear:both">Medalje</h4>'
@@ -173,8 +195,8 @@
 		slika.src = 'data:image/jpg;base64,'+picData._slika;
 		document.body.appendChild(slika);*/
 		$("#parkingModal").modal('show');
-	}
-	;
+	};
+	
 	function setHoverAction(marker2, jsonData) {
 		google.maps.event
 				.addListener(
@@ -286,7 +308,7 @@
 												});
 
 							});
-							// addInfoWindow(marker2,jsonData);
+						 addInfoWindow(marker2,jsonData);
 						});
 		google.maps.event.addListener(marker2, 'mouseout', function() {
 			infowindow.close();
@@ -331,25 +353,9 @@
 			clearInterval(interval);
 		});
 	}
-	function getPicture(picid) {
-		var JSONObject = {
-			"pictureid" : picid
-		};
-		var jsonData = JSON.stringify(JSONObject);
-		var request = $.ajax({
-			url : "http://localhost:80/EasyPark/api/service/pic",
-			type : "POST",
-			contentType : 'application/json',
-			data : jsonData,
-			dataType : "JSON",
-			success : function(data) {
-				return data;
-			}
-		});
-		request.fail(function(jqXHR, textStatus) {
-			clearInterval(interval);
-		});
-	}
+	
+	
+	//returns our location
 	function getLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -366,6 +372,7 @@
 		}
 	}
 
+	//MAIN function for initialize
 	function initialize() {
 		var mapProp = {
 			center : {
@@ -381,10 +388,13 @@
 		});
 		getLocation();
 	}
-
 	google.maps.event.addDomListener(window, 'load', initialize);
 	google.maps.event.addListener(marker, 'click', function() {
 		map.setZoom(8);
 		map.setCenter(marker.getPosition());
 	});
 })();
+
+
+
+

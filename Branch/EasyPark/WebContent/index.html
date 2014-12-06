@@ -16,8 +16,9 @@
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
 <!-- HTML templates -->
-	<link rel="import" href="RegisterBlock.html">
-	<link rel="import" href="LoginBlock.html">
+	<link rel="import" href="partialBlocks/RegisterBlock.html">
+	<link rel="import" href="partialBlocks/LoginBlock.html">
+	<link rel="import" href="partialBlocks/ParkingInfoBlock.html">
 
 <!-- SCRIPTS -->
 	<script src="scripts/bootstrap.min.js"></script>
@@ -32,6 +33,7 @@
   	<!-- places for templates -->
   	<div id="registrationTemplate"></div>
   	<div id="loginTemplate"></div>
+  	<div id="parkingModal" class="modal"></div>
 	<!-- end adding templates -->
 
 <!-- begin main template -->
@@ -111,9 +113,7 @@
     
   </div>
 </div>
-<div id="parkingModal" class="modal">
-    
-</div>
+
 <!-- end main template -->
 </body>
 </html>
