@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="controller.SessionBox" %>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,6 +34,15 @@
 </head>
 
 <body>
+
+ <% HttpSession ses = request.getSession(true); 
+ if (session.getAttribute("id")==null){%>
+ 
+<h2>Niste registrovani!</h2>
+<a href="index.html" >Vratite se na početnu stranicu</a>
+ 
+ <% }
+ else {%>
   	<!-- places for templates -->
   	<div id="registrationTemplate"></div>
   	<div id="loginTemplate"></div>
@@ -50,8 +61,8 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="" data-toggle="modal" data-target="#parkingModal">Traži</a></li>
-        <li><a href="" data-toggle="modal" data-target=".registrationModal">Registracija</a></li>
-        <li><a href="" data-toggle="modal" data-target=".loginModal" >Upis</a></li>
+        <li><a href="" data-toggle="modal" data-target=".registrationModal">Dodaj novi parking</a></li>
+        <li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
       </ul>
       <form class="navbar-form">
         <div class="form-group" style="display:inline;">
@@ -79,7 +90,8 @@
   <div class="row left-panel">
   	<div class="col-xs-8" id="left">
     
-      <h2>Dobrodošli na EasyPark.ba!</h2>
+
+      <h2>Dobrodošao!</h2>
       
       <!-- item list -->
       <div class="panel panel-default">
@@ -115,8 +127,7 @@
     
   </div>
 </div>
-
+<%}%>
 <!-- end main template -->
 </body>
 </html>
-

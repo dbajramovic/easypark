@@ -17,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import model.Parking;
+import model.Person;
 import model.Slika;
 
 import org.codehaus.jettison.json.JSONException;
@@ -27,9 +28,12 @@ import org.codehaus.jettison.json.JSONObject;
 
 
 
+
+
 //import jdk.nashorn.internal.runtime.regexp.RegExp;
 import oracle.jdbc.driver.OracleDriver;
 import oracle.jdbc.*;
+import repository.AccountFunctions;
 import repository.ParkingsFunctions;
 import repository.ObjectsFunctions;
 
@@ -88,7 +92,6 @@ public class ParkingService {
 		ObjectsFunctions lp = new ObjectsFunctions();	
 		CreateConnection();
 		try {
-			
 			p = lp.giveMe(connection,id.getInt("pictureid"));
 		}
 		catch(Exception e) {
@@ -96,7 +99,52 @@ public class ParkingService {
 		}
 		return p;
 	}
-/*
+
+	@Path("/register")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Long Register(JSONObject id) throws SQLException{
+		Long p=(long) 0;
+		Person te=new Person();
+		AccountFunctions lp = new AccountFunctions();	
+		CreateConnection();
+		try{
+			te.set_firstname(id.get("firstname").toString());
+			te.set_lastname(id.get("lastname").toString());
+			//te.setid.get("about").toString());
+			//te.set(id.get("companyname").toString());
+			te.set_password(id.get("password").toString());
+			te.set_username(id.get("username").toString());
+			te.set_city(id.get("city").toString());
+			te.set_email(id.get("email").toString());
+			p = lp.registerAccount(connection,te);
+			System.out.println(p);
+			
+		}catch(Exception e){}
+		finally{
+			CloseConnection();
+		}
+		return p;
+	}
+	@Path("/login")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Person Login(JSONObject id) throws SQLException{
+		Person te=new Person();
+		AccountFunctions lp = new AccountFunctions();	
+		CreateConnection();
+		try{
+			te = lp.loginAccount(connection,id.get("username").toString(),id.get("password").toString());
+			System.out.println(te);
+			
+		}catch(Exception e){}
+		finally{
+			CloseConnection();
+		}
+		return te;
+	}
+	
+	/*
 	@Path("/getdataofadmin")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -355,36 +403,7 @@ public class ParkingService {
 		
 	}
 	
-	@Path("/register")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public void Register(JSONObject id) throws SQLException{
-		String s="Uspjesno";
-		Admin te=new Admin();
-		try{
-			// da maknemo ð dž š è æ jer se ne moze pretrazivati po njima
-			te.setFirstName(BosnianEncode(id.get("firstname").toString()));
-			te.setLastName(BosnianEncode(id.get("lastname").toString()));
-			te.setAbout(BosnianEncode(id.get("about").toString()));
-			te.setCompanyName(BosnianEncode(id.get("companyname").toString()));
-			te.setPassword(BosnianEncode(id.get("password").toString()));
-			te.setUsername(BosnianEncode(id.get("username").toString()));
-
-			CreateConnection();
-			String newState="INSERT INTO Admin (Username,FirstName,LastName,RegistrationDate,RegistrationTime,CompanyName,Password,About) VALUES (?,?,?,CURDATE(),CURTIME(),?,?,?) ";
-			PreparedStatement query=connection.prepareStatement(newState);
-			query.setString(1, te.getUsername());
-			query.setString(2, te.getFirstName());
-			query.setString(3, te.getLastName());
-			query.setString(4, te.getCompanyName());
-			query.setString(5, te.getPassword());
-			query.setString(6, te.getAbout());
-			int rs=query.executeUpdate();
-		}catch(Exception e){s=(e.getMessage());}
-		finally{
-			CloseConnection();
-		}
-	}
+	
 	
 	*/
 	
