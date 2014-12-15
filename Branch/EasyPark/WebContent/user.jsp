@@ -21,7 +21,7 @@
 	<link rel="import" href="partialBlocks/RegisterBlock.html">
 	<link rel="import" href="partialBlocks/LoginBlock.html">
 	<link rel="import" href="partialBlocks/ParkingInfoBlock.html">
-
+	<link rel="import" href="partialBlocks/UserInfoBlock.html">
 <!-- SCRIPTS -->
 	<script src="scripts/bootstrap.min.js"></script>
 	<script src="scripts/LoadTemplates.js"></script>
@@ -47,6 +47,7 @@
   	<div id="registrationTemplate"></div>
   	<div id="loginTemplate"></div>
   	<div id="parkingModal" class="modal"></div>
+  	<div id="userModal"></div>
 	<!-- end adding templates -->
 
 <!-- begin main template -->
@@ -60,7 +61,7 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="" data-toggle="modal" data-target="#parkingModal">Traži</a></li>
+        <li class="active"><a id= "abc" href="" data-toggle="modal" data-target=".userModal">Traži</a></li>
         <li><a href="" data-toggle="modal" data-target=".registrationModal">Dodaj novi parking</a></li>
         <li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
       </ul>
@@ -129,5 +130,6 @@
 </div>
 <%}%>
 <!-- end main template -->
+<script src="scripts/DrawUserModal.js"></script>
 </body>
 </html>

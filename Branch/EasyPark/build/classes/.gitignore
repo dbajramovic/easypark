@@ -1,5 +1,2 @@
-/ServicePackage
-/repository
-/controllerPackage
-/model
 /controller
+/repository

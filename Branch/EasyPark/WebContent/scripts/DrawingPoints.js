@@ -49,7 +49,7 @@
 				animation : google.maps.Animation.DROP,
 				draggable : true
 			});
-			return marker
+			return marker;
 		} else {
 			marker = new google.maps.Marker({
 				position : coordinates,
