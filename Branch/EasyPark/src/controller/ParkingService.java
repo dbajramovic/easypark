@@ -71,9 +71,11 @@ public class ParkingService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Parking> giveMeParkingsInRange(JSONObject id){	
+		System.out.println("OVdje");
 		List<Parking> lp = null;
 		ParkingsFunctions ga = new ParkingsFunctions();	
 		CreateConnection();
+		
 		try {
 			lp = ga.giveMe(connection, (float) id.getDouble("longitude"), (float) id.getDouble("latitude"),id.getInt("range"));
 		}

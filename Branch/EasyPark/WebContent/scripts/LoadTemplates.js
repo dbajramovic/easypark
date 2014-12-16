@@ -19,7 +19,6 @@ $(function() {
 	
 	//loading User modal
 	var link4 = document.querySelector('link[href="partialBlocks/UserInfoBlock.html"]');
-	Console.log(link4);
 	var template4 = link4.import.querySelector('template');
 	var clone4 = document.importNode(template4.content, true);
 	document.querySelector('#userModal').appendChild(clone4);
