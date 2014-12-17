@@ -16,43 +16,41 @@ import oracle.jdbc.OracleTypes;
 
 public class AccountFunctions {
 
-	public Long registerAccount(Connection con,Person id) throws IOException {
+	public void registerAccount(Connection con,Person id) throws IOException {
 		boolean t;
 		long d=0;
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
 		try {
 			CallableStatement cs = null;
-			cs = con.prepareCall("begin ? := INSERTPERSONRETURNINGID(?,?,?,?,?,?,?); end;");
+			cs = con.prepareCall("begin REGISTEROWNER(?,?,?,?,?,?); end;");
 			cs.clearParameters();
-			cs.registerOutParameter(1, OracleTypes.CURSOR);
-			cs.setString(2,id.get_firstname());
-			cs.setString(3,id.get_lastname());
-			cs.setString(4,id.get_city());
-			cs.setString(5,id.get_username());
-			cs.setString(6,id.get_password());
-			cs.setString(7,id.get_email());
-			cs.setString(8,"f");
+			//cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setString(1,id.get_firstname());
+			cs.setString(2,id.get_lastname());
+			cs.setString(3,id.get_email());
+			cs.setString(4,id.get_password());
+			cs.setString(5,id.get_city());
+			//phone number
+			cs.setString(6,id.get_email());
 			t = cs.execute();
-			rs = (ResultSet)cs.getObject(1);
-		while(rs.next()) {
-			d=rs.getLong(0);
-		}
+			System.out.println(t);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return d;
 	}
 	
 	public Person loginAccount(Connection con,String username, String password) throws IOException {
 		boolean t;
+		System.out.println(username);
+		System.out.println(password);
 		Person d=new Person();
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
 		try {
 			CallableStatement cs = null;
-			cs = con.prepareCall("begin ? := GETPERSON(?,?); end;");
+			cs = con.prepareCall("begin ? := LOGIN(?,?); end;");
 			cs.clearParameters();
 			cs.registerOutParameter(1, OracleTypes.CURSOR);
 			cs.setString(2,username);

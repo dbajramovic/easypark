@@ -19,13 +19,13 @@ public class SessionBox {
 	@Path("/insert")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void SetUserSession(JSONObject usr)
+	public void SetUserSession(JSONObject usr) throws JSONException
 	{
+		System.out.println(usr);
 		HttpSession custSession = request.getSession(true);
-		custSession.setAttribute("username", "GAZDA");
-		custSession.setAttribute("id", "1245");
-		custSession.setAttribute("about", "Neki tekst o registrovanom korisniku");
-		custSession.setAttribute("email", "admin");
+		custSession.setAttribute("username", usr.getString("username"));	
+		custSession.setAttribute("id", usr.getString("id"));
+		custSession.setAttribute("password", usr.getString("password"));
 	}
 	//@Context private HttpServletRequest request2;
 	@Path("/delete")
@@ -33,16 +33,10 @@ public class SessionBox {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteSession(JSONObject usr) throws JSONException
 	{
-		//System.out.println("Zdravo");
-		//if (usr.getString("valid").toString()=="true")
-		//{
-			
 		HttpSession custSession = request.getSession(true);
 		custSession.removeAttribute("username");
 		custSession.removeAttribute("id");
-		custSession.removeAttribute("about");
-		custSession.removeAttribute("email");
-		//}
+		custSession.removeAttribute("password");
 	}
 	
 }

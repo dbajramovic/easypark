@@ -71,7 +71,6 @@ public class ParkingService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Parking> giveMeParkingsInRange(JSONObject id){	
-		System.out.println("OVdje");
 		List<Parking> lp = null;
 		ParkingsFunctions ga = new ParkingsFunctions();	
 		CreateConnection();
@@ -119,8 +118,8 @@ public class ParkingService {
 			te.set_username(id.get("username").toString());
 			te.set_city(id.get("city").toString());
 			te.set_email(id.get("email").toString());
-			p = lp.registerAccount(connection,te);
-			System.out.println(p);
+			lp.registerAccount(connection,te);
+			
 			
 		}catch(Exception e){}
 		finally{
