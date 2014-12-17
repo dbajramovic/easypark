@@ -136,7 +136,9 @@ public class ParkingService {
 		AccountFunctions lp = new AccountFunctions();	
 		CreateConnection();
 		try{
-			te = lp.loginAccount(connection,id.get("username").toString(),id.get("password").toString());
+			String user =id.getString("username");
+			String pass = id.getString("password");
+			te = lp.loginAccount(connection,user,pass);
 			System.out.println(te);
 			
 		}catch(Exception e){}
@@ -145,7 +147,23 @@ public class ParkingService {
 		}
 		return te;
 	}
-	
+	@Path("/userdata")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Person UserData(JSONObject id) throws SQLException{
+		Person te=new Person();
+		AccountFunctions lp = new AccountFunctions();	
+		CreateConnection();
+		try{
+			te = lp.UserDetails(connection,id.getInt("userid"));
+			System.out.println(te);
+			
+		}catch(Exception e){}
+		finally{
+			CloseConnection();
+		}
+		return te;
+	}
 	/*
 	@Path("/getdataofadmin")
 	@POST

@@ -26,7 +26,8 @@ function openUserScreen(data2){
 			contentType: 'application/json',
 			data: jsonData,
 			dataType: "JSON",
-			success: function(data) { if ((usr==='admin') && (pss==='admin')) window.open ('user.jsp','_self',false);}  
+			success: function(data) { if ((usr==='admin') && (pss==='admin'))
+									  window.open ('user.jsp','_self',false);}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});
 
@@ -45,7 +46,10 @@ function login(){
 			contentType: 'application/json',
 			data: jsonData,
 			dataType: "JSON",
-			success: function(data) { openUserScreen(data);}  
+			success: function(data) { 
+				document.getElementById("userdiv").value = data._personid;
+				console.log(data._personid);
+				openUserScreen(data);}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});
 }

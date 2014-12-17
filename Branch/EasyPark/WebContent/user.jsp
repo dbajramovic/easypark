@@ -48,6 +48,7 @@
   	<div id="loginTemplate"></div>
   	<div id="parkingModal" class="modal"></div>
   	<div id="userModal"></div>
+  	<div id="userdiv" value="5198"></div>
 	<!-- end adding templates -->
 
 <!-- begin main template -->
@@ -61,7 +62,7 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a id= "abc" href="" data-toggle="modal" data-target=".userModal">Traži</a></li>
+        <li class="active"><a href="" data-toggle="modal" data-target=".userModal">Traži</a></li>
         <li><a href="" data-toggle="modal" data-target=".registrationModal">Dodaj novi parking</a></li>
         <li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
       </ul>
@@ -89,43 +90,6 @@
 <div id="googleMap" class="mapa"></div>
 <div class="container-fluid" id="main">
   <div class="row left-panel">
-  	<div class="col-xs-8" id="left">
-    
-
-      <h2>Dobrodošao!</h2>
-      
-      <!-- item list -->
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Naslov1</a></div>
-      </div>
-      <p>Testni tekst broj 1 u kojem opisujemo neku novost na aplikaciji.</p>
-      
-      <hr>
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Naslov 2</a></div>
-      </div>
-      <p>Testni tekst broj 2 u kojem opisujemo neku novost na aplikaciji..</p>
-      
-      <hr>
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Naslov 3</a></div>
-      </div>
-      <p>Testni tekst broj 3 u kojem opisujemo neku novost na aplikaciji..</p>
-      
-      <hr>
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Naslov 4</a></div>
-      </div>
-      <p>Testni tekst broj 4 u kojem opisujemo neku novost na aplikaciji..</p>
-      <hr>
-      <!-- /item list -->
-      
-      <p>
-      <a href="http://etf.unsa.ba/">Fakultet</a> | <a href="https://github.com/dbajramovic/easypark">Source Code</a>
-      </p>
-    </div>
-    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
-    
   </div>
 </div>
 <%}%>

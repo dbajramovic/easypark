@@ -51,4 +51,12 @@ public class Person {
 	public void set_email(String _email) {
 		this._email = _email;
 	}
+	@Override
+	public String toString() {
+		return "Person [_personID=" + _personID + ", _firstname=" + _firstname
+				+ ", _lastname=" + _lastname + ", _city=" + _city
+				+ ", _username=" + _username + ", _password=" + _password
+				+ ", _email=" + _email + "]";
+	}
+
 }

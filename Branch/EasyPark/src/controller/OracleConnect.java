@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Locale;
 
 import model.Parking;
+import model.Person;
 import model.Slika;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.BLOB;
+import repository.AccountFunctions;
 import repository.ObjectsFunctions;
  
 public class OracleConnect {
@@ -39,9 +41,9 @@ public class OracleConnect {
 		}
 		if (connection != null) {
 			System.out.println("You made it, take control your database now!");
-			ObjectsFunctions l = new ObjectsFunctions();
-			Slika p = l.giveMe(connection, 3078);
-			System.out.println(p.get_slika());
+			AccountFunctions a = new AccountFunctions();
+			Person p = a.loginAccount(connection, "AAAA","AAAA");
+			System.out.println(p.get_firstname());
 		}
 		else {
 			System.out.println("Failed to make connection!");

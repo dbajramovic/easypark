@@ -57,16 +57,44 @@ public class AccountFunctions {
 			cs.registerOutParameter(1, OracleTypes.CURSOR);
 			cs.setString(2,username);
 			cs.setString(3,password);
-
 			t = cs.execute();
 			rs = (ResultSet)cs.getObject(1);
 		while(rs.next()) {
-			d=(Person) rs.getObject(0);
+			d.set_firstname(rs.getString(2));
+			d.set_lastname(rs.getString(3));
+			d.set_city(rs.getString(4));
+			d.set_email(rs.getString(5));
+			d.set_personID(rs.getInt(1));
 		}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return d;
+	}
+	public Person UserDetails(Connection con,int userID) {
+		Person p = new Person();
+		Boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		try {
+			CallableStatement cs = null;
+			cs = con.prepareCall("begin ? := GETPERSONBYID(?); end;");
+			cs.clearParameters();
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2,userID);
+			t = cs.execute();
+			rs = (ResultSet)cs.getObject(1);
+		while(rs.next()) {
+			p.set_firstname(rs.getString(2));
+			p.set_lastname(rs.getString(3));
+			p.set_city(rs.getString(4));
+			p.set_email(rs.getString(5));
+		}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
 	}
 }
