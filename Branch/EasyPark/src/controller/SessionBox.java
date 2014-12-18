@@ -21,7 +21,6 @@ public class SessionBox {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void SetUserSession(JSONObject usr) throws JSONException
 	{
-		System.out.println(usr);
 		HttpSession custSession = request.getSession(true);
 		custSession.setAttribute("username", usr.getString("username"));	
 		custSession.setAttribute("id", usr.getString("id"));

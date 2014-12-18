@@ -138,7 +138,6 @@ public class ParkingService {
 			String user =id.getString("username");
 			String pass = id.getString("password");
 			te = lp.loginAccount(connection,user,pass);
-			System.out.println(te);
 			
 		}catch(Exception e){}
 		finally{

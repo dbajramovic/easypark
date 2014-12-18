@@ -34,7 +34,6 @@ public class AccountFunctions {
 			//phone number
 			cs.setString(6,id.get_email());
 			t = cs.execute();
-			System.out.println(t);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

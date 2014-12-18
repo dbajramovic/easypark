@@ -17,14 +17,15 @@ function openUserScreen(data2){
 
 	var JSONObject= {"username":data2._email, "password":data2._password, "id": data2._personID};
 	var jsonData = JSON.stringify(JSONObject); 
-	console.log(jsonData);
 	var request = $.ajax({
 			url: "http://localhost:80/EasyPark/api/session/insert",
 			type: "POST",
 			contentType: 'application/json',
 			data: jsonData,
 			dataType: "JSON",
-			success: function(data) { window.open ('user.jsp','_self',false);}  
+			success: function(data) { 
+					window.open ('user.jsp','_self',false);
+				}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});
 
@@ -45,7 +46,8 @@ function login(){
 			dataType: "JSON",
 			success: function(data) { 
 				document.getElementById("userdiv").value = data._personid;
-				openUserScreen(data);
+				if (data._personID==0){alert('Unijeli ste pogrešne podatke');} 
+				else{openUserScreen(data);}
 				}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});
