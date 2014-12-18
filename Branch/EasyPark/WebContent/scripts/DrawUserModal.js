@@ -1,9 +1,9 @@
 var dugme = document.getElementById("Profil");
 
-function getUser(user) {
-	var userid = document.getElementById("userdiv").value;
+function getUser() {
+	var userid = document.getElementById("userdiv").getAttribute('value');
 	var JSONObject = {
-		"userid" : user
+		"userid" : userid
 	};
 	var jsonData = JSON.stringify(JSONObject);
 	var request = $.ajax({
@@ -20,7 +20,7 @@ function getUser(user) {
 		clearInterval(interval);
 	});
 }
-window.addEventListener("load", getUser(5859));
+window.addEventListener("load", getUser());
 function drawProfile(infoData) {
 	var ContentStringHeader = ' <div class="row left-panel">'+'<div class="col-xs-8" id="left">';
 	var ContentStringMain =  '<h2>'+infoData._firstname + ' ' + infoData._lastname +'</h2>'
