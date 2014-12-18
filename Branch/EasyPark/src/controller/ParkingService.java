@@ -154,7 +154,7 @@ public class ParkingService {
 		CreateConnection();
 		try{
 			te = lp.UserDetails(connection,id.getInt("userid"));
-			System.out.println(te);
+			
 			
 		}catch(Exception e){}
 		finally{

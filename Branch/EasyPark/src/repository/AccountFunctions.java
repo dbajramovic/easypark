@@ -42,8 +42,6 @@ public class AccountFunctions {
 	
 	public Person loginAccount(Connection con,String username, String password) throws IOException {
 		boolean t;
-		System.out.println(username);
-		System.out.println(password);
 		Person d=new Person();
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
