@@ -10,6 +10,7 @@
 			<div class="modal-body">
 			<div>
 			<div class="col-md-6">
+			<br><br>
 			<form role="form">		
 				<div class="form-group col-lg-6">
 					<label>Ime</label>
@@ -21,10 +22,9 @@
 					<input class="form-control" id="LastName">
 				</div>
 				<div class="form-group col-lg-12">
-					<label>Korisničko ime</label>
-					<input class="form-control" id="Username">
-				</div>
-				
+					<label>E-mail adresa</label>
+					<input class="form-control" id="Email">
+				</div>			
 				<div class="form-group col-lg-6">
 					<label>Šifra</label>
 					<input type="password" name="" class="form-control" id="Password" value="">
@@ -34,7 +34,18 @@
 					<label>Ponovite šifru</label>
 					<input type="password" name="" class="form-control" id="" value="">
 				</div>
-					
+				
+				<div class="form-group col-lg-12">
+					<label>Grad</label>
+					<select name="City" class="form-control" id="City" multiple-title="Odaberite grad">
+						<option value="1">Sarajevo</option>
+						<option value="2">Banja Luka</option>
+						<option value="3">Tuzla</option>
+						<option value="4">Zenica</option>
+						<option value="5">Bihać</option>
+						<option value="6">Brčko</option>
+					</select>
+				</div>
 					
 				<div class="form-group col-lg-12">
 					<label>Naziv kompanije</label>
@@ -46,12 +57,9 @@
 					<textarea class="form-control" id="About"></textarea>
 				</div>			
 
-				<div class="form-group col-lg-6">
-					<label>E-mail adresa</label>
-					<input class="form-control" id="Email">
-				</div>
 				
-				<div class="form-group col-lg-6">
+				
+				<div class="form-group col-lg-12">
 					<label>Poštanska adresa</label>
 					<input class="form-control" id="Address" >
 				</div>	

@@ -23,11 +23,7 @@ function getUser() {
 window.addEventListener("load", getUser());
 function drawProfile(infoData) {
 	var ContentStringHeader = ' <div class="row left-panel">'+'<div class="col-xs-8" id="left">';
-	var ContentStringMain =  '<h2>'+infoData._firstname + ' ' + infoData._lastname +'</h2>'
-							+ '<div class="panel panel-default">'
-					        +'<div class="panel-heading"><a href="">Grad</a></div>'
-					        +'</div>'
-					        +'<p><b>'+infoData._city+'</b></p>'
+	var ContentStringMain =  '<h2>'+infoData._firstname + ' ' + infoData._lastname +'</h2><hr>'
 					        + '<div class="panel panel-default">'
 					        +'<div class="panel-heading"><a href="">Email</a></div>'
 					        +'</div>'

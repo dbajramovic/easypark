@@ -36,7 +36,7 @@ public class ParkingsFunctions {
 			p.set_longitude(rs.getFloat(3));
 			p.set_latitude(rs.getFloat(4));
 			p.set_note(rs.getString(7));
-			p.set_price(rs.getInt(6));
+			p.set_price(rs.getFloat(6));
 			p.set_pictureID(rs.getInt(2));
 			p.set_totalnumber(rs.getInt(5));
 			p.set_isthereCamera(new Boolean(rs.getInt(8) != 0));

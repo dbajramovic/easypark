@@ -9,7 +9,7 @@ public class Parking {
 	private float _latitude;
 	private String _creator;
 	private int _totalnumber;
-	private int _price;
+	private float _price;
 	private String _note;
 	private int _pictureID;
 	private int _gradeUser;
@@ -37,11 +37,11 @@ public class Parking {
 		this._totalnumber = _totalnumber;
 	}
 
-	public int get_price() {
+	public float get_price() {
 		return _price;
 	}
 
-	public void set_price(int _price) {
+	public void set_price(float _price) {
 		this._price = _price;
 	}
 

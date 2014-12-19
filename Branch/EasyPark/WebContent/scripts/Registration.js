@@ -11,8 +11,6 @@ function registration(){
 	//Validation
 	//...
 	//
-	
-	var username=document.getElementById('Username').value;
 		var firstname=document.getElementById('FirstName').value;
 		var lastname=document.getElementById('LastName').value;
 		var companyname=document.getElementById('CompanyName').value;
@@ -20,10 +18,10 @@ function registration(){
 		var password=document.getElementById('Password').value;  
 		var address=document.getElementById('Address').value;
 		var email=document.getElementById('Email').value;
-		
+		var city =document.getElementById('City').value;
 		var JSONObject = 
 			{
-				"username":username, 
+				"username":email, 
 				"firstname":firstname,
 				"lastname":lastname,
 				"companyname":companyname,
@@ -40,6 +38,6 @@ function registration(){
 				type: "POST",
 				contentType: 'application/json',
 				data: jsonData, 
-			}).done(function() { alert('Uspješno ste se registrovali! Probajte se upisati pomoću vašeg računa sad.');cleanFields(); })
+			}).done(function() { alert('UspjeÅ¡no ste se registrovali! Probajte se upisati pomoÄ‡u vaÅ¡eg raÄ�una sad.');cleanFields(); })
 		.fail(function() {alert("Greska sa konekcijom na server! Pokusajte ponovo.");cleanFields(); });
 }
