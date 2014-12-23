@@ -1,5 +1,3 @@
-var dugme = document.getElementById("Profil");
-
 function getUser() {
 	var userid = document.getElementById("userdiv").getAttribute('value');
 	var JSONObject = {

@@ -1,12 +1,41 @@
+function getUser() {
+	var userid = document.getElementById("userdiv").getAttribute('value');
+	var JSONObject = {
+		"userid" : userid
+	};
+	var jsonData = JSON.stringify(JSONObject);
+	var request = $.ajax({
+		url : "http://localhost:80/EasyPark/api/service/userdata",
+		type : "POST",
+		contentType : 'application/json',
+		data : jsonData,
+		dataType : "JSON",
+		success : function(data) {
+			provjeriFeed(data._city);
+		}
+	});
+	request.fail(function(jqXHR, textStatus) {
+		clearInterval(interval);
+	});
+}
 
-
-window.setInterval(ProvjeriFeed,1000);
+var prvi_put = true;
+	window.setInterval(ProvjeriFeed,1000);
 
 var vrijeme_provjere = new Date();
-var prvi_put = true;
 
-function ProvjeriFeed() {
-	var feed = new google.feeds.Feed('http://www.klix.ba/rss/vijesti/bih');
+
+function ProvjeriFeed(grad) {
+	var feedString = "";
+	switch (grad) {
+		case 1:
+			feedString = 'http://www.klix.ba/rss/vijesti/bih';
+		case 2:
+			feedString = 'http://www.klix.ba/rss/vijesti/bih';
+		default:
+			feedString = 'http://www.klix.ba/rss/vijesti/bih';
+	}
+	var feed = new google.feeds.Feed(feedString);
         feed.setNumEntries(3);
 	feed.load(function (data) { 
         var duzina = data.feed.entries.length;  
@@ -21,7 +50,7 @@ function ProvjeriFeed() {
 			}
 		prvi_put=false;
 		vrijeme_provjere = new Date(data.feed.entries[0].publishedDate);
-		GB.innerHTML += '<p><a href="http://etf.unsa.ba/">Fakultet</a> | <a href="https://github.com/dbajramovic/easypark">Source Code</a></p>'
+		GB.innerHTML += '<hr><p><a href="http://etf.unsa.ba/">Fakultet</a> | <a href="https://github.com/dbajramovic/easypark">Source Code</a></p>'
 	}
 	else {       
         	duzina-=1;
@@ -36,8 +65,6 @@ function ProvjeriFeed() {
 			}       
 		}
 	}
-	
-        console.dir(data);
 	});
 }
 
