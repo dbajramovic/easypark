@@ -22,6 +22,8 @@ public class Parking {
 	private float _secrating;
 	private float _ovrrating;
 	private String _telefon;
+	private int _freespots;
+	private int _takenspots;
 	public int get_parkingID() {
 		return _parkingID;
 	}
@@ -162,5 +164,21 @@ public class Parking {
 
 	public void set_creator(String _creator) {
 		this._creator = _creator;
+	}
+
+	public int get_freespots() {
+		return _freespots;
+	}
+
+	public void set_freespots(int _freespots) {
+		this._freespots = _freespots;
+	}
+
+	public int get_takenspots() {
+		return _takenspots;
+	}
+
+	public void set_takenspots(int _takenspots) {
+		this._takenspots = _takenspots;
 	}
 }

@@ -48,6 +48,8 @@ public class ParkingsFunctions {
 			p.set_secrating(rs.getFloat(15));
 			p.set_ovrrating(rs.getFloat(16));
 			p.set_telefon(rs.getString(14));
+			p.set_freespots(rs.getInt(18));
+			p.set_takenspots(rs.getInt(19));
 			lista_parkinga.add(p);
 		}
 		return lista_parkinga;

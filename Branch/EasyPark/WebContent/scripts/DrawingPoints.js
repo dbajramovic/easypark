@@ -137,8 +137,6 @@
 	
 
 	function getParkingModal(marker2, infoData) {
-		var picData = getPicture(3078);
-		console.log(picData);
 		var kamera = '<img src="http://s23.postimg.org/t59dwo3ob/Medal_Camera_None.png" width="55" height="85" title="Nema kamere">';
 		var cesta = '<img src="http://s1.postimg.org/vpr8jybkf/Medal_Road_None.png" width="55" height="85" title="Nema ceste">';
 		var krov = '<img src="http://s1.postimg.org/ocbukzrin/Medal_Roof_None.png" width="55" height="85" title="Nema krova">';
@@ -184,6 +182,8 @@
 				+'<hr><b>Cijena:</b> '
 				+infoData._price
 				+ ' KM</p>'
+				+ '<br>'
+				+ '<b>Slobodna mjesta:</b>'+infoData._freespots +' <b>Zauzeto mjesta:</b>'+infoData._takenspots
 				+ '</div></div>'
 				+ '<div class="modal-footer">'
 				+ '<button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>'
