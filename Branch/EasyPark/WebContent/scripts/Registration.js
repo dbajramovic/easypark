@@ -1,5 +1,5 @@
 function cleanFields(){
-	document.getElementById('Username').value="";
+	//document.getElementById('Username').value="";
 	document.getElementById('FirstName').value="";
 	document.getElementById('LastName').value="";
 	document.getElementById('CompanyName').value="";

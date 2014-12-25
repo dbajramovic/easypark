@@ -60,10 +60,8 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a id="abc" href="" data-toggle="modal"
-					data-target=".userModal">Traži</a></li>
-				<li><a href="" data-toggle="modal"
-					data-target=".registrationModal">Registracija</a></li>
+
+				<li><a href="" data-toggle="modal" data-target=".registrationModal">Registracija</a></li>
 				<li><a href="" data-toggle="modal" data-target=".loginModal">Upis</a></li>
 			</ul>
 			<form class="navbar-form">
@@ -75,17 +73,31 @@
 								data-toggle="dropdown">
 								<span class="glyphicon glyphicon-chevron-down"></span>
 							</button>
-							<ul class="dropdown-menu">
-								<li><a href="#">Grad</a></li>
-								<li><a href="#">Category 2</a></li>
-								<li><a href="#">Category 3</a></li>
-								<li><a href="#">Category 4</a></li>
-								<li><a href="#">Category 5</a></li>
-							</ul>
+						
+							 <ul class="dropdown-menu">
+								<li>
+									<a><input type="radio" class="radio" id="optionsRadios1" value="" checked> Grad</a>	
+								</li>
+								<li>								
+									 <a><input type="radio" class="radio" id="optionsRadios2" value="option1">Minimalna Cijena</a>
+								</li>
+								<li>
+									  <a><input type="radio" class="radio" id="optionsRadios3" value="option2" >Maximalna Cijena</a>									    
+								</li>
+								<li>
+									<a><input type="radio"  class="radio" id="optionsRadios4" value="option3" >Plaćanje?</a>   
+								</li> 
+							</ul> 
+							<!-- <select class="dropdown-menu">
+    <option value="one">One</option>
+    <option value="two">Two</option>
+    <option value="three">Three</option>
+    <option value="four">Four</option>
+    <option value="five">Five</option>
+</select> -->
+							<button type="button" class="btn btn-default maxSize"><span class="glyphicon glyphicon-search"></span></button>
 						</div>
 						<input type="text" class="form-control" placeholder="Koji grad?">
-						<span class="input-group-addon"><span
-							class="glyphicon glyphicon-search"></span> </span>
 					</div>
 				</div>
 			</form>

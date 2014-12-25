@@ -93,7 +93,6 @@
 			}
 		});
 		request.fail(function(jqXHR, textStatus) {
-			console.log("dada");
 			clearInterval(interval);
 		});
 	}
@@ -104,31 +103,15 @@
 				+ '</div>'
 				+ '<h1 id="firstHeading" class="firstHeading">Podaci o parkingu</h1>'
 				+ '<div id="bodyContent">'
-				+ '<p><b>Uslovi pod kojima biste ostavili auto</b>: vlasnik: <b>'
-				+ infoData._creatorID
+				+'Vlasnik: <b>'
+				+ infoData._creator
 				+ '</b>'
-				+ ' video nadzor: <b>'
-				+ infoData._isthereCamera
-				+ '</b>'
-				+ ' dobar ulaz: <b>'
-				+ infoData._isthereGoodEntrance
-				+ '</b>'
-				+ ' zaštita: <b>'
-				+ infoData._isthereGuard
-				+ '</b>'
-				+ ' osvijetljeno: <b>'
-				+ infoData._isthereLight
-				+ '</b>'
-				+ ' cesta: <b>'
-				+ infoData._isthereRoad
-				+ '</b>'
-				+ ' krov: <b>'
-				+ infoData._isthereRoof
-				+ '</b>'
-				+ ' cijena: <b>'
+				+ '<br>Napomena<b>: "'
+				+ infoData._note
+				+ '"</b> <br> Cijena: <b>'
 				+ infoData._price
-				+ '</b>'
-				+ ' broj mjesta: <b>'
+				+ ' KM</b>'
+				+ ' <br> Broj mjesta: <b>'
 				+ infoData._totalnumber + '</b> </p>';
 		infowindow.content = contentString;
 		infowindow.open(map, marker2);
@@ -157,6 +140,7 @@
 		if (infoData._isthereLight == true) {
 			svjetlo = '<img src="http://s4.postimg.org/ko5hocjil/Medal_Light.png" width="55" height="85" title="Ima svjetla">';
 		}
+		
 		var ContentString = '<div class="modal-dialog" style="width:600px">'
 				+ ' <div class="modal-content">'
 				+ '<div class="modal-header">'
@@ -308,8 +292,11 @@
 												});
 
 							});
-						 addInfoWindow(marker2,jsonData);
+						 //addInfoWindow(marker2,jsonData);
 						});
+		google.maps.event.addListener(marker2, 'mouseover', function() {
+			addInfoWindow(marker2,jsonData);
+		});
 		google.maps.event.addListener(marker2, 'mouseout', function() {
 			infowindow.close();
 		});

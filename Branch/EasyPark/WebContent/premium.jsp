@@ -62,13 +62,13 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="" >Promijeni informacije</a></li>
+        <li><a href="" data-toggle="modal" data-target=".registrationModal"><span class="glyphicon glyphicon-plus"></span>parking</a></li>
         <li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
       </ul>
       <form class="navbar-form">
         <div class="form-group" style="display:inline;">
           <div class="input-group">
-						<div class="input-group-btn">
+ 						<div class="input-group-btn">
 							<button type="button"
 								class="btn btn-default dropdown-toggle maxSize"
 								data-toggle="dropdown">

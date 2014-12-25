@@ -62,7 +62,11 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="" >Promijeni informacije</a></li>
+        <li class="active"><a href="" >Korisnici</a></li>
+        <li class="active"><a href="" >Premium</a></li>
+        <li class="active"><a href="" >Promjene</a></li>
+        <li class="active"><a href="" >Notifikacije</a></li>
+        <li><a href="" data-toggle="modal" data-target=".registrationModal"><span class="glyphicon glyphicon-plus"></span>Token</a></li>
         <li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
       </ul>
       <form class="navbar-form">
