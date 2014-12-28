@@ -116,10 +116,30 @@
 		infowindow.content = contentString;
 		infowindow.open(map, marker2);
 	};
-
+	function reserveSpot(userid,parkingid) {
+		var JSONObject = {
+			"userid" : userid,
+			"parkingid" : parkingid
+		};
+		var jsonData = JSON.stringify(JSONObject);
+		var request = $.ajax({
+			url : "http://localhost:80/EasyPark/api/service/updateuserparking",
+			type : "POST",
+			contentType : 'application/json',
+			data : jsonData,
+		}).done(function() {
+			alert('Parking je azuriran!');
+		}).fail(function() {
+			alert("Greska sa konekcijom na server! Pokusajte ponovo.");
+			cleanFields();
+		});
+	}
+function ReserveSpot(parkID) {
 	
+}	
 
 	function getParkingModal(marker2, infoData) {
+		var parkID = infoData._parkingID;
 		var kamera = '<img src="http://s23.postimg.org/t59dwo3ob/Medal_Camera_None.png" width="55" height="85" title="Nema kamere">';
 		var cesta = '<img src="http://s1.postimg.org/vpr8jybkf/Medal_Road_None.png" width="55" height="85" title="Nema ceste">';
 		var krov = '<img src="http://s1.postimg.org/ocbukzrin/Medal_Roof_None.png" width="55" height="85" title="Nema krova">';
@@ -171,7 +191,8 @@
 				+ '</div></div>'
 				+ '<div class="modal-footer">'
 				+ '<button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>'
-				+ '<button type="button" class="btn btn-primary">NE RADI</button>'
+			
+				+ '<button type="button" class="btn btn-primary" on-click="ReserveSpot(ParkID)">Rezervisite</button>'
 				+ '</div>' + '</div>' + '</div>' + '</div>';
 		document.getElementById("parkingModal").innerHTML = ContentString;
 		;

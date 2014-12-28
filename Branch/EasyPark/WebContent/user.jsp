@@ -47,7 +47,7 @@
   	<div id="registrationTemplate"></div>
   	<div id="loginTemplate"></div>
   	<div id="parkingModal" class="modal"></div>
-  	<div id="userModal"></div>
+  	<div id="userModalregular"><div id="userModalregularPL"></div></div>
   	<div id="userdiv" value="<%=session.getAttribute("id")%>"></div>
 	<!-- end adding templates -->
 

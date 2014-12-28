@@ -18,10 +18,13 @@ import javax.ws.rs.core.MediaType;
 
 import model.Parking;
 import model.Person;
+import model.Reservation;
 import model.Slika;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+
+
 
 
 
@@ -36,6 +39,7 @@ import oracle.jdbc.*;
 import repository.AccountFunctions;
 import repository.ParkingsFunctions;
 import repository.ObjectsFunctions;
+import repository.ReservationFunctions;
 
 @Path("/service")
 public class ParkingService {
@@ -83,7 +87,38 @@ public class ParkingService {
 		}
 		return lp;
 	}
-	
+	@Path("/parkingsofuser")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Parking> giveMeParkingsByUser(JSONObject id){	
+		List<Parking> lp = null;
+		ParkingsFunctions ga = new ParkingsFunctions();	
+		CreateConnection();
+		
+		try {
+			lp = ga.giveMeUserParkings(connection, id.getInt("userid"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();	
+		}
+		return lp;
+	}
+	@Path("/updateuserparking")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void updateUserParking(JSONObject id){	
+		ParkingsFunctions ga = new ParkingsFunctions();	
+		CreateConnection();
+		
+		try {
+				ga.updateUserParkings(connection, id.getInt("spaces"),id.getInt("userid"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();	
+		}
+	}
 	@Path("/pic")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -161,6 +196,21 @@ public class ParkingService {
 			CloseConnection();
 		}
 		return te;
+	}
+	@Path("/userreservations")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Reservation> UserReservations(JSONObject id) throws SQLException{
+		List<Reservation> lr = null;
+		ReservationFunctions rp = new ReservationFunctions();	
+		 CreateConnection();
+		try{
+			lr = rp.giveMe(connection,id.getInt("userid"));
+		}catch(Exception e){}
+		finally{
+			CloseConnection();
+		}
+		return lr;
 	}
 	/*
 	@Path("/getdataofadmin")
