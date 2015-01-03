@@ -122,4 +122,72 @@ public class ParkingsFunctions {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<String> getSuggestions(Connection con, String term, int choice) {
+		boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		List<String> lista_prijedloga = new ArrayList<String>();
+		// pronaci u bazi sve parkinge kod kojih se u nazivu nalazi term koji je u parametrima funkcije po choiceu.
+		//ako je choice 1 onda neka pretrazuje u tabeli "gradovi", samo naziv mi treba
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ako je choice 2 onda u listu nek ubaci "0.50", "1.00" , "1.50", "2.00"
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ako je choice 3 onda u listu nek ubaci "0.50", "1.00" , "1.50", "2.00"
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ako je choice 4 onda u listu nek ubaci "Besplatno", "Sa naplaćivanjem" 
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista_prijedloga;
+	}
+	
+	public List<Parking> getParkingsBySuggestion(Connection con, String term, int choice) {
+		boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		List<Parking> lista_parkinga = new ArrayList<Parking>();
+		//ako je choice 1 onda neka pretrazuje u tabeli "gradovi", po nazivu
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ako je choice 2 onda neka pretrazi sve parkinge kod kojih je cijena minimalno==term
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ako je choice 3 onda u listu neka pretrazi sve parkinge kod kojih je cijena maximalno==term
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ako je choice 4 onda u listu neka pretrazi sve parkinge 
+		try {
+			// ako je term=="Besplatno" onda parkinge koji su besplatni
+			//...
+			// ako je term=="Sa naplaćivanjem" onda parkinge koji se placaju, cijena im je veca od 0
+			//...
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista_parkinga;
+	}
 }

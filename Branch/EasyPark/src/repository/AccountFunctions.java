@@ -18,21 +18,24 @@ public class AccountFunctions {
 
 	public void registerAccount(Connection con,Person id) throws IOException {
 		boolean t;
-		long d=0;
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
 		try {
 			CallableStatement cs = null;
-			cs = con.prepareCall("begin REGISTEROWNER(?,?,?,?,?,?); end;");
+			// regular user koji ce traziti parkinge i rezervisati
+			if (id.get_type()==1)cs = con.prepareCall("begin REGISTERREGULAR(?,?,?,?,?,?); end;");
+			//vlasnici parkinga
+			if (id.get_type()==2)cs = con.prepareCall("begin REGISTERPREMIUM(?,?,?,?,?,?); end;");
+			//admin
+			if (id.get_type()==3)cs = con.prepareCall("begin REGISTEROWNER(?,?,?,?,?,?); end;");
+		
 			cs.clearParameters();
-			//cs.registerOutParameter(1, OracleTypes.CURSOR);
 			cs.setString(1,id.get_firstname());
 			cs.setString(2,id.get_lastname());
 			cs.setString(3,id.get_email());
 			cs.setString(4,id.get_password());
-			cs.setString(5,id.get_city());
-			//phone number
-			cs.setString(6,id.get_email());
+			cs.setString(5,id.get_address());
+			cs.setString(6,id.get_phonenumber());
 			t = cs.execute();
 		}
 		catch (SQLException e) {
@@ -57,7 +60,7 @@ public class AccountFunctions {
 		while(rs.next()) {
 			d.set_firstname(rs.getString(2));
 			d.set_lastname(rs.getString(3));
-			d.set_city(rs.getString(4));
+			d.set_address(rs.getString(4));
 			d.set_email(rs.getString(5));
 			d.set_personID(rs.getInt(1));
 		}
@@ -83,7 +86,32 @@ public class AccountFunctions {
 		while(rs.next()) {
 			p.set_firstname(rs.getString(2));
 			p.set_lastname(rs.getString(3));
-			p.set_city(rs.getString(4));
+			p.set_address(rs.getString(4));
+			p.set_email(rs.getString(5));
+		}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+	public Person SaveTokenRequest(Connection con,int userID) {
+		Person p = new Person();
+		Boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		try {
+			CallableStatement cs = null;
+			cs = con.prepareCall("begin ? := GETPERSONBYID(?); end;");
+			cs.clearParameters();
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2,userID);
+			t = cs.execute();
+			rs = (ResultSet)cs.getObject(1);
+		while(rs.next()) {
+			p.set_firstname(rs.getString(2));
+			p.set_lastname(rs.getString(3));
+			p.set_address(rs.getString(4));
 			p.set_email(rs.getString(5));
 		}
 		}

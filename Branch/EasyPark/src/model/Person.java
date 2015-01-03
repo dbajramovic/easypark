@@ -5,10 +5,24 @@ public class Person {
 	private int _personID;
 	private String _firstname;
 	private String _lastname;
-	private String _city;
-	private String _username;
+	private String _address;
+	private String _phonenumber;
 	private String _password;
 	private String _email;
+	private int _type;
+	private String _accountNumber;
+	public String get_accountNumber() {
+		return _accountNumber;
+	}
+	public void set_accountNumber(String _accountNumber) {
+		this._accountNumber = _accountNumber;
+	}
+	public int get_type() {
+		return _type;
+	}
+	public void set_type(int _type) {
+		this._type = _type;
+	}
 	public int get_personID() {
 		return _personID;
 	}
@@ -27,17 +41,17 @@ public class Person {
 	public void set_lastname(String _lastname) {
 		this._lastname = _lastname;
 	}
-	public String get_city() {
-		return _city;
+	public String get_address() {
+		return _address;
 	}
-	public void set_city(String _city) {
-		this._city = _city;
+	public void set_address(String _city) {
+		this._address = _city;
 	}
-	public String get_username() {
-		return _username;
+	public String get_phonenumber() {
+		return _phonenumber;
 	}
-	public void set_username(String _username) {
-		this._username = _username;
+	public void set_phonenumber(String _u) {
+		this._phonenumber = _u;
 	}
 	public String get_password() {
 		return _password;
@@ -54,8 +68,8 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [_personID=" + _personID + ", _firstname=" + _firstname
-				+ ", _lastname=" + _lastname + ", _city=" + _city
-				+ ", _username=" + _username + ", _password=" + _password
+				+ ", _lastname=" + _lastname + ", _address=" + _address
+				+ ", _phonenumber=" + _phonenumber + ", _password=" + _password
 				+ ", _email=" + _email + "]";
 	}
 

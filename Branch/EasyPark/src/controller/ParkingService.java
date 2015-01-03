@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.UUID;
 import java.util.List;
 import java.util.Locale;
 import java.io.File;
@@ -119,6 +120,21 @@ public class ParkingService {
 			e.printStackTrace();	
 		}
 	}
+	@Path("/searchsuggestions")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void searchSuggestions(JSONObject i){	
+		ParkingsFunctions ga = new ParkingsFunctions();	
+		CreateConnection();
+		
+		try {
+				List<String> l =ga.getSuggestions(connection, i.getString("term"), i.getInt("choice"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();	
+		}
+	}
 	@Path("/pic")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -147,21 +163,40 @@ public class ParkingService {
 		try{
 			te.set_firstname(id.get("firstname").toString());
 			te.set_lastname(id.get("lastname").toString());
-			//te.setid.get("about").toString());
-			//te.set(id.get("companyname").toString());
 			te.set_password(id.get("password").toString());
-			te.set_username(id.get("username").toString());
-			te.set_city(id.get("city").toString());
+			te.set_phonenumber(id.get("phonenumber").toString());
+			te.set_address(id.get("address").toString());
 			te.set_email(id.get("email").toString());
-			lp.registerAccount(connection,te);
-			
-			
+			lp.registerAccount(connection,te);	
 		}catch(Exception e){}
-		finally{
-			CloseConnection();
-		}
+		finally{ CloseConnection();}
 		return p;
 	}
+	
+	@Path("/getToken")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void GetToken(JSONObject obj) throws SQLException{
+		
+		//Person te=new Person();
+		//MailService lp = new MailService();	
+		AccountFunctions lp= new AccountFunctions();
+		CreateConnection();
+		try{
+			String username = obj.getString("username");
+			int type = obj.getInt("type");
+			//System.out.print(UUID.randomUUID());
+			//System.out.print(UUID.fromString(username));
+			String token = UUID.randomUUID().toString();
+			//lp.SaveTokenRequest(con, username,type,token,)
+			//lp.SendToken(username, "megasadasdasdasdadsas");
+			//System.out.print(UUID.randomUUID());
+	
+		}catch(Exception e){}
+		finally{ CloseConnection();}
+
+	}
+
 	@Path("/login")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

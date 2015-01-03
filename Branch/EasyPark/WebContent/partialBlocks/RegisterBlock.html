@@ -5,65 +5,67 @@
 		<div class="modal-content">	
 			<div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title dark-grey" id="exampleModalLabel">Registracija novog korisnika</h4>
+		        <h3 class="modal-title dark-grey" id="exampleModalLabel">Registracija novog korisnika</h3>
 		    </div>
 			<div class="modal-body">
-			<div>
+			<form role="form">	
 			<div class="col-md-6">
-			<br><br>
-			<form role="form">		
 				<div class="form-group col-lg-6">
 					<label>Ime</label>
 					<input class="form-control" id="FirstName">
 				</div>
-				
 				<div class="form-group col-lg-6">
 					<label>Prezime</label>
 					<input class="form-control" id="LastName">
 				</div>
 				<div class="form-group col-lg-12">
-					<label>E-mail adresa</label>
-					<input class="form-control" id="Email">
+					<label>E-mail adresa(Korisničko ime)</label>
+					<input class="form-control" id="Email" data-toggle="tooltip" data-placement="right" title="Putem ovog e-maila ćete komunicirati!">
 				</div>			
 				<div class="form-group col-lg-6">
 					<label>Šifra</label>
 					<input type="password" name="" class="form-control" id="Password" value="">
 				</div>
-				
 				<div class="form-group col-lg-6">
 					<label>Ponovite šifru</label>
-					<input type="password" name="" class="form-control" id="" value="">
+					<input type="password" name="" class="form-control" id="PasswordRepeat" data-toggle="tooltip" data-placement="right" title="Tačnost šifre!">
 				</div>
-				
-				<div class="form-group col-lg-12">
-					<label>Grad</label>
-					<select name="City" class="form-control" id="City" multiple-title="Odaberite grad">
-						<option value="1">Sarajevo</option>
-						<option value="2">Banja Luka</option>
-						<option value="3">Tuzla</option>
-						<option value="4">Zenica</option>
-						<option value="5">Bihać</option>
-						<option value="6">Brčko</option>
-					</select>
-				</div>
-					
-				<div class="form-group col-lg-12">
-					<label>Naziv kompanije</label>
-					<input class="form-control" id="CompanyName">
-				</div>
-				
-				<div class="form-group col-lg-12">
-					<label>O vama</label>
-					<textarea class="form-control" id="About"></textarea>
-				</div>			
-
-				
-				
-				<div class="form-group col-lg-12">
+				<div class="form-group col-lg-6">
+					<label>Broj telefona</label>
+					<input class="form-control" id="PhoneNumber">
+				</div>		
+				<div class="form-group col-lg-6">
 					<label>Poštanska adresa</label>
 					<input class="form-control" id="Address" >
 				</div>	
-				</form>		
+				<div class="form-group col-lg-6">
+					<label>Korisnik</label>
+					<select name="UserType" class="form-control" id="UserType" multiple-title="Odaberite vrstu">
+						<option value="1">Regularni - korisnik parkinga</option>
+						<option value="2">Premium - vlasnik parkinga</option>
+						<option value="3">Administrator - dio organizacije</option>
+					</select>
+				</div>
+				<div class="form-group col-lg-6" id="Company" hidden>
+					<label>Naziv kompanije</label>
+					<input class="form-control" id="CompanyName">
+				</div>
+				<div class="form-group col-lg-12">
+					<label>Broj bankovnog računa</label>
+					<input class="form-control" id="AccNumber"></input>
+				</div>
+				<div class="form-group col-lg-12">
+					<label>Pristupni token za registraciju</label>
+					
+					<div class="input-group">
+   						<input class="form-control" id="Token"></input>
+   						<span class="input-group-btn">
+        					<button type="button" class="btn btn-warning" onclick="tokenRequest()" data-toggle="tooltip" data-placement="right" title="Ukoliko nemate pristupni token, biće vam poslan na upisani e-mail!">
+        					Traži token!
+        					</button>
+   						</span>
+					</div>
+				</div>
 			</div>
 		
 			<div class="col-md-6">
@@ -94,11 +96,9 @@
 						parkirališta u velikim gradovima se organizuje u više-etažnim podzemnim ili nadzemnim
 						objektima. 
 					</p>
-			</div>
-			</div>
-			</div>
-			<div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="cleanFields()">Zatvori</button>
+				</div>
+				</form>
+        		<button type="button" class="btn btn-default pull-right" data-dismiss="modal" onclick="cleanFields()">Zatvori</button>
         		<button type="button" class="btn btn-primary" onclick="registration()">Registruj me!</button>
       		</div>
       

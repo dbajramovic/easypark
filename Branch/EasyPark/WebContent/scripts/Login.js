@@ -14,7 +14,7 @@ function deleteSession(){
 
 //Opens userPage
 function openUserScreen(data2){
-	
+	console.log(data2);
 	var JSONObject= {"username":data2._email, "password":data2._password, "id": data2._personID};
 	var jsonData = JSON.stringify(JSONObject); 
 	var request = $.ajax({

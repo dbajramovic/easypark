@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/partialBlocks/RegisterBlock.html=UTF-8
 encoding//WebContent/scripts/Registration.js=UTF-8
+encoding//src/controller/MailService.java=UTF-8
+encoding//src/repository/ParkingsFunctions.java=UTF-8
