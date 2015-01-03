@@ -36,7 +36,7 @@
 <body>
 
  <% HttpSession ses = request.getSession(true); 
- if (session.getAttribute("id")==null){%>
+ if ((session.getAttribute("id")==null) && (session.getAttribute("type")!="4")){%>
  
 <h2>Niste registrovani!</h2>
 <a href="index.html" >Vratite se na početnu stranicu</a>
@@ -61,55 +61,250 @@
       </a>
     </div>
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="" >Korisnici</a></li>
-        <li class="active"><a href="" >Premium</a></li>
-        <li class="active"><a href="" >Promjene</a></li>
-        <li class="active"><a href="" >Notifikacije</a></li>
-        <li><a href="" data-toggle="modal" data-target=".registrationModal"><span class="glyphicon glyphicon-plus"></span>Token</a></li>
-        <li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
-      </ul>
-      <form class="navbar-form">
-        <div class="form-group" style="display:inline;">
-          <div class="input-group">
-						<div class="input-group-btn">
-							<button type="button"
-								class="btn btn-default dropdown-toggle maxSize"
-								data-toggle="dropdown">
-								<span class="glyphicon glyphicon-chevron-down"></span>
-							</button>
-						
-							<ul class="dropdown-menu">
-								<li>
-									<a><input type="radio" class="radio" id="optionsRadios1" value="" checked> Grad</a>	
-								</li>
-								<li>								
-									 <a><input type="radio" class="radio" id="optionsRadios2" value="option1">Minimalna Cijena</a>
-								</li>
-								<li>
-									  <a><input type="radio" class="radio" id="optionsRadios3" value="option2" >Maximalna Cijena</a>									    
-								</li>
-								<li>
-									<a><input type="radio"  class="radio" id="optionsRadios4" value="option3" >Plaćanje?</a>   
-								</li> 
-							</ul>
-							<button type="button" class="btn btn-default maxSize"><span class="glyphicon glyphicon-search"></span></button>
-						</div>
-            <input type="text" class="form-control" placeholder="Koji grad?">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
-          </div>
-        </div>
-      </form>
+       
+       <ul class="nav navbar-nav nav-tabs" role="tablist">
+    	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Mapa</a></li>
+    	<li role="presentation"><a href="#parkinzi" aria-controls="profile" role="tab" data-toggle="tab">Parkinzi</a></li>
+    	<li role="presentation"><a href="#korisniciParkinga" aria-controls="profile" role="tab" data-toggle="tab">Korisnici parkinga</a></li>
+    	<li role="presentation"><a href="#premiumVlasnici" aria-controls="messages" role="tab" data-toggle="tab">Premium/vlasnici</a></li>
+    	<li role="presentation"><a href="#tokeni" aria-controls="settings" role="tab" data-toggle="tab">Tokeni</a></li>
+  		<li role="presentation"><a href="#zahtjeviBrisanje" aria-controls="settings" role="tab" data-toggle="tab">Zahtjevi za brisanje</a></li>
+  		<li role="presentation"><a href="#prijave" aria-controls="settings" role="tab" data-toggle="tab">Prijave</a></li>
+  		<li><a href="index.html" onclick="deleteSession()">Ispis <span class="glyphicon glyphicon-log-out"></span></a></li>
+  		</ul>
     </div>
 </div>
 
-<div id="googleMap" class="mapa"></div>
-<div class="container-fluid" id="main">
-  <div class="row left-panel">
+
+<!-- <div class="container-fluid" id="main"> 
+	
+	<div class="row left-panel"> 
+	ovdje ovdje
+	
+	</div> 
+
+</div> -->
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+	<div id="googleMap" class="mapa-tab"></div>
+	<div class="form-group" style="display:inline;">
+          <div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default maxSize"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+            <input type="text" class="form-control" placeholder="Koji grad?">
+          </div>
+        </div>
+	</div>
+    <div role="tabpanel" class="tab-pane fade" id="parkinzi">
+    <br>
+    <div class="container container-fluid">
+    
+    	<div class="table-responsive">
+	    <table class="table table-bordered table-hover">
+		  	 <thead>
+		        <tr class="info">
+		            <th>Item ID</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th class="col-md-2">Opcije</th>
+		        </tr>
+    		</thead>
+    		<tbody>
+		  	<tr>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td >
+			  		<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			  		<button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button> 
+			  		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		  		</td>
+		  		
+		  	</tr>
+		  	</tbody>
+		</table>
+    	</div>
+    </div>
+    
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="korisniciParkinga">
+	<br>
+    <div class="container container-fluid">
+    	<div class="table-responsive">
+	    <table class="table table-bordered table-hover">
+		  	 <thead>
+		        <tr class="info">
+		            <th>Item ID</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th class="col-md-2">Opcije</th>
+		        </tr>
+    		</thead>
+    		<tbody>
+		  	<tr>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td >
+			  		<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			  		<button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button> 
+			  		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		  		</td>
+		  	</tr>
+		  	</tbody>
+		</table>
+    	</div>
+    </div>
+
+	</div>
+    <div role="tabpanel" class="tab-pane fade" id="premiumVlasnici">
+   	<br>
+    <div class="container container-fluid">
+    	<div class="table-responsive">
+	    <table class="table table-bordered table-hover">
+		  	 <thead>
+		        <tr class="info">
+		            <th>Item ID</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th class="col-md-2">Opcije</th>
+		        </tr>
+    		</thead>
+    		<tbody>
+		  	<tr>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td >
+			  		<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			  		<button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button> 
+			  		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		  		</td>
+		  	</tr>
+		  	</tbody>
+		</table>
+    	</div>
+    </div>
+	</div>
+    <div role="tabpanel" class="tab-pane fade" id="tokeni">
+	   <br>
+    <div class="container container-fluid">
+    	<div class="table-responsive">
+	    <table class="table table-bordered table-hover">
+		  	 <thead>
+		        <tr class="info">
+		            <th>Item ID</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th class="col-md-2">Opcije</th>
+		        </tr>
+    		</thead>
+    		<tbody>
+		  	<tr>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td >
+			  		<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			  		<button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button> 
+			  		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		  		</td>
+		  	</tr>
+		  	</tbody>
+		</table>
+    	</div>
+    </div>
+
+	</div>
+    <div role="tabpanel" class="tab-pane fade" id="zahtjeviBrisanje">
+    <br>
+    <div class="container container-fluid">
+    	<div class="table-responsive">
+	    <table class="table table-bordered table-hover">
+		  	 <thead>
+		        <tr class="info">
+		            <th>Item ID</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th class="col-md-2">Opcije</th>
+		        </tr>
+    		</thead>
+    		<tbody>
+		  	<tr>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td >
+			  		<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			  		<button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button> 
+			  		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		  		</td>
+		  	</tr>
+		  	</tbody>
+		</table>
+    	</div>
+    </div>
+    
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="prijave">
+	   <br>
+    <div class="container container-fluid">
+    	<div class="table-responsive">
+	    <table class="table table-bordered table-hover">
+		  	 <thead>
+		        <tr class="info">
+		            <th>Item ID</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th>Item Name</th>
+		            <th>Item Price</th>
+		            <th class="col-md-2">Opcije</th>
+		        </tr>
+    		</thead>
+    		<tbody>
+		  	<tr>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td>...</td>
+		  		<td >
+			  		<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			  		<button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button> 
+			  		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		  		</td>
+		  	</tr>
+		  	</tbody>
+		</table>
+    	</div>
+    </div>
+	</div>
   </div>
-</div>
+
 <%}%>
 <!-- end main template -->
-<script src="scripts/DrawUserModal.js"></script>
+
 </body>
 </html>

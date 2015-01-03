@@ -22,9 +22,14 @@ public class SessionBox {
 	public void SetUserSession(JSONObject usr) throws JSONException
 	{
 		HttpSession custSession = request.getSession(true);
-		custSession.setAttribute("username", usr.getString("username"));	
-		custSession.setAttribute("id", usr.getString("id"));
-		custSession.setAttribute("password", usr.getString("password"));
+		custSession.setAttribute("username", usr.getString("_email"));	
+		custSession.setAttribute("id", usr.getString("_personID"));
+		custSession.setAttribute("firstName", usr.getString("_firstname"));
+		custSession.setAttribute("lastName", usr.getString("_lastname"));
+		custSession.setAttribute("address", usr.getString("_address"));
+		custSession.setAttribute("companyName", usr.getString("_companyName"));
+		custSession.setAttribute("phoneNumber", usr.getString("_phonenumber"));
+		custSession.setAttribute("type", usr.getString("_type"));
 	}
 	//@Context private HttpServletRequest request2;
 	@Path("/delete")
@@ -33,9 +38,14 @@ public class SessionBox {
 	public void deleteSession(JSONObject usr) throws JSONException
 	{
 		HttpSession custSession = request.getSession(true);
-		custSession.removeAttribute("username");
+		custSession.removeAttribute("username");	
 		custSession.removeAttribute("id");
-		custSession.removeAttribute("password");
+		custSession.removeAttribute("firstName");
+		custSession.removeAttribute("lastName");
+		custSession.removeAttribute("address");
+		custSession.removeAttribute("companyName");
+		custSession.removeAttribute("phoneNumber");
+		custSession.removeAttribute("type");
 	}
 	
 }

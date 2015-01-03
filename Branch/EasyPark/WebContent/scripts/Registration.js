@@ -1,5 +1,4 @@
 
-
 function cleanFields(){	
 	$('#FirstName').val("");
 	$('#LastName').val("");
@@ -13,25 +12,43 @@ function cleanFields(){
 	$('#AccNumber').val("");
 	$('#Token').val("");
 }
-function CheckToken(email, token){
-	//code for checking token
-	return true;
+function CheckToken(email, token, usertype, action){
+	var res=false;
+	var JSONObject = 
+	{
+		"username":email, 
+		"type":usertype,
+		"token":token,
+		"action":action
+	};
+		var jsonData = JSON.stringify(JSONObject);
+		var request = $.ajax({
+		url: "http://localhost:80/EasyPark/api/service/checkToken",
+		type: "POST",
+		async: false,
+		contentType: 'application/json',
+		data: jsonData,})
+			.done(function(data) {
+				res=data;
+				})
+			.fail(function(data) {alert("Greška sa konekcijom na server! Pokusajte ponovo."); return false;});
+		return res;
 }
 function tokenRequest(){
 	var token = $('#Token').val();
 	var email = $('#Email').val();
 	var usertype = $('#UserType').val();
-	var result=CheckToken(email,token);
+	var result=CheckToken(email,token,usertype,'request');
 	if (!result) {alert('Zahtjev za tokenom sa ovom e-mail adresom je već poslan!');}
 	else{
 		var JSONObject = 
 		{
 			"username":email, 
-			"type":usertype,
+			"type":usertype
 		};
 	var jsonData = JSON.stringify(JSONObject);
 	var request = $.ajax({
-			url: "http://localhost:80/EasyPark/api/service/getToken",
+			url: "http://localhost:80/EasyPark/api/service/saveToken",
 			type: "POST",
 			contentType: 'application/json',
 			data: jsonData, 
@@ -58,9 +75,8 @@ function registration(){
 		var token = $('#Token').val();
 		var email = $('#Email').val();
 		
-		var result = CheckToken(email,token);
-
-		if (result) {
+		var result = CheckToken(email,token,usertype,'registration');
+	if (result) {
 		var JSONObject = 
 			{
 				"username":email, 

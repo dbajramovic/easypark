@@ -15,19 +15,20 @@ function deleteSession(){
 //Opens userPage
 function openUserScreen(data2){
 	console.log(data2);
-	var JSONObject= {"username":data2._email, "password":data2._password, "id": data2._personID};
-	var jsonData = JSON.stringify(JSONObject); 
+	//var JSONObject= {"username":data2._email,"password":data2._password,"id": data2._personID };
+	//var jsonData = JSON.stringify(JSONObject); 
+	
 	var request = $.ajax({
 			url: "http://localhost:80/EasyPark/api/session/insert",
 			type: "POST",
 			contentType: 'application/json',
-			data: jsonData,
+			data: JSON.stringify(data2), //jsonData,
 			dataType: "JSON",
 			success: function(data) {
-				console.log(data2);
-				if (data2._personID==13){window.open ('user.jsp','_self',false);}
-				if (data2._personID==42){window.open ('premium.jsp','_self',false);}
-				if (data2._personID==41){ window.open ('admin.jsp','_self',false);}
+				//console.log(data2);
+				if (data2._type==2){window.open ('user.jsp','_self',false);}
+				if (data2._type==3){window.open ('premium.jsp','_self',false);}
+				if (data2._type==4){ window.open ('admin.jsp','_self',false);}
 				}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});
@@ -48,9 +49,11 @@ function login(){
 			data: jsonData,
 			dataType: "JSON",
 			success: function(data) { 
-				document.getElementById("userdiv").value = data._personid;
+				$("#userdiv").val(data._personID);
 				if (data._personID==0){alert('Unijeli ste pogrešne podatke');} 
-				else{openUserScreen(data);}
+				else{
+					openUserScreen(data);
+					}
 				}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});

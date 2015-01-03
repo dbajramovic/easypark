@@ -11,6 +11,22 @@ public class Person {
 	private String _email;
 	private int _type;
 	private String _accountNumber;
+	private String _companyName;
+	private String _token;
+	
+	
+	public String get_token() {
+		return _token;
+	}
+	public void set_token(String _token) {
+		this._token = _token;
+	}
+	public String get_companyName() {
+		return _companyName;
+	}
+	public void set_companyName(String _companyName) {
+		this._companyName = _companyName;
+	}
 	public String get_accountNumber() {
 		return _accountNumber;
 	}

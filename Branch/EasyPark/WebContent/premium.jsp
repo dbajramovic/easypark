@@ -36,7 +36,7 @@
 <body>
 
  <% HttpSession ses = request.getSession(true); 
- if (session.getAttribute("id")==null){%>
+ if ((session.getAttribute("id")==null) && (session.getAttribute("type")!="3")){%>
  
 <h2>Niste registrovani!</h2>
 <a href="index.html" >Vratite se na početnu stranicu</a>
@@ -70,30 +70,9 @@
         <div class="form-group" style="display:inline;">
           <div class="input-group">
  						<div class="input-group-btn">
-							<button type="button"
-								class="btn btn-default dropdown-toggle maxSize"
-								data-toggle="dropdown">
-								<span class="glyphicon glyphicon-chevron-down"></span>
-							</button>
-						
-							<ul class="dropdown-menu">
-								<li>
-									<a><input type="radio" class="radio" id="optionsRadios1" value="" checked> Grad</a>	
-								</li>
-								<li>								
-									 <a><input type="radio" class="radio" id="optionsRadios2" value="option1">Minimalna Cijena</a>
-								</li>
-								<li>
-									  <a><input type="radio" class="radio" id="optionsRadios3" value="option2" >Maximalna Cijena</a>									    
-								</li>
-								<li>
-									<a><input type="radio"  class="radio" id="optionsRadios4" value="option3" >Plaćanje?</a>   
-								</li> 
-							</ul>
 							<button type="button" class="btn btn-default maxSize"><span class="glyphicon glyphicon-search"></span></button>
 						</div>
             <input type="text" class="form-control" placeholder="Koji grad?">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
           </div>
         </div>
       </form>

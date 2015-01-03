@@ -34,6 +34,7 @@ import org.codehaus.jettison.json.JSONObject;
 
 
 
+
 //import jdk.nashorn.internal.runtime.regexp.RegExp;
 import oracle.jdbc.driver.OracleDriver;
 import oracle.jdbc.*;
@@ -166,37 +167,57 @@ public class ParkingService {
 			te.set_password(id.get("password").toString());
 			te.set_phonenumber(id.get("phonenumber").toString());
 			te.set_address(id.get("address").toString());
-			te.set_email(id.get("email").toString());
+			te.set_email(id.get("username").toString());
+			te.set_companyName(id.get("companyname").toString());
+			te.set_type(id.getInt("type"));
+			te.set_accountNumber(id.get("accountnumber").toString());
+			te.set_token(id.getString("token"));
 			lp.registerAccount(connection,te);	
 		}catch(Exception e){}
 		finally{ CloseConnection();}
 		return p;
 	}
 	
-	@Path("/getToken")
+	@Path("/saveToken")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void GetToken(JSONObject obj) throws SQLException{
-		
-		//Person te=new Person();
-		//MailService lp = new MailService();	
+	public void SaveToken(JSONObject obj) throws SQLException{	
 		AccountFunctions lp= new AccountFunctions();
 		CreateConnection();
 		try{
 			String username = obj.getString("username");
 			int type = obj.getInt("type");
+			//MailService lp = new MailService();
 			//System.out.print(UUID.randomUUID());
 			//System.out.print(UUID.fromString(username));
-			String token = UUID.randomUUID().toString();
-			//lp.SaveTokenRequest(con, username,type,token,)
 			//lp.SendToken(username, "megasadasdasdasdadsas");
-			//System.out.print(UUID.randomUUID());
+			//String token = UUID.randomUUID().toString();
+			lp.SaveTokenRequest(connection, username,type,"");
 	
 		}catch(Exception e){}
 		finally{ CloseConnection();}
 
 	}
 
+	@Path("/checkToken")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Boolean CheckToken(JSONObject obj) throws SQLException{	
+		AccountFunctions lp= new AccountFunctions();
+		CreateConnection();
+		try{
+			String username = obj.getString("username");
+			int type = obj.getInt("type");
+			String token = obj.getString("token");
+			String action = obj.getString("action");
+			Boolean result = lp.CheckToken(connection,username,type,token,action);
+			return result;
+		}catch(Exception e){
+			return false;
+		}
+		finally{ CloseConnection();}
+	}
 	@Path("/login")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
