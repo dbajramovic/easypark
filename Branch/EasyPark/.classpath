@@ -10,6 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="D:/Programi/Eclipse IDE for Java EE Developers/ojdbc7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Elvis/AppData/Local/Microsoft/Windows/INetCache/IE/7UQ9EKGD/mail[1].jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
