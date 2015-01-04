@@ -24,6 +24,24 @@ public class Parking {
 	private String _telefon;
 	private int _freespots;
 	private int _takenspots;
+	private int _city;
+	public String get_isVerificated() {
+		return _isVerificated;
+	}
+
+	public void set_isVerificated(String _isVerificated) {
+		this._isVerificated = _isVerificated;
+	}
+
+	private String _isVerificated;
+	public int get_city() {
+		return _city;
+	}
+
+	public void set_city(int _city) {
+		this._city = _city;
+	}
+
 	public int get_parkingID() {
 		return _parkingID;
 	}

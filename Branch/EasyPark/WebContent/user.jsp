@@ -61,15 +61,20 @@
 				<h2 align="center"><%=session.getAttribute("firstName")%>
 					<%=session.getAttribute("lastName")%></h2>
 				<hr>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="">Email</a>
+				<div class="panel panel-default ">
+					<div class="panel-heading text-center">
+						<div>E-mail: <%=session.getAttribute("username")%></div>
 					</div>
-				</div>
-				<p align="center" id="puseremail"><%=session.getAttribute("username")%></p>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="">Lista Rezervacija</a>
+					<div class="panel-heading text-center">
+						<div >Broj telefona: <%=session.getAttribute("phoneNumber")%></div>
+					</div>
+					<div class="panel-heading text-center">
+						<div>Adresa: <%=session.getAttribute("address")%></div>
+					</div>
+					<br>
+					<br>
+					<div class="panel-heading text-center">
+						<div>Rezervacije:</div>
 					</div>
 				</div>
 				<p id="listofReservations" align="center"></p>

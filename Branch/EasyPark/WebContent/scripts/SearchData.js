@@ -1,15 +1,17 @@
 function sendToList(data){
-	var dataList = document.getElementById('search-datalist');
-	$(dataList).empty();
-	//var input = document.getElementById('unosTeksta');
-
+	console.log('promjena');
+	var dataList = $('#search-datalist');
+	//$(dataList).empty();
     data.forEach(function(item) {
       var option = document.createElement('option');
-      option.value = item;
+      option.value = data[item];
       dataList.appendChild(option);
       })
   
 }
+var list=['Sarajevo','Tuzla','Mostar'];
+
+//$('#searchBar').on('change',function(){sendToList(list);});
 
 function showHint(arg, choice)
 {

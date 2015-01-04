@@ -61,7 +61,37 @@ public class ParkingsFunctions {
 		}
 		return lista_parkinga;
 	}
-
+	
+	public List<Parking> giveMeForTable(Connection con, int kolicina) {
+		boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		List<Parking> lista_parkinga = new ArrayList<Parking>();
+		try {
+			CallableStatement cs = null;
+			cs = con.prepareCall("begin ? := GETPARKINGSFORTABLE(?); end;");
+			cs.clearParameters();
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2, kolicina);
+			t = cs.execute();
+			rs = (ResultSet) cs.getObject(1);
+			while (rs.next()) {
+				Parking p = new Parking();
+				p.set_parkingID(rs.getInt(1));
+				p.set_creator(rs.getString(17));
+				p.set_note(rs.getString(7));
+				p.set_price(rs.getFloat(6));
+				p.set_totalnumber(rs.getInt(5));
+				p.set_telefon(rs.getString(14));
+				p.set_isVerificated(rs.getString(20));
+				lista_parkinga.add(p);
+			}
+			return lista_parkinga;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista_parkinga;
+	}
 	public List<Parking> giveMeUserParkings(Connection con, int userid) {
 		boolean t;
 		Locale.setDefault(Locale.US);

@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import model.Parking;
@@ -74,6 +76,68 @@ public class AccountFunctions {
 			e.printStackTrace();
 		}
 		return d;
+	}
+
+	public List<Person> giveMeUsersForTable(Connection con,int howMuch) {
+		List<Person> p = new ArrayList<Person>();
+		Boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		try {
+			CallableStatement cs = null;
+			cs = con.prepareCall("begin ? := GETUSERSFORTABLE(?); end;");
+			cs.clearParameters();
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2,howMuch);
+			t = cs.execute();
+			rs = (ResultSet)cs.getObject(1);
+		while(rs.next()) {
+			Person pe=new Person();
+			pe.set_personID(rs.getInt(1));
+			pe.set_firstname(rs.getString(2));
+			pe.set_lastname(rs.getString(3));
+			pe.set_accountNumber(rs.getString(10));
+			pe.set_phonenumber(rs.getString(7));
+			pe.set_email(rs.getString(5));
+			pe.set_address(rs.getString(8));
+			p.add(pe);
+		}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+	public List<Person> giveMePremiumForTable(Connection con,int howMuch) {
+		List<Person> p = new ArrayList<Person>();
+		Boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		try {
+			CallableStatement cs = null;
+			cs = con.prepareCall("begin ? := GETPREMIUMFORTABLE(?); end;");
+			cs.clearParameters();
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2,howMuch);
+			t = cs.execute();
+			rs = (ResultSet)cs.getObject(1);
+		while(rs.next()) {
+			Person pe=new Person();
+			pe.set_personID(rs.getInt(1));
+			pe.set_firstname(rs.getString(2));
+			pe.set_lastname(rs.getString(3));
+			pe.set_accountNumber(rs.getString(10));
+			pe.set_phonenumber(rs.getString(7));
+			pe.set_email(rs.getString(5));
+			pe.set_address(rs.getString(8));
+			pe.set_companyName(rs.getString(11));
+			p.add(pe);
+		}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
 	}
 	public Person UserDetails(Connection con,int userID) {
 		Person p = new Person();
