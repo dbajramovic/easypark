@@ -92,7 +92,7 @@ public class AccountFunctions {
 			p.set_firstname(rs.getString(2));
 			p.set_lastname(rs.getString(3));
 			p.set_address(rs.getString(4));
-			p.set_email(rs.getString(5));
+			p.set_email(rs.getString(4));
 		}
 		}
 		catch (SQLException e) {

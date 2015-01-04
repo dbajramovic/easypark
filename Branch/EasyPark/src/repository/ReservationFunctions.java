@@ -2,6 +2,7 @@ package repository;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,17 +15,18 @@ import model.Reservation;
 
 
 public class ReservationFunctions {
-	public List<Reservation> giveMe(Connection con,int userid) {
+	public List<Reservation> giveMe(Connection con,int userid, String d) {
 		List<Reservation> ListaRezervacija = new ArrayList<Reservation>();
 		boolean t;
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
 		try {
 		CallableStatement cs = null;
-		cs = con.prepareCall("begin ? := GETRESERVEDBYUSER(?); end;");
+		cs = con.prepareCall("begin ? := GETRESERVEDBYUSER(?,?); end;");
 		cs.clearParameters();
 		cs.registerOutParameter(1, OracleTypes.CURSOR);
 		cs.setInt(2,userid);
+		cs.setString(3, d);
 		t = cs.execute();
 		rs = (ResultSet)cs.getObject(1);
 		while(rs.next()){

@@ -1,6 +1,9 @@
 var SpacesNum = 0;
 var SpacesNumStart = 0;
 var parkID = 0;
+var userID = document.getElementById("userdiv").getAttribute('value');
+window.addEventListener("load", getParkings(userID));
+
 function updateParking(userid, spaces) {
 	var JSONObject = {
 		"spaces" : spaces,
@@ -31,53 +34,16 @@ function getParkings(userid) {
 		data : jsonData,
 		dataType : "JSON",
 		success : function(data) {
-
+			console.log(data)
 			drawListOfParkings(data);
 		}
 	});
 	request.fail(function(jqXHR, textStatus) {
+		console.log("SASDSD")
 		clearInterval(interval);
 	});
 }
 
-function getUser() {
-	var userid = document.getElementById("userdiv").getAttribute('value');
-	var JSONObject = {
-		"userid" : userid
-	};
-	var jsonData = JSON.stringify(JSONObject);
-	var request = $.ajax({
-		url : "http://localhost:80/EasyPark/api/service/userdata",
-		type : "POST",
-		contentType : 'application/json',
-		data : jsonData,
-		dataType : "JSON",
-		success : function(data) {
-			drawProfile(data);
-		}
-	});
-	request.fail(function(jqXHR, textStatus) {
-		clearInterval(interval);
-	});
-}
-function drawProfile(infoData) {
-	var ContentStringHeader = ' <div class="row left-panel">'
-			+ '<div class="col-xs-8" id="left">';
-	var ContentStringMain = '<h2 align="center">' + infoData._firstname + ' '
-			+ infoData._lastname + '</h2><hr>'
-			+ '<div class="panel panel-default">'
-			+ '<div class="panel-heading"><a href="">Email</a></div>'
-			+ '</div>' + '<p align="center">' + infoData._email + '</p>'
-			+ '<div class="panel panel-default">'
-			+ '<div class="panel-heading"><a href="">Lista Parkinga</a></div>'
-			+ '</div>' + '<p id="listofUserParkings" align="center"></p>';
-	+'</div>';
-
-	var ContentStringFooter = '</div>' + '</div>';
-	document.getElementById("userModalpremium").innerHTML = ContentStringHeader
-			+ ContentStringMain + ContentStringFooter;
-	getParkings(document.getElementById("userdiv").getAttribute('value'));
-};
 function sendUpdate(parkingID) {
 	updateParking(parkingID, SpacesNum);
 	location.reload();
@@ -85,11 +51,9 @@ function sendUpdate(parkingID) {
 function ChangeSpace(change) {
 	if (change == 0) {
 		SpacesNum--;
-
 	}
 	if (change == 1) {
 		SpacesNum++;
-
 	}
 	if (SpacesNum < SpacesNumStart)
 		document.getElementById("totalNum").setAttribute("style", "color:red");
@@ -126,7 +90,7 @@ function drawListOfParkings(infoData) {
 		if (infoData[i]._isthereLight == true) {
 			svjetlo = '<img src="http://s4.postimg.org/ko5hocjil/Medal_Light.png" width="55" height="85" title="Ima svjetla">';
 		}
-		var ContentStringMain = "";
+		var ContentStringMain = " ";
 		ContentStringMain += '<b>Parking #'
 				+ infoData[i]._parkingID
 				+ '</b>'
@@ -151,4 +115,3 @@ function drawListOfParkings(infoData) {
 	}
 	document.getElementById("listofUserParkings").innerHTML = ContentStringMain;
 }
-window.addEventListener("load", getUser());
