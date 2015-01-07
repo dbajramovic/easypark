@@ -201,8 +201,6 @@ public class ParkingsFunctions {
 	public void registerParking(Connection con,Parking p, int creatorid) {
 		boolean t;
 		Locale.setDefault(Locale.US);
-		ResultSet rs = null;
-		List<Parking> lista_parkinga = new ArrayList<Parking>();
 		try {
 			CallableStatement cs = null;
 			cs = con.prepareCall("begin ADDPARKING(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); end;");

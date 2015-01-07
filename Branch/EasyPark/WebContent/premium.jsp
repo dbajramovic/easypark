@@ -183,10 +183,5 @@
 	%>
 	<!-- end main template -->
 	<script src="scripts/DrawPremiumUserModal.js"></script>
-	<a href="" data-toggle="modal" data-target="#parkingregistrationModal2"
-		id="newparkingbtn2"> <span class="glyphicon glyphicon-plus"></span>
-		parking
-	</a>
-
 </body>
 </html>

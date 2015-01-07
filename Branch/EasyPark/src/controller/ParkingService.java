@@ -298,8 +298,10 @@ public class ParkingService {
 			te.set_isthereGoodEntrance(id.getBoolean("goodentrance"));
 			te.set_longitude((float) id.getDouble("long"));
 			te.set_latitude((float) id.getDouble("lat"));
+			System.out.print("USAO SAM U FUNKCIJU!");
 			lp.registerParking(connection, te,id.getInt("userid"));
 		} catch (Exception e) {
+			
 		} finally {
 			CloseConnection();
 		}

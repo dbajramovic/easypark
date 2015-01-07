@@ -110,10 +110,13 @@ function registration() {
 	} else {
 		alert('Ne mozete koristit taj token za ovu e-mail adresu!');
 	}
+}
+	
 	function parkingregistration() {
 		// Validation
 		// ...
 		//
+;
 		var freespots = $('#FreespotsParking').val();
 		var note = $('#NoteParking').val();
 		var camera = $('#isthereCamera').val();
@@ -127,6 +130,7 @@ function registration() {
 		var creatorid = document.getElementById("userdiv")
 				.getAttribute('value');
 		var goodE =  $('#isthereGoodEntrance').val();
+		console.log(long,lat,creatorid);
 		var JSONObject = {
 			"freespots" : freespots,
 			"note" : note,
@@ -151,11 +155,10 @@ function registration() {
 				})
 				.done(
 						function() {
-							alert('Uspješno ste se registrovali! Probajte se upisati pomoću vašeg računa sad.');
+							alert('Uspješno unešen parking!');
 							cleanFields();
 						}).fail(function() {
 					alert("Greška sa konekcijom na server! Pokusajte ponovo.");
 					cleanFields();
 				});
 	}
-}
