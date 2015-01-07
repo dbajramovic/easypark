@@ -67,6 +67,7 @@ function ChangeSpace(change) {
 
 }
 function drawListOfParkings(infoData) {
+	console.log(infoData);
 	parkID = infoData[0]._parkingID;
 	for ( var i = 0; i < infoData.length; i++) {
 		SpacesNum = SpacesNumStart = infoData[i]._totalnumber;
@@ -116,8 +117,8 @@ function drawListOfParkings(infoData) {
 	document.getElementById("listofUserParkings").innerHTML = ContentStringMain;
 }
 function openParkingRegModal() {
-	$("#parkingregistrationModal").modal('show');
-	$("#parkingregistrationModal").appendTo("body")
+	//$("#parkingregistrationModal").modal('show');
+	//$("#parkingregistrationModal").appendTo("body");
 }
 document.getElementById('newparkingbtn').onclick = function() {
 	openParkingRegModal();

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import model.City;
 import model.Complaints;
 import model.Message;
 import model.Parking;
@@ -28,6 +30,8 @@ import model.Token;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+
+
 
 
 
@@ -245,18 +249,18 @@ public class ParkingService {
 	}
 	@Path("/searchsuggestions")
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void searchSuggestions(JSONObject i) {
+	public List<City> searchSuggestions() {
 		ParkingsFunctions ga = new ParkingsFunctions();
+		List<City> l= new ArrayList<City>();
 		CreateConnection();
-
 		try {
-			List<String> l = ga.getSuggestions(connection, i.getString("term"),
-					i.getInt("choice"));
+			//l = ga.getSuggestions(connection);
+			return l;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return l;
 	}
 
 	@Path("/pic")

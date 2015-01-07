@@ -36,6 +36,9 @@
 <script src="scripts/Login.js"></script>
 <script src="scripts/RSSFeed2.js"></script>
 <script src="scripts/Events.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.autocomplete.min.js"></script>
+<script type="text/javascript" src="scripts/searchBar-autocomplete.js"></script>
 <!-- <script src="scripts/GetData.js"></script> -->
 
 
@@ -67,11 +70,11 @@
 			</ul>
 			<form class="navbar-form">
 				<div class="form-group" style="display: inline;">
-					<div class="input-group">
+					<div id="searchField" class="input-group">
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default maxSize"><span class="glyphicon glyphicon-search"></span></button>
 						</div>
-						<input type="text" class="form-control" placeholder="Koji grad?">
+						<input id="autocomplete" type="text" class="form-control biginput" placeholder="Koji grad?">
 					</div>
 				</div>
 			</form>

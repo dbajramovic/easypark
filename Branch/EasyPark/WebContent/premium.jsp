@@ -55,7 +55,7 @@
 	%>
 	<!-- places for templates -->
 	<div id="registrationTemplate"></div>
-	<div id="parkingregistrationModal" class="modal"></div>
+	<div id="parkingregistrationModal"></div>
 	<div id="loginTemplate"></div>
 	<div id="parkingModal" class="modal"></div>
 	<div id="userModalpremium">
@@ -119,8 +119,7 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="" data-toggle="modal"
-					data-target="#registrationParkingModal" id="newparkingbtn"><span
+				<li><a href="" data-toggle="modal" data-target="#parkingregistrationModal" id="newparkingbtn"><span
 						class="glyphicon glyphicon-plus"></span>parking</a></li>
 				<li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
 				<li><a href="#" onclick="setListOfReservations()" id="parkResList">Lista Rezervacija</a></li>
@@ -177,5 +176,10 @@
 	%>
 	<!-- end main template -->
 	<script src="scripts/DrawPremiumUserModal.js"></script>
+	<a href="" data-toggle="modal" data-target="#parkingregistrationModal2" id="newparkingbtn2">
+		<span class="glyphicon glyphicon-plus"></span>
+		parking
+		</a>
+	
 </body>
 </html>
