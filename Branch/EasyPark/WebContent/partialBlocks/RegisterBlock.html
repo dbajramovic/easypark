@@ -8,35 +8,35 @@
 		        <h3 class="modal-title dark-grey" id="exampleModalLabel">Registracija novog korisnika</h3>
 		    </div>
 			<div class="modal-body">
-			<form role="form">	
+			<form id="userRegistrationForm" role="form">	
 			<div class="col-md-6">
 				<div class="form-group col-lg-6">
 					<label>Ime</label>
-					<input class="form-control" id="FirstName">
+					<input class="form-control" id="FirstName" required>
 				</div>
 				<div class="form-group col-lg-6">
 					<label>Prezime</label>
-					<input class="form-control" id="LastName">
+					<input class="form-control" id="LastName" required>
 				</div>
 				<div class="form-group col-lg-12">
 					<label>E-mail adresa(Korisničko ime)</label>
-					<input class="form-control" id="Email" data-toggle="tooltip" data-placement="right" title="Putem ovog e-maila ćete komunicirati!">
+					<input class="form-control" id="Email" data-toggle="tooltip" data-placement="right" title="Putem ovog e-maila ćete komunicirati!" required>
 				</div>			
 				<div class="form-group col-lg-6">
 					<label>Šifra</label>
-					<input type="password" name="" class="form-control" id="Password" value="">
+					<input type="password" name="" class="form-control" id="Password" value="" required>
 				</div>
 				<div class="form-group col-lg-6">
 					<label>Ponovite šifru</label>
-					<input type="password" name="" class="form-control" id="PasswordRepeat" data-toggle="tooltip" data-placement="right" title="Tačnost šifre!">
+					<input type="password" name="" class="form-control" id="PasswordRepeat" data-toggle="tooltip" data-placement="right" title="Tačnost šifre!" required>
 				</div>
 				<div class="form-group col-lg-6">
 					<label>Broj telefona</label>
-					<input class="form-control" id="PhoneNumber">
+					<input class="form-control" id="PhoneNumber" required>
 				</div>		
 				<div class="form-group col-lg-6">
 					<label>Poštanska adresa</label>
-					<input class="form-control" id="Address" >
+					<input class="form-control" id="Address" required>
 				</div>	
 				<div class="form-group col-lg-6">
 					<label>Korisnik</label>
@@ -48,17 +48,17 @@
 				</div>
 				<div class="form-group col-lg-6" id="Company" hidden>
 					<label>Naziv kompanije</label>
-					<input class="form-control" id="CompanyName">
+					<input class="form-control" id="CompanyName" required>
 				</div>
 				<div class="form-group col-lg-12">
 					<label>Broj bankovnog računa</label>
-					<input class="form-control" id="AccNumber"></input>
+					<input class="form-control" id="AccNumber" required></input>
 				</div>
 				<div class="form-group col-lg-12">
 					<label>Pristupni token za registraciju</label>
 					
 					<div class="input-group">
-   						<input class="form-control" id="Token"></input>
+   						<input class="form-control" id="Token" required></input>
    						<span class="input-group-btn">
         					<button type="button" class="btn btn-warning" onclick="tokenRequest()" data-toggle="tooltip" data-placement="right" title="Ukoliko nemate pristupni token, biće vam poslan na upisani e-mail!">
         					Traži token!
@@ -105,4 +105,37 @@
 		</div>
 	</div>
 </div>
+<script>
+toastr.options = {
+		  "closeButton": true,
+		  "debug": false,
+		  "progressBar": true,
+		  "positionClass": "toast-top-right",
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		};
+	var listOfErrors=[];
+$('#userRegistrationForm').validate({
+	errorClass: "invalid",
+	errorPlacement: function(error, element) {
+		/* console.log(error);
+	if (element.isValid)
+		var temp={
+				errorData: error,
+				elementData:element
+		};
+		listOfErrors.push(temp); */
+		//toastr.clear();
+		toastr.warning(error);
+	  }
+});
+
+</script>
 </template>
