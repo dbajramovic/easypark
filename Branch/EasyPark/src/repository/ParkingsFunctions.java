@@ -152,7 +152,25 @@ public class ParkingsFunctions {
 			e.printStackTrace();
 		}
 	}
-	
+	public void reserveParkings(Connection con, int spaces, int userid,String date, int parkID) {
+		boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		List<Parking> lista_parkinga = new ArrayList<Parking>();
+		try {
+			CallableStatement cs = null;
+			System.out.print(date);
+			cs = con.prepareCall("begin RESERVESPOTFORUSER(?,?,?,?); end;");
+			cs.clearParameters();
+			cs.setInt(1, spaces);
+			cs.setInt(3, userid);
+			cs.setString(2, date);
+			cs.setInt(4,parkID);
+			t = cs.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public List<String> getSuggestions(Connection con, String term, int choice) {
 		boolean t;
 		Locale.setDefault(Locale.US);

@@ -229,7 +229,20 @@ public class ParkingService {
 			e.printStackTrace();
 		}
 	}
+	@Path("/reserveparking")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void reserveParking(JSONObject id) {
+		ParkingsFunctions ga = new ParkingsFunctions();
+		CreateConnection();
 
+		try {
+			ga.reserveParkings(connection, 1,id.getInt("userid"),id.getString("date"),id.getInt("parkingid"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Path("/searchsuggestions")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -288,7 +301,21 @@ public class ParkingService {
 		}
 		return p;
 	}
-
+	@Path("/parkingreservationsforowner")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Reservation> ReservationsForOwner(JSONObject id) throws SQLException {
+		List<Reservation> l = null;
+		ReservationFunctions lp = new ReservationFunctions();
+		CreateConnection();
+		try {
+			l = lp.ReservationsForOwner(connection, id.getInt("parkingid"));
+		} catch (Exception e) {
+		} finally {
+			CloseConnection();
+		}
+		return l;
+	}
 	@Path("/saveToken")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -351,6 +378,20 @@ public class ParkingService {
 			CloseConnection();
 		}
 		return te;
+	}
+	@Path("/reportuser")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public void ReportUser(JSONObject id) throws SQLException {
+		ReservationFunctions rf = new ReservationFunctions();
+		CreateConnection();
+		try {
+			rf.ReportUser(connection, id.getInt("ownerid"), id.getInt("accusedid"),id.getInt("parkingid"), id.getInt("numofR"));
+
+		} catch (Exception e) {
+		} finally {
+			CloseConnection();
+		}
 	}
 
 	@Path("/userdata")

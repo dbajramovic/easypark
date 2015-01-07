@@ -3,6 +3,7 @@ function getReservations() {
 	var id = document.getElementById("userdiv").getAttribute('value');
 	var date = new Date();
 	var test = date.getFullYear()+'-'+("0" + (date.getMonth() + 1)).slice(-2)+'-'+("0" + date.getDate()).slice(-2);
+	console.log(test);
 	date = new Date(test);
 	console.log(date);
 	var JSONObject = {

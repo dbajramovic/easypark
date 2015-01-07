@@ -24,7 +24,7 @@ $(function() {
 	document.querySelector('#userModalregular').appendChild(clone4);
 	
 	var link5 = document.querySelector('link[href="partialBlocks/RegisterParkingBlock.html"]');
-	var template5 = link.import.querySelector('template');
-	var clone5 = document.importNode(template.content, true);
-	document.querySelector('#parkingregistrationTemplate').appendChild(clone);
+	var template5 = link5.import.querySelector('template');
+	var clone5 = document.importNode(template5.content, true);
+	document.querySelector('#parkingregistrationModal').appendChild(clone5);
 });

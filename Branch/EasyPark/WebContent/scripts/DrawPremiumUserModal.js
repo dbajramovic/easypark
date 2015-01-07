@@ -67,9 +67,9 @@ function ChangeSpace(change) {
 
 }
 function drawListOfParkings(infoData) {
+	parkID = infoData[0]._parkingID;
 	for ( var i = 0; i < infoData.length; i++) {
 		SpacesNum = SpacesNumStart = infoData[i]._totalnumber;
-		parkID = infoData[i]._parkingID;
 		var kamera = '<img src="http://s23.postimg.org/t59dwo3ob/Medal_Camera_None.png" width="55" height="85" title="Nema kamere">';
 		var cesta = '<img src="http://s1.postimg.org/vpr8jybkf/Medal_Road_None.png" width="55" height="85" title="Nema ceste">';
 		var krov = '<img src="http://s1.postimg.org/ocbukzrin/Medal_Roof_None.png" width="55" height="85" title="Nema krova">';
@@ -114,4 +114,79 @@ function drawListOfParkings(infoData) {
 				+ '<button type="button" class="btn btn-default" onclick="sendUpdate(parkID)">Potvrdi promjene</button>';
 	}
 	document.getElementById("listofUserParkings").innerHTML = ContentStringMain;
+}
+function openParkingRegModal() {
+	$("#parkingregistrationModal").modal('show');
+	$("#parkingregistrationModal").appendTo("body")
+}
+document.getElementById('newparkingbtn').onclick = function() {
+	openParkingRegModal();
+};
+document.getElementById('parkResList').onclick = function() {
+	getParkingReservations(parkID);
+};
+function getParkingReservations(pID) {
+	console.log(pID);
+	parkID = pID;
+	var JSONObject = {
+		"parkingid" : pID
+	};
+	var jsonData = JSON.stringify(JSONObject);
+	var request = $
+			.ajax({
+				url : "http://localhost:80/EasyPark/api/service/parkingreservationsforowner",
+				type : "POST",
+				contentType : 'application/json',
+				data : jsonData,
+				dataType : "JSON",
+				success : function(data) {
+					console.log(data,parkID);
+					drawListOfReservations(data);
+				}
+			});
+	request.fail(function(jqXHR, textStatus) {
+		console.log("SASDSD")
+		clearInterval(interval);
+	});
+}
+function drawListOfReservations(infoData,pID) {
+	document.getElementById("listofUserParkings").innerHTML = "";
+	var ContentStringMain = "";
+	for (i = 0; i < infoData.length; i++) {
+		ContentStringMain += "<p>Korisnik #" + infoData[i]._personID
+				+ " je zaduzio " + infoData[i]._numberofreserved
+				+ " mjesta do " + infoData[i]._dateofEnd + '</p><button type="button" class="btn btn-default btn-sm" id="Prijavi'+i+'" onclick="ReportUser('+infoData[i]._personID+','+userID+','+parkID+','+infoData[i]._numberofreserved+')"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Prijavi</button><hr>';
+	}
+	document.getElementById("listofUserParkings").innerHTML = ContentStringMain;
+}
+function ReportUser(aID,uID,pID,nR) {
+	var provjera = confirm('Da li ste sigurni da zelite prijaviti korisnika '+aID+'?');
+	if(provjera == true) {
+		var JSONObject = {
+				"ownerid" : userID,
+				"accusedid" : userID,
+				"parkingid" : parkID,
+				"numofR" : nR
+			};
+			var jsonData = JSON.stringify(JSONObject);
+			var request = $
+					.ajax({
+						url : "http://localhost:80/EasyPark/api/service/reportuser",
+						type : "POST",
+						contentType : 'application/json',
+						data : jsonData,
+						dataType : "JSON",
+						success : function(data) {
+							alert("Korisnik prijavljen!");
+							location.reload();
+						}
+					});
+			request.fail(function(jqXHR, textStatus) {
+				console.log("SASDSD")
+				clearInterval(interval);
+			});
+	}
+	else {
+		
+	}
 }

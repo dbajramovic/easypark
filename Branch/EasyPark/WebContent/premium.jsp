@@ -26,6 +26,7 @@
 <link rel="import" href="partialBlocks/LoginBlock.html">
 <link rel="import" href="partialBlocks/ParkingInfoBlock.html">
 <link rel="import" href="partialBlocks/UserInfoBlock.html">
+<link rel="import" href="partialBlocks/RegisterParkingBlock.html">
 <!-- SCRIPTS -->
 <script src="scripts/bootstrap.min.js"></script>
 <script src="scripts/LoadTemplates.js"></script>
@@ -54,42 +55,53 @@
 	%>
 	<!-- places for templates -->
 	<div id="registrationTemplate"></div>
+	<div id="parkingregistrationModal" class="modal"></div>
 	<div id="loginTemplate"></div>
 	<div id="parkingModal" class="modal"></div>
 	<div id="userModalpremium">
-		<div class="row left-panel">	       
-<!-- 		<ul class="nav navbar-nav nav-tabs" role="tablist">
+		<div class="row left-panel">
+			<!-- 		<ul class="nav navbar-nav nav-tabs" role="tablist">
     	<li role="presentation" class="active"><a href="#podaciPremium" aria-controls="home" role="tab" data-toggle="tab" >Opće</a></li>
     	<li role="presentation"><a href="#rezervacijePremium" aria-controls="profile" role="tab" data-toggle="tab" >Rezervacije</a></li>
-  		</ul>  --> 
-  		<div class="col-xs-8" id="left">
-						<h2 align="center"><%=session.getAttribute("firstName") %> <%=session.getAttribute("lastName") %></h2>
-						<hr>
-						<div class="panel panel-default">
-							<div class="panel-heading text-center">
-								<div>E-mail: <%=session.getAttribute("username")%></div>
-							</div>
-							<div class="panel-heading text-center">
-								<div>Broj telefona: <%=session.getAttribute("phoneNumber")%></div>
-							</div>
-							<div class="panel-heading text-center">
-								<div >Adresa: <%=session.getAttribute("address")%></div>
-							</div>
-							<div class="panel-heading text-center">
-								<div>Naziv kompanije: <%=session.getAttribute("companyName")%></div>
-							</div>
-							<br>
-							<br>
-							<div class="panel-heading text-center">
-								<div>Podaci o parking-u:</div>
-							</div>
-						</div>
-						<br>						
-						<div class="pull-right">
-								<button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-						</div>
-						<p id="listofUserParkings" align="center"></p>
+  		</ul>  -->
+			<div class="col-xs-8" id="left">
+				<h2 align="center"><%=session.getAttribute("firstName")%>
+					<%=session.getAttribute("lastName")%></h2>
+				<hr>
+				<div class="panel panel-default">
+					<div class="panel-heading text-center">
+						<div>
+							E-mail:
+							<%=session.getAttribute("username")%></div>
 					</div>
+					<div class="panel-heading text-center">
+						<div>
+							Broj telefona:
+							<%=session.getAttribute("phoneNumber")%></div>
+					</div>
+					<div class="panel-heading text-center">
+						<div>
+							Adresa:
+							<%=session.getAttribute("address")%></div>
+					</div>
+					<div class="panel-heading text-center">
+						<div>
+							Naziv kompanije:
+							<%=session.getAttribute("companyName")%></div>
+					</div>
+					<br> <br>
+					<div class="panel-heading text-center">
+						<div>Podaci o parking-u:</div>
+					</div>
+				</div>
+				<br>
+				<div class="pull-right">
+					<button class="btn btn-danger">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</div>
+				<p id="listofUserParkings" align="center"></p>
+			</div>
 		</div>
 	</div>
 	<div id="userModalregular"></div>
@@ -108,9 +120,10 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="" data-toggle="modal"
-					data-target=".registrationModal"><span
+					data-target="#registrationParkingModal" id="newparkingbtn"><span
 						class="glyphicon glyphicon-plus"></span>parking</a></li>
 				<li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
+				<li><a href="#" onclick="setListOfReservations()" id="parkResList">Lista Rezervacija</a></li>
 			</ul>
 			<form class="navbar-form">
 				<div class="form-group" style="display: inline;">
@@ -120,7 +133,8 @@
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</div>
-						<input id="searchBar" type="text" class="form-control" placeholder="Koji grad?" list="search-datalist">
+						<input id="searchBar" type="text" class="form-control"
+							placeholder="Koji grad?" list="search-datalist">
 						<datalist id="search-datalist"></datalist>
 					</div>
 				</div>
@@ -162,6 +176,6 @@
 		}
 	%>
 	<!-- end main template -->
- <script src="scripts/DrawPremiumUserModal.js"></script> 
+	<script src="scripts/DrawPremiumUserModal.js"></script>
 </body>
 </html>

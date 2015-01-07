@@ -73,10 +73,11 @@
 		} else if (yest == true) {
 			marker2.setAnimation(google.maps.Animation.BOUNCE);
 		}
-	};
+	}
+	;
 
 	function getPicture(picid) {
-		
+
 		var JSONObject = {
 			"pictureid" : picid
 		};
@@ -88,7 +89,7 @@
 			data : jsonData,
 			dataType : "JSON",
 			success : function(data2) {
-				
+
 				return data2;
 			}
 		});
@@ -96,48 +97,47 @@
 			clearInterval(interval);
 		});
 	}
-	
+
 	function addInfoWindow(marker2, infoData) {
 		var contentString = '<div id="content">'
 				+ '<div id="siteNotice">'
 				+ '</div>'
 				+ '<h1 id="firstHeading" class="firstHeading">Podaci o parkingu</h1>'
-				+ '<div id="bodyContent">'
-				+'Vlasnik: <b>'
-				+ infoData._creator
-				+ '</b>'
-				+ '<br>Napomena<b>: "'
-				+ infoData._note
-				+ '"</b> <br> Cijena: <b>'
-				+ infoData._price
-				+ ' KM</b>'
-				+ ' <br> Broj mjesta: <b>'
-				+ infoData._totalnumber + '</b> </p>';
+				+ '<div id="bodyContent">' + 'Vlasnik: <b>' + infoData._creator
+				+ '</b>' + '<br>Napomena<b>: "' + infoData._note
+				+ '"</b> <br> Cijena: <b>' + infoData._price + ' KM</b>'
+				+ ' <br> Broj mjesta: <b>' + infoData._totalnumber
+				+ '</b> </p>';
 		infowindow.content = contentString;
 		infowindow.open(map, marker2);
-	};
-	function reserveSpot(userid,parkingid) {
+	}
+	;
+	function ReserveSpot(parkingid) {
+		var date = new Date();
+		var test = date.getFullYear() + '-'
+				+ ("0" + (date.getMonth() + 1)).slice(-2) + '-'
+				+ ("0" + date.getDate()).slice(-2);
+		date = new Date(test);
+		console.log(test);
+		var userid = document.getElementById("userdiv").getAttribute('value');
 		var JSONObject = {
 			"userid" : userid,
-			"parkingid" : parkingid
+			"parkingid" : parkingid,
+			"date" : test
 		};
 		var jsonData = JSON.stringify(JSONObject);
 		var request = $.ajax({
-			url : "http://localhost:80/EasyPark/api/service/updateuserparking",
+			url : "http://localhost:80/EasyPark/api/service/reserveparking",
 			type : "POST",
 			contentType : 'application/json',
 			data : jsonData,
 		}).done(function() {
-			alert('Parking je azuriran!');
+			alert('Rezervisano Vam je mjesto!');
 		}).fail(function() {
 			alert("Greska sa konekcijom na server! Pokusajte ponovo.");
 			cleanFields();
 		});
 	}
-function ReserveSpot(parkID) {
-	
-}	
-
 	function getParkingModal(marker2, infoData) {
 		var parkID = infoData._parkingID;
 		var kamera = '<img src="http://s23.postimg.org/t59dwo3ob/Medal_Camera_None.png" width="55" height="85" title="Nema kamere">';
@@ -160,7 +160,7 @@ function ReserveSpot(parkID) {
 		if (infoData._isthereLight == true) {
 			svjetlo = '<img src="http://s4.postimg.org/ko5hocjil/Medal_Light.png" width="55" height="85" title="Ima svjetla">';
 		}
-		
+
 		var ContentString = '<div class="modal-dialog" style="width:600px">'
 				+ ' <div class="modal-content">'
 				+ '<div class="modal-header">'
@@ -170,7 +170,10 @@ function ReserveSpot(parkID) {
 				+ '</h4>'
 				+ '</div>'
 				+ '<div class="modal-body">'
-				+ '<p>Vlasnik:<b>'+ infoData._creator+'</b> <br>Broj telefona: <b>'+infoData._telefon
+				+ '<p>Vlasnik:<b>'
+				+ infoData._creator
+				+ '</b> <br>Broj telefona: <b>'
+				+ infoData._telefon
 				+ '</b><div id="container1" style="width: 270px; height: 200px; margin: 0 auto; float:left" ></div>'
 				+ '<div id="container2" style="width: 270px; height: 200px; margin: 0; float:left"></div>'
 				+ '<div id="medalje"><hr><h4 class="modal-title" style="clear:both">Medalje</h4>'
@@ -183,25 +186,30 @@ function ReserveSpot(parkID) {
 				+ cuvar
 				+ ' '
 				+ svjetlo
-				+'<hr><b>Cijena:</b> '
-				+infoData._price
+				+ '<hr><b>Cijena:</b> '
+				+ infoData._price
 				+ ' KM</p>'
 				+ '<br>'
-				+ '<b>Slobodna mjesta:</b>'+infoData._freespots +' <b>Zauzeto mjesta:</b>'+infoData._takenspots
+				+ '<b>Slobodna mjesta:</b>'
+				+ infoData._freespots
+				+ ' <b>Zauzeto mjesta:</b>'
+				+ infoData._takenspots
 				+ '</div></div>'
 				+ '<div class="modal-footer">'
 				+ '<button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>'
-			
-				+ '<button type="button" class="btn btn-primary" on-click="ReserveSpot(ParkID)">Rezervisite</button>'
+
+				+ '<button type="button" class="btn btn-primary" id="RezervacijaDugme" onClick="ReserveSpot('+infoData._parkingID+')">Rezervisite</button>'
 				+ '</div>' + '</div>' + '</div>' + '</div>';
 		document.getElementById("parkingModal").innerHTML = ContentString;
 		;
-		/*var slika = document.createElement('img');
-		slika.src = 'data:image/jpg;base64,'+picData._slika;
-		document.body.appendChild(slika);*/
+		/*
+		 * var slika = document.createElement('img'); slika.src =
+		 * 'data:image/jpg;base64,'+picData._slika;
+		 * document.body.appendChild(slika);
+		 */
 		$("#parkingModal").modal('show');
-	};
-	
+	}
+	;
 	function setHoverAction(marker2, jsonData) {
 		google.maps.event
 				.addListener(
@@ -313,10 +321,10 @@ function ReserveSpot(parkID) {
 												});
 
 							});
-						 //addInfoWindow(marker2,jsonData);
+							// addInfoWindow(marker2,jsonData);
 						});
 		google.maps.event.addListener(marker2, 'mouseover', function() {
-			addInfoWindow(marker2,jsonData);
+			addInfoWindow(marker2, jsonData);
 		});
 		google.maps.event.addListener(marker2, 'mouseout', function() {
 			infowindow.close();
@@ -361,9 +369,8 @@ function ReserveSpot(parkID) {
 			clearInterval(interval);
 		});
 	}
-	
-	
-	//returns our location
+
+	// returns our location
 	function getLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -380,7 +387,7 @@ function ReserveSpot(parkID) {
 		}
 	}
 
-	//MAIN function for initialize
+	// MAIN function for initialize
 	function initialize() {
 		var mapProp = {
 			center : {
@@ -402,7 +409,3 @@ function ReserveSpot(parkID) {
 		map.setCenter(marker.getPosition());
 	});
 })();
-
-
-
-

@@ -1,20 +1,102 @@
 <template>
 <meta charset="UTF-8">
-<div class="modal fade registrationModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal parkingregistrationModal" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="false">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">	
 			<div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h3 class="modal-title dark-grey" id="exampleModalLabel">Registracija novog korisnika</h3>
+		        <h3 class="modal-title dark-grey" id="exampleModalLabel">Registracija novog PARKINGA</h3>
 		    </div>
 			<div class="modal-body">
 			<form role="form">	
 			<div class="col-md-6">
+				<div class="form-group col-lg-6">
+					<label>Ime</label>
+					<input class="form-control" id="FirstName">
+				</div>
+				<div class="form-group col-lg-6">
+					<label>Prezime</label>
+					<input class="form-control" id="LastName">
+				</div>
 				<div class="form-group col-lg-12">
-					<label>Cijenaime)</label>
-					<input class="form-control" id="Price" data-toggle="tooltip" data-placement="right" title="Cijena Vašeg parkinga">
+					<label>E-mail adresa(Korisničko ime)</label>
+					<input class="form-control" id="Email" data-toggle="tooltip" data-placement="right" title="Putem ovog e-maila ćete komunicirati!">
+				</div>			
+				<div class="form-group col-lg-6">
+					<label>Šifra</label>
+					<input type="password" name="" class="form-control" id="Password" value="">
+				</div>
+				<div class="form-group col-lg-6">
+					<label>Ponovite šifru</label>
+					<input type="password" name="" class="form-control" id="PasswordRepeat" data-toggle="tooltip" data-placement="right" title="Tačnost šifre!">
+				</div>
+				<div class="form-group col-lg-6">
+					<label>Broj telefona</label>
+					<input class="form-control" id="PhoneNumber">
+				</div>		
+				<div class="form-group col-lg-6">
+					<label>Poštanska adresa</label>
+					<input class="form-control" id="Address" >
+				</div>	
+				<div class="form-group col-lg-6">
+					<label>Korisnik</label>
+					<select name="UserType" class="form-control" id="UserType" multiple-title="Odaberite vrstu">
+						<option value="1">Regularni - korisnik parkinga</option>
+						<option value="2">Premium - vlasnik parkinga</option>
+						<option value="3">Administrator - dio organizacije</option>
+					</select>
+				</div>
+				<div class="form-group col-lg-6" id="Company" hidden>
+					<label>Naziv kompanije</label>
+					<input class="form-control" id="CompanyName">
+				</div>
+				<div class="form-group col-lg-12">
+					<label>Broj bankovnog računa</label>
+					<input class="form-control" id="AccNumber"></input>
+				</div>
+				<div class="form-group col-lg-12">
+					<label>Pristupni token za registraciju</label>
+					
+					<div class="input-group">
+   						<input class="form-control" id="Token"></input>
+   						<span class="input-group-btn">
+        					<button type="button" class="btn btn-warning" onclick="tokenRequest()" data-toggle="tooltip" data-placement="right" title="Ukoliko nemate pristupni token, biće vam poslan na upisani e-mail!">
+        					Traži token!
+        					</button>
+   						</span>
+					</div>
 				</div>
 			</div>
+		
+			<div class="col-md-6">
+				<h3 class="dark-grey">Uslovi korištenja</h3>
+					<p>
+						Klikom na "Registruj me" na dnu prikaza prihvatate:
+					</p>
+					<p>
+						Potreba za mirovanjem vozila je neizbježan pratioc svih vidova saobraćaja. Činjenica je da
+						putnički automobil provede više od 90% vremena u stanju mirovanja. Zato se obezbjeđivanje
+						uslova za mirovanje – parkiranje vozila postavlja kao polazni uvjet za funkcioniranje
+						saobraćajnog sistema
+					</p>
+					<p>
+						Problem parkiranja vozila javlja se na oba kraja jednog putovanja. To se naravno dešava na
+						različitim lokacijama gradskog područja i različitim vremenskim periodima tokom dana. 				
+					</p>
+					<p>
+						U procesu urbanističko – saobraćajnog planiranja jedna od osnovnih dilema je koliko parking
+						– mjesta obezbjediti za određene vrste aktivnosti (stanovanja, rad, trgovina i sl.) i u kojim
+						dijelovima grada (centralna zona, obodno područje, i sl.). 				
+					</p>
+					<p>
+						Parkirališta opće namjene planiraju se uz atraktivne urbanističke sadržaje (trgovina,
+						poslovanje, zabava i sl.) kao javni objekti. Oni treba da omoguće korištenje putničkih
+						automobila u lične svrhe putovanja. Budući da su najveće koncentracije atraktivnih
+						sadržaja u centralnoj zoni praćene i najoštrijim prostornim ograničenjima, ova vrsta
+						parkirališta u velikim gradovima se organizuje u više-etažnim podzemnim ili nadzemnim
+						objektima. 
+					</p>
+				</div>
 				</form>
         		<button type="button" class="btn btn-default pull-right" data-dismiss="modal" onclick="cleanFields()">Zatvori</button>
         		<button type="button" class="btn btn-primary" onclick="registration()">Registruj me!</button>

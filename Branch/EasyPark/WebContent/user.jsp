@@ -95,8 +95,8 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="">Promijeni informacije</a></li>
 				<li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
+				<li><a href="" onclick="alert('EasyPark Team\nBroj Telefona:062587927')">Kontakt Informacije</a></li>
 			</ul>
 			<form class="navbar-form">
 				<div class="form-group" style="display: inline;">
