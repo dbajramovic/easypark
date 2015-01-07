@@ -32,7 +32,7 @@
 <!-- SCRIPTS -->
 <script src="scripts/bootstrap.min.js"></script>
 <script src="scripts/LoadTemplates.js"></script>
-<script src="scripts/DrawingPoints.js"></script>
+<script src="scripts/DrawingPoints.js"></script> 
 <script src="scripts/Registration.js"></script>
 <script src="scripts/Login.js"></script>
 <script src="scripts/SearchData.js"></script>
@@ -60,6 +60,8 @@
 	<div id="parkingregistrationModal"></div>
 	<div id="loginTemplate"></div>
 	<div id="parkingModal" class="modal"></div>
+	<div id="markerlong" value=""></div>
+	<div id="markerlat" value=""></div>
 	<div id="userModalpremium">
 		<div class="row left-panel">
 			<!-- 		<ul class="nav navbar-nav nav-tabs" role="tablist">
@@ -121,10 +123,13 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="" data-toggle="modal" data-target="#parkingregistrationModal" id="newparkingbtn"><span
-						class="glyphicon glyphicon-plus"></span>parking</a></li>
+				<li><a href="" data-toggle="modal"
+					data-target="#parkingregistrationModal2" id="newparkingbtn"> <span
+						class="glyphicon glyphicon-plus"></span> parking
+				</a></li>
 				<li><a href="index.html" onclick="deleteSession()">Ispis</a></li>
-				<li><a href="#" onclick="setListOfReservations()" id="parkResList">Lista Rezervacija</a></li>
+				<li><a href="#" onclick="setListOfReservations()"
+					id="parkResList">Lista Rezervacija</a></li>
 			</ul>
 			<form class="navbar-form">
 				<div class="form-group" style="display: inline;">
@@ -134,7 +139,8 @@
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</div>
-						<input id="autocomplete" type="text" class="form-control" placeholder="Koji grad?">
+						<input id="autocomplete" type="text" class="form-control"
+							placeholder="Koji grad?">
 
 					</div>
 				</div>
@@ -177,10 +183,10 @@
 	%>
 	<!-- end main template -->
 	<script src="scripts/DrawPremiumUserModal.js"></script>
-	<a href="" data-toggle="modal" data-target="#parkingregistrationModal2" id="newparkingbtn2">
-		<span class="glyphicon glyphicon-plus"></span>
+	<a href="" data-toggle="modal" data-target="#parkingregistrationModal2"
+		id="newparkingbtn2"> <span class="glyphicon glyphicon-plus"></span>
 		parking
-		</a>
-	
+	</a>
+
 </body>
 </html>

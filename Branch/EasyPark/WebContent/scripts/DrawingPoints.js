@@ -202,11 +202,6 @@
 				+ '</div>' + '</div>' + '</div>' + '</div>';
 		document.getElementById("parkingModal").innerHTML = ContentString;
 		;
-		/*
-		 * var slika = document.createElement('img'); slika.src =
-		 * 'data:image/jpg;base64,'+picData._slika;
-		 * document.body.appendChild(slika);
-		 */
 		$("#parkingModal").modal('show');
 	}
 	;
@@ -338,6 +333,8 @@
 			var r = getParkings(marker2.getPosition().lat(), marker2
 					.getPosition().lng(), 10);
 			toggleBounce(false, marker2);
+			document.getElementById("markerlong").setAttribute('value', marker2.getPosition().lng());
+			document.getElementById("markerlat").setAttribute('value', marker2.getPosition().lat());
 		});
 	}
 

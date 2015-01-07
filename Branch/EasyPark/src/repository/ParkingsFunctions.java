@@ -198,6 +198,41 @@ public class ParkingsFunctions {
 		}
 		return lista_prijedloga;
 	}
-	
+	public void registerParking(Connection con,Parking p, int creatorid) {
+		boolean t;
+		Locale.setDefault(Locale.US);
+		ResultSet rs = null;
+		List<Parking> lista_parkinga = new ArrayList<Parking>();
+		try {
+			CallableStatement cs = null;
+			cs = con.prepareCall("begin ADDPARKING(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); end;");
+			cs.clearParameters();
+			cs.setInt(1, creatorid);
+			cs.setInt(2, p.get_freespots());
+			cs.setFloat(3, p.get_price());
+			cs.setString(4,p.get_note());
+			cs.setInt(5, 1);
+			cs.setBoolean(6,p.get_isthereCamera());
+			cs.setBoolean(7,p.get_isthereGuard());
+			cs.setBoolean(8,p.get_isthereRoof());
+			cs.setBoolean(9,p.get_isthereRoad());
+			cs.setBoolean(10,p.get_isthereGoodEntrance());
+			cs.setString(11,p.get_telefon());
+			cs.setBoolean(12,p.get_isthereLight());
+			cs.setInt(13, 0);
+			cs.setInt(14, 0);
+			cs.setString(15, "N");
+			cs.setFloat(16,p.get_latitude());
+			cs.setFloat(17,p.get_longitude());
+			cs.setInt(18, p.get_city());
+			cs.setInt(19, p.get_freespots());
+			cs.setInt(20, 0);
+			cs.setString(21,"Y");
+			t = cs.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 }

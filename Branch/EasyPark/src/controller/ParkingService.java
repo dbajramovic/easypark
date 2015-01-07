@@ -278,7 +278,32 @@ public class ParkingService {
 		}
 		return p;
 	}
-
+	@Path("/registerparking")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public void RegisterParking(JSONObject id) throws SQLException {
+		Long p = (long) 0;
+		Parking te = new Parking();
+		ParkingsFunctions lp = new ParkingsFunctions();
+		CreateConnection();
+		try {
+			te.set_city(id.getInt("cityid"));
+			te.set_freespots(id.getInt("freespots"));
+			te.set_isthereCamera(id.getBoolean("camera"));
+			te.set_isthereGuard(id.getBoolean("guard"));
+			te.set_isthereRoof(id.getBoolean("roof"));
+			te.set_isthereRoad(id.getBoolean("road"));
+			te.set_isthereLight(id.getBoolean("light"));
+			te.set_telefon(id.getString("telefon"));
+			te.set_isthereGoodEntrance(id.getBoolean("goodentrance"));
+			te.set_longitude((float) id.getDouble("long"));
+			te.set_latitude((float) id.getDouble("lat"));
+			lp.registerParking(connection, te,id.getInt("userid"));
+		} catch (Exception e) {
+		} finally {
+			CloseConnection();
+		}
+	}
 	@Path("/register")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
