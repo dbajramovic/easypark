@@ -10,17 +10,16 @@
 <link rel="stylesheet" type="text/css" href="css/Style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<link rel="icon" type="image/png"
-	href="http://www.queenshotelbrighton.com/portals/0/images/Parking%20Logo.jpg" />
+<link rel="icon" type="image/png" href="http://www.queenshotelbrighton.com/portals/0/images/Parking%20Logo.jpg" />
 
 <!-- INTERNET APIS -->
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<!-- <script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
+	<script type="text/javascript" src="scripts/jquery-2.1.3.min.js"></script>
 <script
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Nok-cKRP-OtaS8tPeuLEAgcN-FLKlIY"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
-<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.autocomplete.min.js"></script>
 
 <!-- HTML templates -->
@@ -34,7 +33,7 @@
 <script src="scripts/DrawingPoints.js"></script>
 <script src="scripts/Registration.js"></script>
 <script src="scripts/Login.js"></script>
-<!-- <script src="scripts/GetData.js"></script> -->
+
 
 
 </head>

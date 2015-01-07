@@ -201,10 +201,11 @@
 				+ '<button type="button" class="btn btn-primary" id="RezervacijaDugme" onClick="ReserveSpot('+infoData._parkingID+')">Rezervisite</button>'
 				+ '</div>' + '</div>' + '</div>' + '</div>';
 		document.getElementById("parkingModal").innerHTML = ContentString;
-		;
-		$("#parkingModal").modal('show');
-	}
-	;
+		//;
+		//jQuery.noConflict();
+        $("#parkingModal").modal('show');
+	
+	};
 	function setHoverAction(marker2, jsonData) {
 		google.maps.event
 				.addListener(
