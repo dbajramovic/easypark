@@ -386,6 +386,38 @@
 			alert("Vaš pretrazivac ne odaje informaciju o vašoj geolokaciji!");
 		}
 	}
+	function loadAutoComplete(){
+		  var towns = [];
+		  var request = $.ajax({
+				url : "http://localhost:80/EasyPark/api/service/getsuggestions",
+				type : "POST",
+				contentType : 'application/json',
+				dataType : "JSON",
+				success : function(data) {
+					data.forEach(function(item){
+						var temp= {
+								value:item._name,
+								data:{
+									longitude: item._longitude,
+									latitude: item._latitude
+									}
+						};
+						towns.push(temp);
+					});
+				}
+			});
+		  $('#autocomplete').autocomplete({
+		    lookup: towns,
+		    onSelect: function (suggestion) {    
+		    	initialLocation = new google.maps.LatLng(suggestion.data.latitude, suggestion.data.longitude);
+				map.setCenter(initialLocation);
+				var mark = setMarker(initialLocation, 2, 1, true);
+				setDraggableAction(mark);
+				var test = getParkings(suggestion.data.latitude,
+						suggestion.data.longitude, 10);
+		    }
+		  });
+		};  
 
 	// MAIN function for initialize
 	function initialize() {
@@ -402,10 +434,12 @@
 			styles : styles
 		});
 		getLocation();
+		loadAutoComplete();
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
 	google.maps.event.addListener(marker, 'click', function() {
 		map.setZoom(8);
 		map.setCenter(marker.getPosition());
 	});
+	
 })();

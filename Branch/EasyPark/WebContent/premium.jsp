@@ -20,6 +20,8 @@
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Nok-cKRP-OtaS8tPeuLEAgcN-FLKlIY"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.autocomplete.min.js"></script>
 
 <!-- HTML templates -->
 <link rel="import" href="partialBlocks/RegisterBlock.html">
@@ -132,9 +134,8 @@
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</div>
-						<input id="searchBar" type="text" class="form-control"
-							placeholder="Koji grad?" list="search-datalist">
-						<datalist id="search-datalist"></datalist>
+						<input id="autocomplete" type="text" class="form-control" placeholder="Koji grad?">
+
 					</div>
 				</div>
 			</form>

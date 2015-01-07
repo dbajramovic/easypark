@@ -17,6 +17,8 @@
 	<script src="http://code.highcharts.com/highcharts.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 	<script src="http://cdn.alloyui.com/3.0.0/aui/aui-min.js"></script>
+	<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.autocomplete.min.js"></script>
 	<link href="http://cdn.alloyui.com/3.0.0/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
 
 <!-- HTML templates -->
@@ -87,7 +89,7 @@
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default maxSize"><span class="glyphicon glyphicon-search"></span></button>
 						</div>
-            <input type="text" class="form-control" placeholder="Koji grad?">
+            <input id="autocomplete" type="text" class="form-control" placeholder="Koji grad?">
           </div>
         </div>
 	</div>
