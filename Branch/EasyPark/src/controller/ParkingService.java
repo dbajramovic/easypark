@@ -247,15 +247,15 @@ public class ParkingService {
 			e.printStackTrace();
 		}
 	}
-	@Path("/searchsuggestions")
+	@Path("/getsuggestions")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<City> searchSuggestions() {
+	public List<City> getSuggestions() {
 		ParkingsFunctions ga = new ParkingsFunctions();
 		List<City> l= new ArrayList<City>();
 		CreateConnection();
 		try {
-			//l = ga.getSuggestions(connection);
+			l = ga.getSuggestions(connection);
 			return l;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -8,13 +8,17 @@ $(function(){
 		contentType : 'application/json',
 		dataType : "JSON",
 		success : function(data) {
-
-			console.log(data);
-			//ubaciti u towns
+			data.forEach(function(item){
+				var temp= {
+						value:item._name,
+						data:{
+							longitude: item._longitude,
+							latitude: item._latitude
+							}
+				};
+				towns.push(temp);
+			});
 		}
-	});
-	request.fail(function(jqXHR, textStatus) {
-		clearInterval(interval);
 	});
   
   // setup autocomplete function pulling from currencies[] array
