@@ -22,4 +22,9 @@ $(function() {
 	var template4 = link4.import.querySelector('template');
 	var clone4 = document.importNode(template4.content, true);
 	document.querySelector('#userModalregular').appendChild(clone4);
+	
+	var link5 = document.querySelector('link[href="partialBlocks/RegisterParkingBlock.html"]');
+	var template5 = link.import.querySelector('template');
+	var clone5 = document.importNode(template.content, true);
+	document.querySelector('#parkingregistrationTemplate').appendChild(clone);
 });
