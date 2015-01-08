@@ -21,6 +21,8 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 <script type="text/javascript" src="scripts/jquery.autocomplete.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="scripts/toastr.min.js"></script>
 
 <!-- HTML templates -->
 <link rel="import" href="partialBlocks/RegisterBlock.html">

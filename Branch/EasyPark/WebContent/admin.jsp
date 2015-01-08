@@ -16,6 +16,8 @@
 	<script type="text/javascript" src="scripts/jquery-2.1.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Nok-cKRP-OtaS8tPeuLEAgcN-FLKlIY"></script>
 	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script type="text/javascript" src="scripts/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="scripts/toastr.min.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 	<script src="http://cdn.alloyui.com/3.0.0/aui/aui-min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.autocomplete.min.js"></script>
@@ -25,7 +27,7 @@
 	<link rel="import" href="partialBlocks/RegisterBlock.html">
 	<link rel="import" href="partialBlocks/LoginBlock.html">
 	<link rel="import" href="partialBlocks/ParkingInfoBlock.html">
-	<link rel="import" href="partialBlocks/UserInfoBlock.html">
+	<!-- <link rel="import" href="partialBlocks/UserInfoBlock.html"> -->
 	
 <!-- SCRIPTS -->
 	<script src="scripts/bootstrap.min.js"></script>

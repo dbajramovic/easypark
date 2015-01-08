@@ -84,6 +84,7 @@ public class ParkingsFunctions {
 				p.set_totalnumber(rs.getInt(5));
 				p.set_telefon(rs.getString(14));
 				p.set_isVerificated(rs.getString(20));
+				p.set_results(rs.getInt(21));
 				lista_parkinga.add(p);
 			}
 			return lista_parkinga;

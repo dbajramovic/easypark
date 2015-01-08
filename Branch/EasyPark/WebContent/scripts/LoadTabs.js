@@ -1,4 +1,6 @@
-function LoadPagination(a){
+function LoadPagination(a, pagesPerPage, results){
+	var temp=Math.round(results/pagesPerPage);
+	if (temp>5) {temp=5;}
 $(a).empty();
 	YUI().use(
 		 'aui-pagination',
@@ -8,10 +10,11 @@ $(a).empty();
 		    	boundingBox: a,
 		    	circular: false,
 		        containers: a,
-		        total: 5,
+		        total: temp,
 			    page: 1
 		      }
 		    ).render();
+		   // Y.maxPageLinks=5;
 		  }
 );}
 function LoadDatePicker(a){
@@ -72,7 +75,7 @@ function SendDataToTable(data, naziv,table){
 	    var tr = document.createElement('tr');
 	    for (var prop in entry) {
 	        if(entry.hasOwnProperty(prop)
-	        		&&entry[prop]!=null 
+	        		&&entry[prop]!=null && prop!=='_results'
 	        		&& entry[prop]!==0 
 	        		|| naziv==='tokeni' 
 	        		|| naziv==='zahtjevi' 
@@ -82,6 +85,7 @@ function SendDataToTable(data, naziv,table){
 		        tr.appendChild(td);
 	        }
 	     }
+	   
 	    var td = document.createElement('td');
 	    if (naziv==='parkinzi'){
 		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-plus-sign"></span>', td);
@@ -113,6 +117,8 @@ function SendDataToTable(data, naziv,table){
 	    tr.appendChild(td);
         $(table).append(tr);
 	});
+	if  (typeof data[0]['_results']!=='undefined') {return data[0]['_results'];}
+	else return 0;
 };
 
 function LoadData(url,naziv,table){
@@ -122,52 +128,55 @@ function LoadData(url,naziv,table){
 			"numOfResults":0 //zasad
 	};
 	var jsonData = JSON.stringify(JSONObject); 
+	var results=0;
 	var request = $.ajax({
 			url: "http://localhost:80/EasyPark/api/service/"+url,
 			type: "POST",
 			contentType: 'application/json',
 			data: jsonData,
 			dataType: "JSON",
+			async: false,
 			success: function(data) { 
-				SendDataToTable(data, naziv, table);
+				results = SendDataToTable(data, naziv, table);
+				return results;
 				}  
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});	
 };
 
 function LoadPrijave(){
-	LoadData("getTopPrijave",'prijave','#prijaveTable');
-	LoadPagination('#prijavePagination');
+	brojRez=LoadData("getTopPrijave",'prijave','#prijaveTable');
+	LoadPagination('#prijavePagination',10,10);
 	LoadDatePicker('#prijaveDateFrom');
 	LoadDatePicker('#prijaveDateTo');
 }
 function LoadZahtjevi(){
-	LoadData("getTopRequests",'zahtjevi','#zahtjeviTable');
-	LoadPagination('#zahtjeviPagination');
+	brojRez=LoadData("getTopRequests",'zahtjevi','#zahtjeviTable');
+	LoadPagination('#zahtjeviPagination',10,10);
 	LoadDatePicker('#zahtjeviDateFrom');
 	LoadDatePicker('#zahtjeviDateTo');
 }
 function LoadTokeni(){
-	LoadData("getTopTokens",'tokeni','#tokensTable');
-	LoadPagination('#tokeniPagination');
+	brojRez=LoadData("getTopTokens",'tokeni','#tokensTable');
+	LoadPagination('#tokeniPagination',10,20);
 	LoadDatePicker('#tokeniDateFrom');
 	LoadDatePicker('#tokeniDateTo');
 }
 function LoadPremiumKorisnici(){
-	LoadData("getTopPremium",'vlasniciParkinga','#premiumTable');
-	LoadPagination('#premiumPagination');
+	brojRez=LoadData("getTopPremium",'vlasniciParkinga','#premiumTable');
+	LoadPagination('#premiumPagination',10,10);
 	LoadDatePicker('#premiumDateFrom');
 	LoadDatePicker('#premiumDateTo');
 }
 function LoadKorisniciParkinga(){
-	LoadData("getTopKorisnici",'korisniciParkinga','#korisniciTable');
-	LoadPagination('#korisniciPagination');
+	brojRez=LoadData("getTopKorisnici",'korisniciParkinga','#korisniciTable');
+	LoadPagination('#korisniciPagination',10,10);
 	LoadDatePicker('#korisniciDateFrom');
 	LoadDatePicker('#korisniciDateTo');
 }
 function LoadParkings(){
-	LoadData("getTopParkings",'parkinzi','#parkinziTable');
-	LoadPagination('#parkinziPagination');
+	var brojRez=LoadData("getTopParkings",'parkinzi','#parkinziTable');
+	LoadPagination('#parkinziPagination', 10, 1001);
 	LoadDatePicker('#parkinziDateFrom');
 	LoadDatePicker('#parkinziDateTo');
 }

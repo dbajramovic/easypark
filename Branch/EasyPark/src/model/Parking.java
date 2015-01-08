@@ -25,6 +25,16 @@ public class Parking {
 	private int _freespots;
 	private int _takenspots;
 	private int _city;
+	
+	private int _results;
+	public int get_results() {
+		return _results;
+	}
+
+	public void set_results(int _results) {
+		this._results = _results;
+	}
+
 	public String get_isVerificated() {
 		return _isVerificated;
 	}
