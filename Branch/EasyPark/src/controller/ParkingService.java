@@ -460,13 +460,4 @@ public class ParkingService {
 		return lr;
 	}
 
-	
-
-	@Path("/version")
-	@GET
-	@Produces(MediaType.TEXT_HTML)
-	public String returnVersion() {
-		return "<p>Version calling:</p>" + api_version;
-	}
-	
 }

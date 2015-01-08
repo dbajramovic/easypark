@@ -18,7 +18,6 @@ import oracle.jdbc.OracleTypes;
 public class ParkingsFunctions {
 	public List<Parking> giveMe(Connection con, float longtituda,
 			float latituda, int razdaljina) {
-
 		boolean t;
 		Locale.setDefault(Locale.US);
 		ResultSet rs = null;
@@ -28,8 +27,8 @@ public class ParkingsFunctions {
 			cs = con.prepareCall("begin ? := GETPARKINGSATLOCATION(?,?,?); end;");
 			cs.clearParameters();
 			cs.registerOutParameter(1, OracleTypes.CURSOR);
-			cs.setFloat(3, longtituda);
 			cs.setFloat(2, latituda);
+			cs.setFloat(3, longtituda);
 			cs.setFloat(4, razdaljina);
 			t = cs.execute();
 			rs = (ResultSet) cs.getObject(1);
