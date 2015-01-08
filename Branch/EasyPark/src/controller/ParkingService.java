@@ -356,11 +356,6 @@ public class ParkingService {
 		try {
 			String username = obj.getString("username");
 			int type = obj.getInt("type");
-			// MailService lp = new MailService();
-			// System.out.print(UUID.randomUUID());
-			// System.out.print(UUID.fromString(username));
-			// lp.SendToken(username, "megasadasdasdasdadsas");
-			// String token = UUID.randomUUID().toString();
 			lp.SaveTokenRequest(connection, username, type, "");
 
 		} catch (Exception e) {
@@ -369,7 +364,32 @@ public class ParkingService {
 		}
 
 	}
+	
 
+
+	@Path("/sendToken")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void SendToken(JSONObject obj) throws SQLException {
+		MailService lpm = new MailService();
+		
+		AccountFunctions lp = new AccountFunctions();
+		CreateConnection();
+		try {
+			String username=obj.getString("email");
+			long id=obj.getLong("id");
+			String token = UUID.randomUUID().toString();
+			// System.out.print(UUID.randomUUID());
+			// System.out.print(UUID.fromString(username));
+			 lpm.SendToken(username, token);
+			 lp.UpdateTokenRequest(connection, id, token);
+
+		} catch (Exception e) {
+		} finally {
+			CloseConnection();
+		}
+
+	}
 	@Path("/checkToken")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

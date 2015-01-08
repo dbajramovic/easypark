@@ -58,14 +58,14 @@ function LoadDatePicker(a){
 			);
 }
 
-function CreateButton(klase, unutrasnjiDio, td){
+function CreateButton(klase, unutrasnjiDio, td, funkcija){
     var type='button';
     var element = document.createElement("button");
     element.type = type;
     element.name = type;
     element.className= klase;
     element.innerHTML=unutrasnjiDio;
-    element.onclick = function() {alert("nista");};
+    element.onclick = funkcija;
     td.appendChild(element);
 };
 
@@ -88,31 +88,31 @@ function SendDataToTable(data, naziv,table){
 	   
 	    var td = document.createElement('td');
 	    if (naziv==='parkinzi'){
-		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-plus-sign"></span>', td);
-		    CreateButton('btn btn-default', '<span class="glyphicon glyphicon-edit"></span>', td);
-		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-minus-sign"></span>', td);
+		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-plus-sign"></span>', td, function(){alert('nije implementirano');});
+		    CreateButton('btn btn-default', '<span class="glyphicon glyphicon-edit"></span>', td, function(){alert('nije implementirano');});
+		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-minus-sign"></span>', td, function(){alert('nije implementirano');});
 	    }
 	    if (naziv==='korisniciParkinga'){
-		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-ok-circle"></span>', td);
-		    CreateButton('btn btn-default', '<span class="glyphicon glyphicon-edit"></span>', td);
-		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-ban-circle"></span>', td);
+		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-ok-circle"></span>', td, function(){alert('nije implementirano');});
+		    CreateButton('btn btn-default', '<span class="glyphicon glyphicon-edit"></span>', td, function(){alert('nije implementirano');});
+		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-ban-circle"></span>', td, function(){alert('nije implementirano');});
 	    }
 	    if (naziv==='vlasniciParkinga'){
-		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-ok"></span>', td);
-		    CreateButton('btn btn-default', '<span class="glyphicon glyphicon-edit"></span>', td);
-		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td);
+		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-ok"></span>', td , function(){alert('nije implementirano');});
+		    CreateButton('btn btn-default', '<span class="glyphicon glyphicon-edit"></span>', td ,function(){alert('nije implementirano');});
+		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td , function(){alert('nije implementirano');});
 	    }
 	    if (naziv==='tokeni'){
-		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-envelope"></span>', td);
-		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td);
+		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-envelope"></span>', td , function(){SendToken(entry);});
+		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td , function(){alert('nije implementirano');});
 	    }
 	    if (naziv==='zahtjevi'){
-		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-ok"></span>', td);
-		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td);
+		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-ok"></span>', td ,function(){alert('nije implementirano');});
+		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td, function(){alert('nije implementirano');});
 	    }
 	    if (naziv==='prijave'){
-		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-envelope"></span>', td);
-		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td);
+		    CreateButton('btn btn-success', '<span class="glyphicon glyphicon-envelope"></span>', td ,function(){SendComplaint(entry);});
+		    CreateButton('btn btn-danger', '<span class="glyphicon glyphicon-remove"></span>', td ,function(){alert('nije implementirano');});
 	    }
 	    tr.appendChild(td);
         $(table).append(tr);
@@ -143,6 +143,51 @@ function LoadData(url,naziv,table){
 		});
 	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});	
 };
+
+function SendToken(a){
+	var JSONObject= {
+			"type":"admin",
+			"id":a['_tokenID'],
+			"email":a['_email']
+	};
+	var jsonData = JSON.stringify(JSONObject); 
+	var results=0;
+	var request = $.ajax({
+			url: "http://localhost:80/EasyPark/api/service/sendToken",
+			type: "POST",
+			contentType: 'application/json',
+			data: jsonData,
+			dataType: "JSON",
+			async: false,
+			success: function(data) { 
+				alert('Mail sa tokenom je poslan');
+				window.open ('admin.jsp','_self',false);
+				}  
+		});
+	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});	
+};
+function SendComplaint(a){
+	var JSONObject= {
+			"type":"admin",
+			"id":a['_tokenID']
+	};
+	var jsonData = JSON.stringify(JSONObject); 
+	var results=0;
+	var request = $.ajax({
+			url: "http://localhost:80/EasyPark/api/service/sendComplaint",
+			type: "POST",
+			contentType: 'application/json',
+			data: jsonData,
+			dataType: "JSON",
+			async: false,
+			success: function(data) { 
+				alert('Mail sa opomenom je poslan');
+				window.open ('admin.html','_self',false);
+				}  
+		});
+	request.fail(function( jqXHR, textStatus ) {alert('Problem sa konekcijom na bazu');});	
+};
+
 
 function LoadPrijave(){
 	brojRez=LoadData("getTopPrijave",'prijave','#prijaveTable');

@@ -36,7 +36,7 @@
 	<script src="scripts/Registration.js"></script>
 	<script src="scripts/Login.js"></script>
 	<script src="scripts/LoadTabs.js"></script>
-	<!-- <script src="scripts/GetData.js"></script> -->
+
 
 
 </head>
