@@ -116,7 +116,6 @@ function registration() {
 		// Validation
 		// ...
 		//
-;
 		var freespots = $('#FreespotsParking').val();
 		var note = $('#NoteParking').val();
 		var camera = $('#isthereCamera').val();

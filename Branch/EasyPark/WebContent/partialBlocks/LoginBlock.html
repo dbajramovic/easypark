@@ -13,13 +13,13 @@
                         <h3 class="panel-title">Unesite Vaše podatke:</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form id="userLoginForm" role="form">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" type="email" autofocus="" id="EmailLogin">
+                                    <input class="form-control" placeholder="E-mail" type="email" autofocus="" id="EmailLogin" name="EmailLogin">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Šifra" type="password" id="PasswordLogin">
+                                    <input class="form-control" placeholder="Šifra" type="password" id="PasswordLogin" name="PasswordLogin">
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -27,7 +27,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="javascript:;" class="btn btn-sm btn-success col-md-12" onclick="login()">Upis</a>
+                                <a href="javascript:;" class="btn btn-sm btn-success col-md-12" onclick="validateLogin()">Upis</a>
                             </fieldset>
                         </form>
                     </div>
@@ -37,4 +37,58 @@
 		</div>
 	</div>
 </div>
+<script>
+toastr.options = {
+		  "closeButton": true,
+		  "debug": false,
+		  "progressBar": true,
+		  "positionClass": "toast-top-right",
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		};
+$('#userLoginForm').validate({
+	rules: {
+
+        EmailLogin: {
+            required: true,
+            minlength: 5,
+            maxlength: 40
+        },
+        PasswordLogin: {
+            required: true,
+            minlength: 5,
+            maxlength: 25
+        }
+    },
+    messages: {
+        EmailLogin: {
+            required: "E-mail adresa je neophodna",
+            minlength: "E-mail adresa mora biti veća od 3.",
+            maxlength: "E-mail adresa moze imati maximalno 40 znakova!"
+        },
+        PasswordLogin: {
+            required: "Šifra je obavezno polje!",
+            minlength: "Minimalno 5 znakova za šifru",
+            maxlength: "Maximalno 25 znakova za šifru"
+        }
+    },
+	validClass:"valid",
+	errorClass: "invalid",
+	errorPlacement: function(error, element) {
+		toastr.clear();
+		toastr.error(error);
+	}
+});
+
+function validateLogin(){
+		if ($('#userLoginForm').valid()) {login();}
+		};
+	</script>
 </template>

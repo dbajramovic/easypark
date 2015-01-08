@@ -12,31 +12,31 @@
 			<div class="col-md-6">
 				<div class="form-group col-lg-6">
 					<label>Ime</label>
-					<input class="form-control" id="FirstName" required>
+					<input class="form-control" id="FirstName" name="firstname" required>
 				</div>
 				<div class="form-group col-lg-6">
 					<label>Prezime</label>
-					<input class="form-control" id="LastName" required>
+					<input class="form-control" id="LastName" name="lastname" required>
 				</div>
 				<div class="form-group col-lg-12">
 					<label>E-mail adresa(Korisničko ime)</label>
-					<input class="form-control" id="Email" data-toggle="tooltip" data-placement="right" title="Putem ovog e-maila ćete komunicirati!" required>
+					<input class="form-control" id="Email" data-toggle="tooltip" data-placement="right" title="Putem ovog e-maila ćete komunicirati!" name="email" required>
 				</div>			
 				<div class="form-group col-lg-6">
 					<label>Šifra</label>
-					<input type="password" name="" class="form-control" id="Password" value="" required>
+					<input type="password" name="" class="form-control" id="Password" name="sifra" required>
 				</div>
 				<div class="form-group col-lg-6">
 					<label>Ponovite šifru</label>
-					<input type="password" name="" class="form-control" id="PasswordRepeat" data-toggle="tooltip" data-placement="right" title="Tačnost šifre!" required>
+					<input type="password" name="" class="form-control" id="PasswordRepeat" data-toggle="tooltip" data-placement="right" title="Tačnost šifre!" name="sifraponovi" required>
 				</div>
 				<div class="form-group col-lg-6">
 					<label>Broj telefona</label>
-					<input class="form-control" id="PhoneNumber" required>
+					<input class="form-control" id="PhoneNumber" name="phonenumber" required>
 				</div>		
 				<div class="form-group col-lg-6">
 					<label>Poštanska adresa</label>
-					<input class="form-control" id="Address" required>
+					<input class="form-control" id="Address" name="address" required>
 				</div>	
 				<div class="form-group col-lg-6">
 					<label>Korisnik</label>
@@ -48,17 +48,17 @@
 				</div>
 				<div class="form-group col-lg-6" id="Company" hidden>
 					<label>Naziv kompanije</label>
-					<input class="form-control" id="CompanyName" required>
+					<input class="form-control" id="CompanyName" name="company">
 				</div>
 				<div class="form-group col-lg-12">
 					<label>Broj bankovnog računa</label>
-					<input class="form-control" id="AccNumber" required></input>
+					<input class="form-control" id="AccNumber" name="bankaccount" required></input>
 				</div>
 				<div class="form-group col-lg-12">
 					<label>Pristupni token za registraciju</label>
 					
 					<div class="input-group">
-   						<input class="form-control" id="Token" required></input>
+   						<input class="form-control" id="Token" name="token" required></input>
    						<span class="input-group-btn">
         					<button type="button" class="btn btn-warning" onclick="tokenRequest()" data-toggle="tooltip" data-placement="right" title="Ukoliko nemate pristupni token, biće vam poslan na upisani e-mail!">
         					Traži token!
@@ -97,9 +97,10 @@
 						objektima. 
 					</p>
 				</div>
+				<input id="messageBox" hidden>
 				</form>
         		<button type="button" class="btn btn-default pull-right" data-dismiss="modal" onclick="cleanFields()">Zatvori</button>
-        		<button type="button" class="btn btn-primary" onclick="registration()">Registruj me!</button>
+        		<button type="button" class="btn btn-primary" onclick="validateRegistration()">Registruj me!</button>
       		</div>
       
 		</div>
@@ -123,19 +124,121 @@ toastr.options = {
 		};
 	var listOfErrors=[];
 $('#userRegistrationForm').validate({
+	rules: {
+        firstname: {
+            required: true,
+            minlength: 3,
+            maxlength: 25
+        },
+        lastname: {
+            required: true,
+            minlength: 3,
+            maxlength: 25
+        },
+        email: {
+            required: true,
+            minlength: 5,
+            maxlength: 40
+        },
+        sifra: {
+            required: true,
+            minlength: 5,
+            maxlength: 25
+        },
+        sifraponovi: {
+            required: true,
+            minlength: 5,
+            maxlength: 25
+        },
+        phonenumber: {
+            required: true,
+            minlength: 9,
+            maxlength: 25
+        },
+        address: {
+            required: true,
+            minlength: 4,
+            maxlength: 25
+        },
+        bankaccount: {
+            required: true,
+            minlength: 16,
+            maxlength: 20
+        },
+        token: {
+            required: true,
+            minlength: 16,
+            maxlength: 50
+        }
+    },
+    messages: {
+        firstname: {
+            required: "Ime je neophodno",
+            minlength: "Ime treba minimalno da sadrzi 3 slova",
+            maxlength: "Maksimalno 25 slova za ime!"
+        },
+        lastname: {
+            required: "Prezime je neophodno",
+            minlength: "Prezime mora sadrzavati minimalno 3 slova",
+            maxlength: "Maksimalno 25 slova za prezime!"
+        },
+        email: {
+            required: "E-mail adresa je neophodna",
+            minlength: "E-mail adresa mora biti veća od 3.",
+            maxlength: "E-mail adresa moze imati maximalno 40 znakova!"
+        },
+        sifra: {
+            required: "Šifra je obavezno polje, putem nje ćete se logirati!",
+            minlength: "Minimalno 5 znakova za šifru",
+            maxlength: "Maximalno 25 znakova za šifru"
+        },
+        sifraponovi: {
+            required: "Šifra je obavezno polje, putem nje ćete se logirati!",
+            minlength: "Minimalno 5 znakova za šifru",
+            maxlength: "Maximalno 25 znakova za šifru"
+        },
+        phonenumber: {
+            required: "Broj telefona je obavezno polje!",
+            minlength: "Minimalno 9 znakova za broj telefona",
+            maxlength: "Maximalno 25 znakova za broj telefona"
+        },
+        address: {
+            required: "Adresa je obavezno polje!",
+            minlength: "Minimalno 4 znakova za adresu",
+            maxlength: "Maximalno 25 znakova za adresu"
+        },
+        bankaccount: {
+            required: "Broj bankovnog računa je obavezno polje!",
+            minlength: "Minimalno 12 znakova za broj bankovnog računa",
+            maxlength: "Maximalno 20 znakova za broj bankovnog računa"
+        },
+        token: {
+            required: "Token je obavezno polje!",
+            minlength: "Minimalno 16 znakova za broj token",
+            maxlength: "Maximalno 50 znakova za token"
+        }
+    },
+	validClass:"valid",
 	errorClass: "invalid",
 	errorPlacement: function(error, element) {
-		/* console.log(error);
-	if (element.isValid)
-		var temp={
-				errorData: error,
-				elementData:element
-		};
-		listOfErrors.push(temp); */
-		//toastr.clear();
-		toastr.warning(error);
+		toastr.clear();
+		toastr.error(error);
 	  }
 });
 
+	function validateRegistration(){
+	if ($('#userRegistrationForm').valid()) {registration();}
+	}
+	
+	// visible of #Company field
+	$("#UserType").on('change', function(){ 
+		var a = $( "#UserType option:selected" ).val();
+		if (a==2) {
+			$("#Company").show(); 
+			}
+		else {
+			$("#Company").hide();
+			}
+	});	
 </script>
 </template>
