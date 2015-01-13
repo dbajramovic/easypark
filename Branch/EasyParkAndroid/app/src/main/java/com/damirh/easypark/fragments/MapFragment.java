@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,12 @@ import android.widget.Toast;
 import com.damirh.easypark.R;
 import com.damirh.easypark.views.BoundedMapView;
 
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.tileprovider.IRegisterReceiver;
@@ -28,7 +35,14 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
+
+import model.Parking;
+import connector.ParkingFunctions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,10 +57,9 @@ public class MapFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_STARTX = "start_x";
     private static final String ARG_STARTY = "start_y";
-
     private double startX;
     private double startY;
-
+    public List<Parking> p;
     private BoundedMapView mapView;
     private ArrayList<OverlayItem> parkingSpotOverlays;
     private ItemizedOverlay<OverlayItem> mMyLocationOverlay;
@@ -83,18 +96,35 @@ public class MapFragment extends Fragment {
             startX = getArguments().getDouble(ARG_STARTX);
             startY = getArguments().getDouble(ARG_STARTY);
         }
-
+        p = new ArrayList<Parking>();
+        new ParkingFunctions(this).execute("S");
 
     }
-
-    public void populateDummyData() {
-
+    public void setParkingList(List<Parking> lp1) {
+        for(int i = 0;i < lp1.size();i++) {
+            this.p.add(lp1.get(i));
+        }
+        populateMap();
+    }
+    public void populateRealData() {
         parkingSpotOverlays = new ArrayList<OverlayItem>();
-        parkingSpotOverlays.add(new OverlayItem("Parking 1", "Opis za parking 1", new org.osmdroid.util.GeoPoint(startX, startY)));
-        parkingSpotOverlays.add(new OverlayItem("Parking 2", "Opis za parking 2", new org.osmdroid.util.GeoPoint(startX+0.001f, startY-0.001f)));
-        parkingSpotOverlays.add(new OverlayItem("Parking 3", "Opis za parking 3", new org.osmdroid.util.GeoPoint(startX-0.041f, startY+0.003f)));
+        Log.d("myTag",this.p.size()+" u crtanju");
+        int n = 1;
+        if(this.p != null) {
+            n = this.p.size();
+        }
+        for (int i=0; i < n; i++) {
+            Log.d("myTag",this.p.get(i).get_latitude()+" "+this.p.get(i).get_longitude()+" unutar RealData");
+            parkingSpotOverlays.add(new OverlayItem("Parking #"+this.p.get(i).get_parkingID(), "TEST", new org.osmdroid.util.GeoPoint(this.p.get(i).get_latitude(), this.p.get(i).get_longitude())));
+        }
     }
+    public void populateDummyData() {
+        parkingSpotOverlays = new ArrayList<OverlayItem>();
 
+            parkingSpotOverlays.add(new OverlayItem("Parking 1", " asda" + "", new org.osmdroid.util.GeoPoint(startX, startY)));
+            parkingSpotOverlays.add(new OverlayItem("Parking 2", "Opis za parking 2", new org.osmdroid.util.GeoPoint(startX + 0.001f, startY - 0.001f)));
+            parkingSpotOverlays.add(new OverlayItem("Parking 3", "Opis za parking 3", new org.osmdroid.util.GeoPoint(startX - 0.041f, startY + 0.003f)));
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -111,7 +141,7 @@ public class MapFragment extends Fragment {
 
         mapView.getController().setCenter(new org.osmdroid.util.GeoPoint(startX, startY));
 
-        populateMap();
+
         //GeoPoint geoP = new GeoPoint(48115436,-1638084);
         //mapView.getController().setCenter(new GeoPoint((int)startX,(int)startY));
 
@@ -120,8 +150,7 @@ public class MapFragment extends Fragment {
 
 
     private void populateMap() {
-        populateDummyData();
-
+        populateRealData();
         mResourceProxy = new DefaultResourceProxyImpl(getActivity().getApplicationContext());
         mMyLocationOverlay = new ItemizedIconOverlay<OverlayItem>(parkingSpotOverlays,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
