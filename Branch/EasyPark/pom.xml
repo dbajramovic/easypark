@@ -45,7 +45,7 @@
                 <assembleDirectory>target</assembleDirectory>
                 <programs>
                     <program>
-                        <mainClass>launch.Main</mainClass>
+                        <mainClass>controller.Main</mainClass>
                         <name>webapp</name>
                     </program>
                 </programs>
