@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.damirh.easypark.fragments.ParkingDetailsFragment">
+
+    <ListView android:id="@+id/parkingDetailsList" android:layout_width="match_parent"
+        android:layout_height="435dp" />
+
+    <TextView android:id="@android:id/empty" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:gravity="center" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Reserve"
+        android:id="@+id/btnReserve"
+        android:layout_gravity="left|bottom"
+        android:enabled="true"
+        android:onClick="reserve" />
+
+</FrameLayout>

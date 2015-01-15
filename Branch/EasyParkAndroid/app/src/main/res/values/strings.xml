@@ -8,8 +8,9 @@
     <string name="hello_blank_fragment">This feature is not yet implemented.</string>
     <string name="drawer_option_map">Parking Map</string>
     <string name="drawer_option_login">Log In</string>
+    <string name="drawer_option_login_new">Login</string>
     <string name="drawer_option_register">Register</string>
-    <string name="drawer_option_add_parking">Add Parking</string>
+    <string name="drawer_option_add_parking">Parking Details</string>
     <string name="drawer_option_edit_parking">Edit Parking</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>

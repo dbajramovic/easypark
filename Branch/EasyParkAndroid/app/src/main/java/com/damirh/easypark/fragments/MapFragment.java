@@ -14,11 +14,6 @@ import com.damirh.easypark.R;
 import com.damirh.easypark.views.BoundedMapView;
 
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONObject;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.tileprovider.IRegisterReceiver;
@@ -35,14 +30,11 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Parking;
-import connector.ParkingFunctions;
+import connector.getParkingsInRange;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +89,7 @@ public class MapFragment extends Fragment {
             startY = getArguments().getDouble(ARG_STARTY);
         }
         p = new ArrayList<Parking>();
-        new ParkingFunctions(this).execute("S");
+        new getParkingsInRange(this,null).execute("S");
 
     }
     public void setParkingList(List<Parking> lp1) {
@@ -115,7 +107,7 @@ public class MapFragment extends Fragment {
         }
         for (int i=0; i < n; i++) {
             Log.d("myTag",this.p.get(i).get_latitude()+" "+this.p.get(i).get_longitude()+" unutar RealData");
-            parkingSpotOverlays.add(new OverlayItem("Parking #"+this.p.get(i).get_parkingID(), "TEST", new org.osmdroid.util.GeoPoint(this.p.get(i).get_latitude(), this.p.get(i).get_longitude())));
+            parkingSpotOverlays.add(new OverlayItem("Parking #"+this.p.get(i).get_parkingID(), "Ukupno mjesta:"+this.p.get(i).get_totalnumber()+"\n Slobodno:"+this.p.get(i).get_freespots(), new org.osmdroid.util.GeoPoint(this.p.get(i).get_latitude(), this.p.get(i).get_longitude())));
         }
     }
     public void populateDummyData() {
@@ -165,9 +157,12 @@ public class MapFragment extends Fragment {
                     @Override
                     public boolean onItemLongPress(final int index,
                                                    final OverlayItem item) {
-                        Toast.makeText(
+                        /*Toast.makeText(
                                 getActivity(),
-                                item.getSnippet() ,Toast.LENGTH_LONG).show();
+                                item.getSnippet() ,Toast.LENGTH_LONG).show();*/
+                        Log.d("TagDetails","Usao sam u onItemLongPress!");
+                        ParkingDetailsFragment pdf = ParkingDetailsFragment.newInstance("a","b");
+
                         return false;
                     }
                 }, mResourceProxy);

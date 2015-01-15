@@ -210,4 +210,9 @@ public class Parking {
     public void set_takenspots(int _takenspots) {
         this._takenspots = _takenspots;
     }
+    @Override
+    public String toString() {
+        return "Parking#"+this.get_parkingID();
+    }
 }
+

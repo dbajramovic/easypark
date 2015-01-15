@@ -3,7 +3,8 @@
 
     <string-array name="left_drawer_options">
         <item>@string/drawer_option_map</item>
-        <item>@string/drawer_option_login</item>
+        <item>@string/drawer_option_login_new</item>
         <item>@string/drawer_option_register</item>
+        <item>@string/drawer_option_add_parking</item>
     </string-array>
 </resources>

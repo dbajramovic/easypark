@@ -1,38 +1,40 @@
 package com.damirh.easypark;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.damirh.easypark.fragments.AddParkingFragment;
 import com.damirh.easypark.fragments.EditParkingFragment;
+import com.damirh.easypark.fragments.LoginFragment;
 import com.damirh.easypark.fragments.MapFragment;
+import com.damirh.easypark.fragments.ParkingDetailsFragment;
 import com.damirh.easypark.fragments.RegLogFragment;
 
-import org.osmdroid.api.Marker;
-import org.osmdroid.views.overlay.OverlayItem;
-
-import java.util.ArrayList;
-import java.util.List;
+import connector.loginUserJSON;
+import model.Parking;
+import model.Person;
 
 
 public class MapActivity extends Activity implements MapFragment.OnFragmentInteractionListener,
         RegLogFragment.OnFragmentInteractionListener,
+        LoginFragment.OnFragmentInteractionListener,
         AddParkingFragment.OnFragmentInteractionListener,
+        ParkingDetailsFragment.OnFragmentInteractionListener,
         EditParkingFragment.OnFragmentInteractionListener{
 
     public static final int POSITION_MAP = 0;
@@ -40,14 +42,22 @@ public class MapActivity extends Activity implements MapFragment.OnFragmentInter
     public static final int POSITION_REGISTER = 2;
     public static final int POSITION_ADD_PARKING = 3;
     public static  final int POSITION_EDIT_PARKING = 4;
-
-
+    private String ParkingID;
+    private Parking selected_parking;
     private String[] mDrawerOptions;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private int userid;
+    private int regParkingPos;
+    private Person Korisnik;
+
+    @Override
+    public void onFragmentInteraction(String id) {
+        regParkingPos = Integer.parseInt(id);
+    }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -56,8 +66,61 @@ public class MapActivity extends Activity implements MapFragment.OnFragmentInter
         }
     }
 
+    public void reserve(View v) {
+        ListView lw = (ListView) findViewById(R.id.parkingDetailsList);
+        Log.d("Parking", lw.getSelectedItemPosition()+"");
+        Parking p = (Parking) lw.getItemAtPosition(regParkingPos);
+        if(p!=null)
+            Log.d("Parking", p.get_telefon());
+        Toast.makeText(
+                this,
+                "ReserveMOFO", Toast.LENGTH_LONG).show();
 
+    }
+    public void loginUser(View v) {
+        EditText mail = (EditText) findViewById(R.id.loginEmail);
+        EditText pass = (EditText) findViewById(R.id.loginPass);
+        String textMail = String.valueOf(mail.getText());
+        String textPass = String.valueOf(pass.getText());
+        if(textMail.equals("admin") && textPass.equals("admin")) {
+            userid = 3;
+            Toast.makeText(
+                    this,
+                    "Dobrodosli natrag!"+textMail+" "+textPass + "!", Toast.LENGTH_LONG).show();
+        }
+        loginUserJSON luj = new loginUserJSON(textMail,textPass,this);
+        luj.execute();
+    }
+    public void loginPerson(Person p) {
+        if(p.get_personID()!=0) {
+            userid = p.get_personID();
+            Korisnik = p;
+            Toast.makeText(
+                    this,
+                    "Upisani ste kao "+p.get_firstname()+" "+p.get_lastname(), Toast.LENGTH_LONG).show();
+            Button loginbtn = (Button) findViewById(R.id.btnLogin);
+            Button logoutbtn = (Button) findViewById(R.id.Logout);
+            loginbtn.setEnabled(false);
+            logoutbtn.setEnabled(true);
+        }
 
+        else {
+            Toast.makeText(
+                    this,
+                    "Pogrešni podaci!", Toast.LENGTH_LONG).show();
+        }
+    }
+    public void logoutPerson(View v) {
+        userid = 0;
+        Korisnik = null;
+        Button loginbtn = (Button) findViewById(R.id.btnLogin);
+        Button logoutbtn = (Button) findViewById(R.id.Logout);
+        loginbtn.setEnabled(true);
+        logoutbtn.setEnabled(false);
+        Toast.makeText(
+                this,
+                "Ispisali ste se!", Toast.LENGTH_LONG).show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,13 +245,11 @@ public class MapActivity extends Activity implements MapFragment.OnFragmentInter
             case POSITION_MAP:
                 return MapFragment.newInstance(43.854892, 18.386757);
             case POSITION_LOGIN:
-                return RegLogFragment.newInstance(true);
+                return LoginFragment.newInstance("A","B");
             case POSITION_REGISTER:
                 return RegLogFragment.newInstance(false);
             case POSITION_ADD_PARKING:
-                return AddParkingFragment.newInstance();
-            case POSITION_EDIT_PARKING:
-                return EditParkingFragment.newInstance(0);
+                return ParkingDetailsFragment.newInstance("A","B");
         }
 
         return null;
